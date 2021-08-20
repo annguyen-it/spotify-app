@@ -3,14 +3,14 @@
   grid-template-columns: 300px auto;
   grid-template-rows: 200px auto 200px;
   grid-template-areas: 
-    "sidebar topbar"
-    "sidebar mainview"
-    "playbar playbar";
+    "sidebar top-bar"
+    "sidebar main-view"
+    "play-bar play-bar";
   height: 100vh;
 }
 
 spotify-play-bar {
-  grid-area: playbar;
+  grid-area: play-bar;
   background-color: red;
 }
 
@@ -20,11 +20,11 @@ spotify-sidebar {
 }
 
 main-view {
-  grid-area: mainview;
+  grid-area: main-view;
   background-color: yellow;
 }
 
 spotify-top-bar {
-  grid-area: topbar;
+  grid-area: top-bar;
   background-color: blue;
 }
