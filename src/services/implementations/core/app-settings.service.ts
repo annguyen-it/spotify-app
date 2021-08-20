@@ -24,7 +24,7 @@ export class AppSettingsService implements IAppSettingService {
       return of(APP_SETTINGS);
     }
 
-    const filePath = '/assets/settings/app-settings.json';
+    const filePath = 'assets/settings/app-settings.json';
     return this.httpClient
       .get<AppSettings>(filePath)
       .pipe(
