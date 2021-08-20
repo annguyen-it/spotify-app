@@ -6,12 +6,6 @@ const routes: Routes = [
   {
     path: '',
     component: AppComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: async() => (await import('./main-view/main-view.module')).MainViewModule
-      }
-    ]
   }
 ];
 
