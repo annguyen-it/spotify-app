@@ -40,18 +40,6 @@ import { LocalStorageService } from '@services/implementations/storage/local-sto
       multi: true,
       deps: [AppSettingsService]
     },
-    {
-      provide: AUTHORIZATION_SERVICE_INJECTOR,
-      useClass: AuthorizationService,
-    },
-    {
-      provide: SESSION_STORAGE_SERVICE_INJECTOR,
-      useClass: SessionStorageService,
-    },
-    {
-      provide: LOCAL_STORAGE_SERVICE_INJECTOR,
-      useClass: LocalStorageService,
-    }
   ],
   bootstrap: [AppComponent]
 })

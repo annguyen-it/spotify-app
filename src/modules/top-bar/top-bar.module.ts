@@ -11,11 +11,21 @@ import { TopBarComponent } from './top-bar.component';
     /// Remove below
     ExampleModule
   ],
-  declarations: [
-    TopBarComponent
+  declarations: [TopBarComponent],
+  providers: [
+    {
+      provide: AUTHORIZATION_SERVICE_INJECTOR,
+      useClass: AuthorizationService,
+    },
+    {
+      provide: SIGN_UP_SERVICE_INJECTOR,
+      useClass: SignUpService,
+    },
+    {
+      provide: SESSION_STORAGE_SERVICE_INJECTOR,
+      useClass: SessionStorageService,
+    },
   ],
-  exports: [
-    TopBarComponent
-  ]
+  exports: [TopBarComponent]
 })
 export class TopBarModule { }
