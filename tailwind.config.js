@@ -14,6 +14,7 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       gray: colors.trueGray,
+      white: '#ffffff'
     }
   },
   extend: {
