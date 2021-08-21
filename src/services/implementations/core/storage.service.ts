@@ -16,9 +16,8 @@ export abstract class StorageService {
     return this.subjects.get(key)!.asObservable();
   }
 
-  getItem(key: string): string {
-    const item = this.storage.getItem(key);
-    return item !== null ? JSON.parse(item) : item;
+  getItem(key: string): string | null {
+    return this.storage.getItem(key);
   }
 
   setItem(key: string, value: string): void {

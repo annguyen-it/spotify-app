@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AppSettings } from '@models/core/app-settings.model';
 import { IAppSettingService } from '@services/interfaces/core/app-setting-service.interface';
-import { SessionStorageKeyConstant } from '@constants/core/session-storage-key.constant';
+import { LocalStorageKeyConstant } from '@constants/core/local-storage-key.constants';
 
 
 export let APP_SETTINGS: AppSettings;
@@ -18,7 +18,7 @@ export class AppSettingsService implements IAppSettingService {
       return of(APP_SETTINGS);
     }
 
-    const storedSettings = localStorage.getItem(SessionStorageKeyConstant.appSettings);
+    const storedSettings = localStorage.getItem(LocalStorageKeyConstant.appSettings);
     if (storedSettings) {
       APP_SETTINGS = JSON.parse(storedSettings);
       return of(APP_SETTINGS);
@@ -30,7 +30,7 @@ export class AppSettingsService implements IAppSettingService {
       .pipe(
         tap((settings) => {
           APP_SETTINGS = settings;
-          localStorage.setItem(SessionStorageKeyConstant.appSettings, JSON.stringify(settings));
+          localStorage.setItem(LocalStorageKeyConstant.appSettings, JSON.stringify(settings));
         })
       )
   }
