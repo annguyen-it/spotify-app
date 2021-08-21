@@ -1,15 +1,13 @@
-import { ExampleModule } from '../shared/example/example.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './top-bar.component';
-
-
+import { AUTHORIZATION_SERVICE_INJECTOR, SESSION_STORAGE_SERVICE_INJECTOR, SIGN_UP_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
+import { AuthorizationService } from '@services/implementations/core/authorization.service';
+import { SessionStorageService } from '@services/implementations/storage/session-storage.service';
+import { SignUpService } from '@services/implementations/core/sign-up.service';
 
 @NgModule({
-  imports:
-    [CommonModule,
-    /// Remove below
-    ExampleModule
+  imports: [CommonModule
   ],
   declarations: [TopBarComponent],
   providers: [
