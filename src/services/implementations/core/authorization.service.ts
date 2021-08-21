@@ -6,21 +6,19 @@ import { Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
 import { LoginSuccessInfo } from '@models/core/login-success-info.model';
 
-import { BaseDataService } from './base-data.service';
 import { APP_SETTINGS } from './app-settings.service';
 import { SESSION_STORAGE_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
 import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthorizationService extends BaseDataService implements IAuthorizationService, OnInit, OnDestroy {
+export class AuthorizationService implements IAuthorizationService, OnInit, OnDestroy {
   isAuthorized$ = new BehaviorSubject<boolean>(false);
   private authorizationSessionSub!: Subscription;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     @Inject(SESSION_STORAGE_SERVICE_INJECTOR) private sessionStorageService: StorageService) {
-    super();
   }
 
   ngOnInit(): void {
@@ -47,7 +45,6 @@ export class AuthorizationService extends BaseDataService implements IAuthorizat
   }
 
   handleLoginSuccess(loginSuccessInfo: LoginSuccessInfo): void {
-    
     if (loginSuccessInfo.accessToken) {
       this.sessionStorageService.setItem(SessionStorageKeyConstant.accessToken, loginSuccessInfo.accessToken);
       this.isAuthorized$.next(true);

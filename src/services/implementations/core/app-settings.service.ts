@@ -18,7 +18,7 @@ export class AppSettingsService implements IAppSettingService {
       return of(APP_SETTINGS);
     }
 
-    const storedSettings = sessionStorage.getItem(SessionStorageKeyConstant.appSettings);
+    const storedSettings = localStorage.getItem(SessionStorageKeyConstant.appSettings);
     if (storedSettings) {
       APP_SETTINGS = JSON.parse(storedSettings);
       return of(APP_SETTINGS);
@@ -30,7 +30,7 @@ export class AppSettingsService implements IAppSettingService {
       .pipe(
         tap((settings) => {
           APP_SETTINGS = settings;
-          sessionStorage.setItem(SessionStorageKeyConstant.appSettings, JSON.stringify(settings));
+          localStorage.setItem(SessionStorageKeyConstant.appSettings, JSON.stringify(settings));
         })
       )
   }
