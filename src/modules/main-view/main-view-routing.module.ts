@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: async() => (await import('./home/home.module')).HomeModule
+        loadChildren: async() => (await import('../home/home.module')).HomeModule
       }
     ]
   }
