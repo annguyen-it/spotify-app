@@ -2,8 +2,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { AUTHENTICATION_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { IAuthenticationService } from '@services/interfaces/core/authentication-service.interface';
+import { AUTHORIZATION_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
+import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
 
 @Component({
   selector: 'spotify-root',
@@ -11,39 +11,39 @@ import { IAuthenticationService } from '@services/interfaces/core/authentication
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  authenticationSuccessSub!: Subscription;
-  authenticationFailureSub!: Subscription;
+  authorizationSuccessSub!: Subscription;
+  authorizationFailureSub!: Subscription;
 
   constructor(
-    @Inject(AUTHENTICATION_SERVICE_INJECTOR) private authenticationService: IAuthenticationService,
+    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.authenticationSuccessSub = this.route.fragment
+    this.authorizationSuccessSub = this.route.fragment
       .pipe(
         filter(fragment => fragment !== null),
         map(fragment => new URLSearchParams(fragment!)),
         map(params => ({
           accessToken: params.get('access_token'),
-          tokenType: params.get('token_type'),
-        }))
+        })),
+        filter(params => !!params.accessToken)
       )
       .subscribe(
-        (loginInfo) => this.authenticationService.handleLoginSuccess(loginInfo)
+        (loginInfo) => this.authorizationService.handleLoginSuccess(loginInfo)
       );
 
-    this.authenticationFailureSub = this.route.queryParams
+    this.authorizationFailureSub = this.route.queryParams
       .pipe(
         filter(params => params.error !== undefined),
       )
       .subscribe(
-        () => this.authenticationService.handleLoginFailure()
+        () => this.authorizationService.handleLoginFailure()
       );
   }
 
   ngOnDestroy(): void {
-    this.authenticationSuccessSub.unsubscribe();
-    this.authenticationFailureSub.unsubscribe();
+    this.authorizationSuccessSub.unsubscribe();
+    this.authorizationFailureSub.unsubscribe();
   }
 }
