@@ -1,4 +1,6 @@
 <p>top-bar works!</p>
+<button *ngIf="!isAuthorized" (click)="login()">Login</button>
+<button *ngIf="isAuthorized" (click)="logOut()">Log out</button>
 
 <!-- Remove below -->
 <spotify-example></spotify-example>
