@@ -1,7 +1,7 @@
 :host {
   display: grid;
-  grid-template-columns: 300px auto;
-  grid-template-rows: 200px auto 200px;
+  grid-template-columns: 240px auto;
+  grid-template-rows: 60px auto 90px;
   grid-template-areas: 
     "sidebar top-bar"
     "sidebar main-view"
