@@ -10,10 +10,12 @@ module.exports = {
     ]
   },
   theme: {
+    fontFamily: false,
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       gray: colors.trueGray,
+      'main-gray': 'rgb(179, 179, 179)',
       white: '#ffffff'
     }
   },
