@@ -10,6 +10,18 @@ import { APP_SETTINGS } from '../core/app-settings.service';
 export class UserProfileService implements IUserProfileService {
   constructor(private http: HttpClient) { }
 
+  getCurrentUserProfile(): Observable<UserProfile> {
+    return this.http
+      .get<UserProfile>(`${APP_SETTINGS.baseUrl}/v1/me`)
+      .pipe(
+        map<any, UserProfile>((profile) => ({
+          ...profile,
+          displayName: profile.display_name,
+          externalUrls: profile.externalUrls
+        }))
+      );
+  }
+
   getProfile(userId: string): Observable<UserProfile> {
     return this.http
       .get<any>(`${APP_SETTINGS.baseUrl}/v1/${userId}`)
