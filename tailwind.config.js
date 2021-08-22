@@ -16,7 +16,8 @@ module.exports = {
       current: 'currentColor',
       gray: colors.trueGray,
       'main-gray': 'rgb(179, 179, 179)',
-      white: '#ffffff'
+      white: '#ffffff',
+      green: colors.green,
     },
     fontSize: {
       // base
@@ -36,10 +37,10 @@ module.exports = {
     },
   },
   extend: {
-    transitionProperty: {
-      height: 'height',
-    },
+    transform: ['hover']
   },
   variants: {},
-  plugin: []
+  plugins: [
+    require('@tailwindcss/line-clamp')
+  ]
 }
