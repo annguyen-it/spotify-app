@@ -1,35 +1,38 @@
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
 import { SessionStorageKeyConstant } from '@constants/core/session-storage-key.constant';
-import { Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, Injector, OnDestroy } from '@angular/core';
 
 import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
 import { LoginSuccessInfo } from '@models/core/login-success-info.model';
 
-import { BaseDataService } from './base-data.service';
 import { APP_SETTINGS } from './app-settings.service';
 import { SESSION_STORAGE_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
 import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthorizationService extends BaseDataService implements IAuthorizationService, OnInit, OnDestroy {
+export class AuthorizationService implements IAuthorizationService, OnDestroy {
   isAuthorized$ = new BehaviorSubject<boolean>(false);
   private authorizationSessionSub!: Subscription;
+  private sessionStorageService: StorageService;
 
   constructor(
-    private router: Router, 
-    @Inject(SESSION_STORAGE_SERVICE_INJECTOR) private sessionStorageService: StorageService) {
-    super();
+    private router: Router,
+    private injector: Injector,
+  ) {
+    this.sessionStorageService = this.injector.get(SESSION_STORAGE_SERVICE_INJECTOR);
+    this.init();
   }
 
-  ngOnInit(): void {
+  init(): void {
     const accessToken = this.sessionStorageService.getItem(SessionStorageKeyConstant.accessToken);
     if (accessToken != null) {
       this.isAuthorized$.next(true);
     }
 
-    this.authorizationSessionSub = this.sessionStorageService.watch(SessionStorageKeyConstant.accessToken)
+    this.authorizationSessionSub = this.sessionStorageService
+      .watch(SessionStorageKeyConstant.accessToken)
       .subscribe(
         (token) => this.isAuthorized$.next(token !== null),
         () => { },
@@ -47,24 +50,20 @@ export class AuthorizationService extends BaseDataService implements IAuthorizat
   }
 
   handleLoginSuccess(loginSuccessInfo: LoginSuccessInfo): void {
-    
     if (loginSuccessInfo.accessToken) {
       this.sessionStorageService.setItem(SessionStorageKeyConstant.accessToken, loginSuccessInfo.accessToken);
       this.isAuthorized$.next(true);
-      this.router.navigate([]);
     }
   }
 
   handleLoginFailure(): void {
-    this.sessionStorageService.removeItem(SessionStorageKeyConstant.accessToken);
+    this.sessionStorageService.clear();
     this.isAuthorized$.next(false);
-    this.router.navigate([]);
   }
 
   logOut(): void {
-    this.sessionStorageService.removeItem(SessionStorageKeyConstant.accessToken);
+    this.sessionStorageService.clear();
     this.isAuthorized$.next(false);
-    this.router.navigate([]);
   }
 
   isAuthorized(): Observable<boolean> {

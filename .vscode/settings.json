@@ -1,0 +1,13 @@
+{
+  "prettier.htmlWhitespaceSensitivity": "ignore",
+  "prettier.jsxSingleQuote": true,
+  "prettier.printWidth": 1000,
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "none",
+  "prettier.proseWrap": "never",
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.rootFontSize": 14,
+  "typescript.format.semicolons": "insert",
+}
