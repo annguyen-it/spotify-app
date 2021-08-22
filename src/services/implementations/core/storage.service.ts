@@ -40,6 +40,6 @@ export abstract class StorageService {
 
   clear(): void {
     this.subjects.clear();
-    this.storage.clear;
+    this.storage.clear();
   }
 }

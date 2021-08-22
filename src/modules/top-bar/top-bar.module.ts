@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './top-bar.component';
 import {
   AUTHORIZATION_SERVICE_INJECTOR,
+  CURRENT_USER_PROFILE_SERVICE_INJECTOR,
   SESSION_STORAGE_SERVICE_INJECTOR,
   SIGN_UP_SERVICE_INJECTOR,
   UPGRADE_ACCOUNT_SERVICE_INJECTOR
@@ -11,6 +12,7 @@ import { AuthorizationService } from '@services/implementations/core/authorizati
 import { SessionStorageService } from '@services/implementations/storage/session-storage.service';
 import { SignUpService } from '@services/implementations/core/sign-up.service';
 import { UpgradeAccountService } from '@services/implementations/core/upgrade-account.service';
+import { CurrentUserProfileService } from '@services/implementations/user-profile/current-user-profile.service';
 
 @NgModule({
   imports: [CommonModule
@@ -32,6 +34,10 @@ import { UpgradeAccountService } from '@services/implementations/core/upgrade-ac
     {
       provide: UPGRADE_ACCOUNT_SERVICE_INJECTOR,
       useClass: UpgradeAccountService,
+    },
+    {
+      provide: CURRENT_USER_PROFILE_SERVICE_INJECTOR,
+      useClass: CurrentUserProfileService,
     }
   ],
   exports: [TopBarComponent]

@@ -1,8 +1,22 @@
-button {
-  letter-spacing: 1.76px;
-  @apply rounded-3xl font-bold uppercase;
+div > button {
+  @apply rounded-full font-bold;
 
-  &:not(.user):hover {
-    transform: scale(1.06);
+  &:not(.user) {
+    letter-spacing: 1.76px;
+    @apply uppercase;
+
+    &:hover {
+      transform: scale(1.06);
+    }
+  }
+}
+
+.dropdown {
+  button {
+    @apply flex justify-between items-center px-2.5 py-3.5 w-52 font-bold text-base-sm text-main-gray;
+
+    &:hover {
+      @apply bg-gray-700 text-white;
+    }
   }
 }

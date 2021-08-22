@@ -53,20 +53,17 @@ export class AuthorizationService implements IAuthorizationService, OnDestroy {
     if (loginSuccessInfo.accessToken) {
       this.sessionStorageService.setItem(SessionStorageKeyConstant.accessToken, loginSuccessInfo.accessToken);
       this.isAuthorized$.next(true);
-      this.router.navigate([]);
     }
   }
 
   handleLoginFailure(): void {
-    this.sessionStorageService.removeItem(SessionStorageKeyConstant.accessToken);
+    this.sessionStorageService.clear();
     this.isAuthorized$.next(false);
-    this.router.navigate([]);
   }
 
   logOut(): void {
-    this.sessionStorageService.removeItem(SessionStorageKeyConstant.accessToken);
+    this.sessionStorageService.clear();
     this.isAuthorized$.next(false);
-    this.router.navigate([]);
   }
 
   isAuthorized(): Observable<boolean> {

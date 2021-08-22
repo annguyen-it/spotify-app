@@ -6,7 +6,6 @@ import { AppSettings } from '@models/core/app-settings.model';
 import { IAppSettingService } from '@services/interfaces/core/app-setting-service.interface';
 import { LocalStorageKeyConstant } from '@constants/core/local-storage-key.constants';
 
-
 export let APP_SETTINGS: AppSettings;
 
 @Injectable()
