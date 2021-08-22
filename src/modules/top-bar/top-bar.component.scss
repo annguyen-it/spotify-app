@@ -1,0 +1,8 @@
+button {
+  letter-spacing: 1.76px;
+  @apply rounded-3xl font-bold uppercase;
+
+  &:not(.user):hover {
+    transform: scale(1.06);
+  }
+}

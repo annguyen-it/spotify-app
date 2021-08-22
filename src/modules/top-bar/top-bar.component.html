@@ -1,10 +1,15 @@
 <div class="h-full flex justify-end items-center px-0 lg:px-9
  bg-gray-900 text-sm">
   <div *ngIf="!isAuthorized">
-    <button (click)="signUp()">Sign up</button>
+    <button
+      (click)="signUp()"
+      class="px-10 py-3"
+    >
+      Sign up
+    </button>
     <button
       (click)="login()"
-      class="bg-white rounded-3xl text-gray-700"
+      class="px-10 py-3 bg-white text-gray-700"
     >
       Log in
     </button>
@@ -12,7 +17,17 @@
 
 
   <div *ngIf="isAuthorized">
-    <button (click)="upgrade()">Upgrade</button>
-    <button (click)="logOut()">Username</button>
+    <button
+      (click)="upgrade()"
+      class="px-10 py-2 border border-white"
+    >
+      Upgrade
+    </button>
+    <button
+      (click)="openDropDown()"
+      class="user px-10 py-1.5"
+    >
+      Username
+    </button>
   </div>
 </div>

@@ -3,6 +3,7 @@ export interface AppSettings {
   authorizeUrl: string;
   redirectUrl: string;
   signUpUrl: string;
+  upgradeAccountUrl: string;
   clientId: string;
   clientSecret: string;
 }
