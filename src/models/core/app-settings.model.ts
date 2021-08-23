@@ -1,9 +1,9 @@
 export interface AppSettings {
-  appName: string;
-  appTitle: string;
-  clientId: string;
   baseUrl: string;
-  authenticatedRedirectUrl: string;
-  hierarchySupport: boolean;
-  loginType: string[];
+  authorizeUrl: string;
+  redirectUrl: string;
+  signUpUrl: string;
+  upgradeAccountUrl: string;
+  clientId: string;
+  clientSecret: string;
 }

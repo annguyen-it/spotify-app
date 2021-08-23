@@ -1,5 +1,9 @@
 {
   "baseUrl": "https://api.spotify.com",
+  "authorizeUrl": "https://accounts.spotify.com/authorize",
+  "redirectUrl": "http://localhost:4200",
+  "signUpUrl": "https://spotify.com/signup",
+  "upgradeAccountUrl": "https://spotify.com/premium",
   "clientId": "4731a0c7da61412dae10f6c4ce6e76f5",
   "clientSecret": "a3e1d9da1c5446e1939bb82c5213ed8c"
 }
