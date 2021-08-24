@@ -26,11 +26,6 @@ export class AuthorizationService implements IAuthorizationService, OnDestroy {
   }
 
   init(): void {
-    const accessToken = this.sessionStorageService.getItem(SessionStorageKeyConstant.accessToken);
-    if (accessToken != null) {
-      this.isAuthorized$.next(true);
-    }
-
     this.authorizationSessionSub = this.sessionStorageService
       .watch(SessionStorageKeyConstant.accessToken)
       .subscribe(
@@ -52,18 +47,15 @@ export class AuthorizationService implements IAuthorizationService, OnDestroy {
   handleLoginSuccess(loginSuccessInfo: LoginSuccessInfo): void {
     if (loginSuccessInfo.accessToken) {
       this.sessionStorageService.setItem(SessionStorageKeyConstant.accessToken, loginSuccessInfo.accessToken);
-      this.isAuthorized$.next(true);
     }
   }
 
   handleLoginFailure(): void {
     this.sessionStorageService.clear();
-    this.isAuthorized$.next(false);
   }
 
   logOut(): void {
     this.sessionStorageService.clear();
-    this.isAuthorized$.next(false);
   }
 
   isAuthorized(): Observable<boolean> {

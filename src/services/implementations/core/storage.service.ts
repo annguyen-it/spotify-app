@@ -39,6 +39,7 @@ export abstract class StorageService {
   }
 
   clear(): void {
+    this.subjects.forEach((subject) => subject.complete());
     this.subjects.clear();
     this.storage.clear();
   }

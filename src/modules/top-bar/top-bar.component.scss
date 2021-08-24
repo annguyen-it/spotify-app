@@ -6,7 +6,7 @@ div > button {
     @apply uppercase;
 
     &:hover {
-      transform: scale(1.06);
+      @apply transform scale-105;
     }
   }
 }

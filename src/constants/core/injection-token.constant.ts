@@ -9,7 +9,6 @@ export const AUTHORIZATION_SERVICE_INJECTOR = new InjectionToken<IAuthorizationS
 export const SIGN_UP_SERVICE_INJECTOR = new InjectionToken<ISignUpService>('SIGN_UP_SERVICE_INJECTOR');
 export const UPGRADE_ACCOUNT_SERVICE_INJECTOR = new InjectionToken<IUpgradeAccountService>('UPGRADE_ACCOUNT_SERVICE_INJECTOR');
 export const USER_PROFILE_SERVICE_INJECTOR = new InjectionToken<IUserProfileService>('USER_PROFILE_SERVICE_INJECTOR');
-export const CURRENT_USER_PROFILE_SERVICE_INJECTOR = new InjectionToken<IUserProfileService>('CURRENT_USER_PROFILE_SERVICE_INJECTOR');
 
 export const SESSION_STORAGE_SERVICE_INJECTOR = new InjectionToken<StorageService>('SESSION_STORAGE_SERVICE_INJECTOR');
 export const LOCAL_STORAGE_SERVICE_INJECTOR = new InjectionToken<StorageService>('LOCAL_STORAGE_SERVICE_INJECTOR');
