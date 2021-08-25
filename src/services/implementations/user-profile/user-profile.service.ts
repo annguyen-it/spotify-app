@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { APP_SETTINGS } from '../core/app-settings.service';
 
-@Injectable()
-export class UserProfileService implements IUserProfileService {
+@Injectable({ providedIn: 'root' })
+export class UserProfileService {
   constructor(private http: HttpClient) { }
 
   getCurrentUserProfile(): Observable<UserProfile> {

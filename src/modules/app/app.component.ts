@@ -2,8 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { AUTHORIZATION_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
+import { AuthorizationService } from '@services/implementations/core/authorization.service';
 
 @Component({
   selector: 'spotify-root',
@@ -15,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   authorizationFailureSub!: Subscription;
 
   constructor(
-    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService,
+    private authorizationService: AuthorizationService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }

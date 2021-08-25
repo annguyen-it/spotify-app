@@ -1,27 +1,19 @@
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
 import { SessionStorageKeyConstant } from '@constants/core/session-storage-key.constant';
-import { Injectable, Injector, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
-import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
 import { LoginSuccessInfo } from '@models/core/login-success-info.model';
 
 import { APP_SETTINGS } from './app-settings.service';
-import { SESSION_STORAGE_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { StorageService } from './storage.service';
-import { Router } from '@angular/router';
+import { SessionStorageService } from '../storage/session-storage.service';
 
-@Injectable()
-export class AuthorizationService implements IAuthorizationService, OnDestroy {
+@Injectable({ providedIn: 'root' })
+export class AuthorizationService implements OnDestroy {
   isAuthorized$ = new BehaviorSubject<boolean>(false);
   private authorizationSessionSub!: Subscription;
-  private sessionStorageService: StorageService;
 
-  constructor(
-    private router: Router,
-    private injector: Injector,
-  ) {
-    this.sessionStorageService = this.injector.get(SESSION_STORAGE_SERVICE_INJECTOR);
+  constructor(private sessionStorageService: SessionStorageService) {
     this.init();
   }
 
@@ -30,7 +22,7 @@ export class AuthorizationService implements IAuthorizationService, OnDestroy {
       .watch(SessionStorageKeyConstant.accessToken)
       .subscribe(
         (token) => this.isAuthorized$.next(token !== null),
-        () => { },
+        () => this.isAuthorized$.next(false),
         () => this.isAuthorized$.next(false)
       );
   }

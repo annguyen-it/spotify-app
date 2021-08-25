@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AppSettings } from '@models/core/app-settings.model';
-import { IAppSettingService } from '@services/interfaces/core/app-setting-service.interface';
 import { LocalStorageKeyConstant } from '@constants/core/local-storage-key.constants';
 
 export let APP_SETTINGS: AppSettings;
 
-@Injectable()
-export class AppSettingsService implements IAppSettingService {
+@Injectable({ providedIn: 'root' })
+export class AppSettingsService {
   constructor(protected httpClient: HttpClient) { }
 
   loadAppSettingAsync(): Observable<AppSettings> {
