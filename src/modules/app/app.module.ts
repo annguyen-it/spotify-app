@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { loadAppSettingAsync } from '@factories/load-app-settings.factory';
 import { InterceptorsModule } from '@interceptors/interceptors.module';
-import { AppSettingsService } from '@services/implementations/core/app-settings.service';
 
 import { TopBarModule } from '../top-bar/top-bar.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
@@ -13,6 +12,7 @@ import { MainViewModule } from '../main-view/main-view.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppSettingsService } from '@services/core/app-settings.service';
 
 @NgModule({
   imports: [

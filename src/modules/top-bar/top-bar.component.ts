@@ -1,10 +1,10 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
-import { AuthorizationService } from '@services/implementations/core/authorization.service';
-import { SignUpService } from '@services/implementations/core/sign-up.service';
-import { UpgradeAccountService } from '@services/implementations/core/upgrade-account.service';
-import { UserProfileService } from '@services/implementations/user-profile/user-profile.service';
+import { UserProfileService } from '@services/user-profile/user-profile.service';
+import { AuthorizationService } from '@services/core/authorization.service';
+import { SignUpService } from '@services/core/sign-up.service';
+import { UpgradeAccountService } from '@services/core/upgrade-account.service';
 
 @Component({
   selector: 'spotify-top-bar',
