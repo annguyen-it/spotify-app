@@ -1,20 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserProfile } from '@models/user-profile/user-profile.model';
-import { IUserProfileService } from '@services/interfaces/user-profile/user-profile-service.interface';
+import { PublicUser } from '@models/user/public-user.model';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { APP_SETTINGS } from '../core/app-settings.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserProfileService {
   constructor(private http: HttpClient) { }
 
-  getCurrentUserProfile(): Observable<UserProfile> {
+  getCurrentUserProfile(): Observable<PublicUser> {
     return this.http
-      .get<UserProfile>(`${APP_SETTINGS.baseUrl}/v1/me`)
+      .get<any>(`${APP_SETTINGS.baseUrl}/v1/me`)
       .pipe(
-        map<any, UserProfile>((profile) => ({
+        map<any, PublicUser>((profile) => ({
           ...profile,
           displayName: profile.display_name,
           externalUrls: profile.externalUrls
@@ -22,11 +21,11 @@ export class UserProfileService {
       );
   }
 
-  getProfile(userId: string): Observable<UserProfile> {
+  getProfile(userId: string): Observable<PublicUser> {
     return this.http
       .get<any>(`${APP_SETTINGS.baseUrl}/v1/${userId}`)
       .pipe(
-        map<any, UserProfile>((profile) => ({
+        map<any, PublicUser>((profile) => ({
           ...profile,
           displayName: profile.display_name,
           externalUrls: profile.externalUrls

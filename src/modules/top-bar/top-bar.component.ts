@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { take, tap } from 'rxjs/operators';
-import { UserProfile } from '@models/user-profile/user-profile.model';
+import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
 import { AuthorizationService } from '@services/implementations/core/authorization.service';
 import { SignUpService } from '@services/implementations/core/sign-up.service';
@@ -14,7 +13,7 @@ import { UserProfileService } from '@services/implementations/user-profile/user-
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   isAuthorized!: boolean;
-  userProfile?: UserProfile;
+  userProfile?: PublicUser;
   userProfileSub = new Subscription();
   openDropDown = false;
 

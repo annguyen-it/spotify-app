@@ -24,9 +24,9 @@ export abstract class StorageService {
     this.storage.setItem(key, value);
     if (!this.subjects.has(key)) {
       this.subjects.set(key, new BehaviorSubject<string | null>(value));
-    } else {
-      this.subjects.get(key)!.next(value);
     }
+
+    this.subjects.get(key)!.next(value);
   }
 
   removeItem(key: string): void {

@@ -1,4 +1,4 @@
-export interface UserProfileImage {
+export interface Image {
   width: number;
   height: number;
   url: string;
