@@ -12,7 +12,7 @@ import { MainViewModule } from '../main-view/main-view.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppSettingsService } from '@services/core/app-settings.service';
+import { AppSettingsService } from '@services/app-settings.service';
 
 @NgModule({
   imports: [

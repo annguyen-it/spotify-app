@@ -6,7 +6,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { LoginSuccessInfo } from '@models/core/login-success-info.model';
 
 import { APP_SETTINGS } from './app-settings.service';
-import { SessionStorageService } from '../storage/session-storage.service';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizationService implements OnDestroy {

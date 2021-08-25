@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { SimplifiedPlaylist } from "@models/playlist/simplified-playlist.model";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { APP_SETTINGS } from "../core/app-settings.service";
+import { APP_SETTINGS } from "./app-settings.service";
 
 @Injectable({ providedIn: 'root' })
 export class PersonalizedRecommendationsService {

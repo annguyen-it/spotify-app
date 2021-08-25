@@ -1,10 +1,9 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
-import { UserProfileService } from '@services/user-profile/user-profile.service';
-import { AuthorizationService } from '@services/core/authorization.service';
-import { SignUpService } from '@services/core/sign-up.service';
-import { UpgradeAccountService } from '@services/core/upgrade-account.service';
+import { UserProfileService } from '@services/user-profile.service';
+import { AuthorizationService } from '@services/authorization.service';
+import { AccountService } from '@services/account.service';
 
 @Component({
   selector: 'spotify-top-bar',
@@ -20,9 +19,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private authorizationService: AuthorizationService,
-    private signUpService: SignUpService,
-    private upgradeAccountService: UpgradeAccountService,
-    private currentUserProfileService: UserProfileService,
+    private userProfileService: UserProfileService,
+    private accountService: AccountService,
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +29,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
         if (isAuthorized) {
-          this.userProfileSub = this.currentUserProfileService.getCurrentUserProfile()
+          this.userProfileSub = this.userProfileService.getCurrentUserProfile()
             .subscribe((profile) => {
               this.userProfile = profile;
             });
@@ -47,7 +45,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   signUp(): void {
-    this.signUpService.signUp();
+    this.accountService.signUp();
   }
 
   login(): void {
@@ -55,7 +53,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   upgrade(): void {
-    this.upgradeAccountService.upgrade();
+    this.accountService.upgrade();
   }
 
   toggleDropDown(): void {

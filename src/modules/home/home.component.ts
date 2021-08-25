@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonalizedRecommendationsService } from '@services/personalized-recommendations.service';
 
 @Component({
   selector: 'spotify-home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private personalizedRecommendationsService: PersonalizedRecommendationsService
+  ) { }
 
   ngOnInit(): void {
+    // this.personalizedRecommendationsService.getRecommendations()
+    //   .subscribe(e => {
+    //     console.log(e);
+    //   });
   }
-
 }

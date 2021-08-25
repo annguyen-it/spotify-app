@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { AuthorizationService } from '@services/core/authorization.service';
+import { AuthorizationService } from '@services/authorization.service';
 
 @Component({
   selector: 'spotify-root',
