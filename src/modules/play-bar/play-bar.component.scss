@@ -2,17 +2,27 @@
     background: linear-gradient(90deg,#af2896,#509bf5);
     font-size: 16px;
     cursor: default;
+
     .left-box p:first-child {
         text-transform: uppercase;
     }
+
     .right-box {
         display: flex;
         align-items: center;
-    }  button {
-        color: #2e77d0;
-        font-weight: 600;
-        transition: all .3s ease-in-out;
-    }   button:hover {
-        transform: scale(1.1);
+
+        button {
+            color: #2e77d0;
+            font-weight: 600;
+            transition: all .3s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }  
+        }
+    }
+
+    button {
+        @apply px-3 text-white;
     }
 }

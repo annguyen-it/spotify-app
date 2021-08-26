@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APP_SETTINGS } from './app-settings.service';
+import { APP_SETTINGS } from './settings.service';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {

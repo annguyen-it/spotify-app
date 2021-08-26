@@ -1,7 +1,12 @@
-<div class="play-bar sm:flex justify-between p-7">
+<div class="play-bar flex justify-between items-center h-full px-7">
     <div class="left-box">
         <p>Spotify preview</p>
         <p>Subscribe for unlimited songs and postcards</p>
+    </div>
+    <div>
+        <button (click)="prev()">Prev</button>
+        <button (click)="togglePlay()">{{ isPause ? 'Play' : 'Pause'  }}</button>
+        <button (click)="next()">Next</button>
     </div>
     <div class="right-box">
         <button type="button" class="py-2 px-4 rounded-full bg-white text-red-800">Free Sign Up</button>

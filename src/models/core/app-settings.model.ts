@@ -4,7 +4,4 @@ export interface AppSettings {
   redirectUrl: string;
   signUpUrl: string;
   upgradeAccountUrl: string;
-  clientId: string;
-  clientSecret: string;
-  scope: string[];
 }

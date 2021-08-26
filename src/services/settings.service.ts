@@ -4,11 +4,13 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AppSettings } from '@models/core/app-settings.model';
 import { LocalStorageKeyConstant } from '@constants/local-storage-key.constants';
+import { SpotifyAuthorize } from '@models/core/spotify-authorize.model';
 
 export let APP_SETTINGS: AppSettings;
+export let SPOTIFY_AUTHORIZE: SpotifyAuthorize;
 
 @Injectable({ providedIn: 'root' })
-export class AppSettingsService {
+export class SettingsService {
   constructor(protected httpClient: HttpClient) { }
 
   loadAppSettingAsync(): Observable<AppSettings> {
@@ -30,6 +32,29 @@ export class AppSettingsService {
           APP_SETTINGS = settings;
           localStorage.setItem(LocalStorageKeyConstant.appSettings, JSON.stringify(settings));
         })
-      )
+      );
   }
+
+  loadSpotifyAuthorizeAsync(): Observable<SpotifyAuthorize> {
+    if (SPOTIFY_AUTHORIZE) {
+      return of(SPOTIFY_AUTHORIZE);
+    }
+
+    const storedSettings = localStorage.getItem(LocalStorageKeyConstant.spotifyAuthorize);
+    if (storedSettings) {
+      SPOTIFY_AUTHORIZE = JSON.parse(storedSettings);
+      return of(SPOTIFY_AUTHORIZE);
+    }
+
+    const filePath = 'assets/settings/spotify-authorize.json';
+    return this.httpClient
+      .get<SpotifyAuthorize>(filePath)
+      .pipe(
+        tap((settings) => {
+          SPOTIFY_AUTHORIZE = settings;
+          localStorage.setItem(LocalStorageKeyConstant.spotifyAuthorize, JSON.stringify(settings));
+        })
+      );
+  }
+
 }

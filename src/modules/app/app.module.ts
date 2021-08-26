@@ -12,7 +12,8 @@ import { MainViewModule } from '../main-view/main-view.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppSettingsService } from '@services/app-settings.service';
+import { SettingsService } from '@services/settings.service';
+import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.factory';
 
 @NgModule({
   imports: [
@@ -29,12 +30,18 @@ import { AppSettingsService } from '@services/app-settings.service';
     AppComponent
   ],
   providers: [
-    AppSettingsService,
+    SettingsService,
     {
       provide: APP_INITIALIZER,
       useFactory: loadAppSettingAsync,
       multi: true,
-      deps: [AppSettingsService]
+      deps: [SettingsService]
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadSpotifyAuthorizeAsync,
+      multi: true,
+      deps: [SettingsService]
     },
   ],
   bootstrap: [AppComponent]

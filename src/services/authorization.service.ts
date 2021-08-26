@@ -4,7 +4,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 
 import { LoginSuccessInfo } from '@models/core/login-success-info.model';
 
-import { APP_SETTINGS } from './app-settings.service';
+import { APP_SETTINGS, SPOTIFY_AUTHORIZE } from './settings.service';
 import { SessionStorageService } from './session-storage.service';
 import { SessionStorageKeyConstant } from '@constants/session-storage-key.constant';
 
@@ -17,7 +17,7 @@ export class AuthorizationService implements OnDestroy {
     this.init();
   }
 
-  init(): void {
+  private init(): void {
     this.authorizationSessionSub = this.sessionStorageService
       .watch(SessionStorageKeyConstant.accessToken)
       .subscribe(
@@ -33,7 +33,17 @@ export class AuthorizationService implements OnDestroy {
   }
 
   externalLogin(): void {
-    window.location.href = `${APP_SETTINGS.authorizeUrl}?client_id=${APP_SETTINGS.clientId}&response_type=token&redirect_uri=${APP_SETTINGS.redirectUrl}&scope=${APP_SETTINGS.scope.join(' ')}`;
+    const params = new URLSearchParams({
+      response_type: 'token',
+      show_dialog: 'true',
+      client_id: SPOTIFY_AUTHORIZE.clientId,
+      redirect_uri: APP_SETTINGS.redirectUrl,
+      scope: SPOTIFY_AUTHORIZE.scope.join(' ')
+    })
+
+    console.log(params.toString());
+
+    window.location.href = `${APP_SETTINGS.authorizeUrl}?${params.toString()}`;
   }
 
   handleLoginSuccess(loginSuccessInfo: LoginSuccessInfo): void {
