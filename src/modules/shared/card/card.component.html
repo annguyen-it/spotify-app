@@ -1,4 +1,7 @@
-<a class="container block w-full p-4 rounded transition duration-300" *ngIf="playlist.images" href>
+<div class="container block w-full p-4 rounded transition duration-300 cursor-pointer"
+     (click)="openPlaylist($event)"
+     *ngIf="playlist.images"
+     href>
   <div class="h-full">
     <!-- Image -->
     <div class="image-wrapper relative mb-5">
@@ -7,7 +10,8 @@
       </div>
 
       <!-- Raising button -->
-      <button class="absolute bottom-0 right-2 w-11 h-11 
+      <button (click)="playPlaylist($event)"
+              class="absolute bottom-0 right-2 w-11 h-11 
                      flex justify-center items-center 
                      rounded-full bg-green-500 opacity-0
                      transform duration-300">
@@ -26,4 +30,4 @@
     </div>
 
   </div>
-</a>
+</div>

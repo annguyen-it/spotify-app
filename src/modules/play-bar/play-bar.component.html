@@ -5,7 +5,7 @@
     </div>
     <div>
         <button (click)="prev()">Prev</button>
-        <button (click)="togglePlay()">{{ isPause ? 'Play' : 'Pause'  }}</button>
+        <button (click)="togglePlay()">{{ isPause === undefined ? 'None' : isPause ? 'Play' : 'Pause'  }}</button>
         <button (click)="next()">Next</button>
     </div>
     <div class="right-box">

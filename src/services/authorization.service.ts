@@ -41,8 +41,6 @@ export class AuthorizationService implements OnDestroy {
       scope: SPOTIFY_AUTHORIZE.scope.join(' ')
     })
 
-    console.log(params.toString());
-
     window.location.href = `${APP_SETTINGS.authorizeUrl}?${params.toString()}`;
   }
 

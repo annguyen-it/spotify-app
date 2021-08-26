@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./play-bar.component.scss']
 })
 export class PlayBarComponent implements OnInit {
-  isPause = false;
+  isPause?: boolean;
 
   constructor(private playbackService: PlaybackService) { }
 
@@ -18,7 +18,7 @@ export class PlayBarComponent implements OnInit {
       .pipe(
         map((state) => state?.paused),
       )
-      .subscribe((paused) => this.isPause = !!paused);
+      .subscribe((paused) => this.isPause = paused);
   }
 
   async prev(): Promise<void> {

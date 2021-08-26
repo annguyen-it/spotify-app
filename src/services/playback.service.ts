@@ -4,13 +4,18 @@ import { WebPlaybackState } from '@models/playback/web-playback-state.model';
 import { BehaviorSubject } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { AuthorizationService } from './authorization.service';
+import { PlayerService } from './player.service';
 
 @Injectable({ providedIn: 'root' })
 export class PlaybackService {
   playerSession = new BehaviorSubject<any>(null);
   state = new BehaviorSubject<WebPlaybackState | null>(null);
+  deviceId = new BehaviorSubject<string | null>(null);
 
-  constructor(private authorizationService: AuthorizationService) { }
+  constructor(
+    private authorizationService: AuthorizationService,
+    private playerService: PlayerService
+  ) { }
 
   init(): void {
     this.authorizationService.isAuthorized()
@@ -43,37 +48,20 @@ export class PlaybackService {
     player.addListener('playback_error', ({ message }: any) => { console.error(message); });
 
     // Playback status updates
-    player.addListener('player_state_changed', (state: any) => { this.state.next(state); console.log(state); });
+    player.addListener('player_state_changed', (state: WebPlaybackState) => {
+      this.state.next(state);
+      const currentTrackId = state.trackWindow?.currentTrack?.id;
+      
+      if (!state.paused && currentTrackId) {
+        this.playerService.togglePlayback(this.deviceId.value, currentTrackId);
+      }
+    });
 
     // Ready
     player.addListener('ready', ({ device_id }: any) => {
       console.log('Ready with Device ID', device_id);
-
-      const play = ({
-        spotify_uri,
-        playerInstance: {
-          _options: {
-            getOAuthToken,
-            id
-          }
-        }
-      }: any) => {
-        getOAuthToken((access_token: any) => {
-          fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: [spotify_uri] }),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${access_token}`
-            },
-          });
-        });
-      };
-
-      play({
-        playerInstance: player,
-        spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
-      });
+      this.playerService.transferUserPlayback(device_id).subscribe();
+      this.deviceId.next(device_id);
     });
 
     // Not Ready
