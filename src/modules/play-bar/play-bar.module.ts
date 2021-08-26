@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PlayBarComponent } from './play-bar.component';
 
 
-
 @NgModule({
   declarations: [
     PlayBarComponent
@@ -15,4 +14,5 @@ import { PlayBarComponent } from './play-bar.component';
     PlayBarComponent
   ]
 })
+
 export class PlayBarModule { }
