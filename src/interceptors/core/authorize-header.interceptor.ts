@@ -3,10 +3,10 @@ import { Injectable } from "@angular/core";
 
 import { Observable, throwError } from "rxjs";
 
-import { SessionStorageKeyConstant } from "@constants/core/session-storage-key.constant";
 import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { AuthorizationService } from "@services/authorization.service";
+import { SessionStorageKeyConstant } from "@constants/session-storage-key.constant";
 
 @Injectable()
 export class AuthorizeHeaderInterceptor implements HttpInterceptor {

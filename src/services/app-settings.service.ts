@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AppSettings } from '@models/core/app-settings.model';
-import { LocalStorageKeyConstant } from '@constants/core/local-storage-key.constants';
+import { LocalStorageKeyConstant } from '@constants/local-storage-key.constants';
 
 export let APP_SETTINGS: AppSettings;
 

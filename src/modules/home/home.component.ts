@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BrowseService } from '@services/browse.service';
-import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
+import { HomeViewModel } from '@models/view/home-view.model';
 
 @Component({
   selector: 'spotify-home',
@@ -8,16 +8,35 @@ import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  featuredPlaylists: SimplifiedPlaylist[] = [];
-  message!: string;
+  vnViewModel!: HomeViewModel;
+  usViewModel!: HomeViewModel;
+  gbViewModel!: HomeViewModel;
 
-  constructor(private BrowseService: BrowseService) { }
+  constructor(
+    private browseService: BrowseService,
+  ) { }
 
   ngOnInit(): void {
-    this.BrowseService.GetListOfFeaturedPlaylists()
-      .subscribe((response) => {
-        this.featuredPlaylists = response.playlists.items;
-        this.message = response.message;
+    this.initViewModels();
+  }
+
+  initViewModels(): void {
+    this.browseService.getListOfFeaturedPlaylists('VN')
+      .subscribe((response) => this.vnViewModel = {
+        message: response.message,
+        items: response.playlists.items
+      });
+
+    this.browseService.getListOfFeaturedPlaylists('US')
+      .subscribe((response) => this.usViewModel = {
+        message: response.message,
+        items: response.playlists.items
+      });
+
+    this.browseService.getListOfFeaturedPlaylists('GB')
+      .subscribe((response) => this.gbViewModel = {
+        message: response.message,
+        items: response.playlists.items
       });
   }
 }

@@ -1,12 +1,12 @@
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
-import { SessionStorageKeyConstant } from '@constants/core/session-storage-key.constant';
 import { Injectable, OnDestroy } from '@angular/core';
 
 import { LoginSuccessInfo } from '@models/core/login-success-info.model';
 
 import { APP_SETTINGS } from './app-settings.service';
 import { SessionStorageService } from './session-storage.service';
+import { SessionStorageKeyConstant } from '@constants/session-storage-key.constant';
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizationService implements OnDestroy {
@@ -33,7 +33,7 @@ export class AuthorizationService implements OnDestroy {
   }
 
   externalLogin(): void {
-    window.location.href = `${APP_SETTINGS.authorizeUrl}?client_id=${APP_SETTINGS.clientId}&response_type=token&redirect_uri=${APP_SETTINGS.redirectUrl}`;
+    window.location.href = `${APP_SETTINGS.authorizeUrl}?client_id=${APP_SETTINGS.clientId}&response_type=token&redirect_uri=${APP_SETTINGS.redirectUrl}&scope=${APP_SETTINGS.scope.join(' ')}`;
   }
 
   handleLoginSuccess(loginSuccessInfo: LoginSuccessInfo): void {

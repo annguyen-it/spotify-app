@@ -6,4 +6,5 @@ export interface AppSettings {
   upgradeAccountUrl: string;
   clientId: string;
   clientSecret: string;
+  scope: string[];
 }

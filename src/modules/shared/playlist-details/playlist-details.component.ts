@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
 import { ResizedEvent } from 'angular-resize-event';
-import { fromEvent, Subscription } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-playlist-details',

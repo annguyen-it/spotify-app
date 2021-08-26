@@ -6,7 +6,7 @@ export interface PrivateUser {
   country: string;
   displayName: string;
   email: string;
-  explicit_content: ExplicitContentSettings;
+  explicitContent: ExplicitContentSettings;
   externalUrls: ExternalUrl;
   followers: any;
   href: string;
