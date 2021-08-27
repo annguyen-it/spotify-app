@@ -1,0 +1,30 @@
+.wrapper {
+    background-color: black;
+    color: #ffffffbf;
+    height: 100%;
+    & > div {
+        padding: 20px;
+    }
+
+    .control {
+        & > div {
+            padding: 5px;
+        }
+    }
+
+    .ruler {
+        width: 80%;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.425);
+        display: block;
+        margin: auto;
+    }
+
+    .fas {
+        margin-right: 10px;
+    }
+    button:hover {
+        color: white;
+    }
+
+}

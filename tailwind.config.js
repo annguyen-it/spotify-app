@@ -16,14 +16,31 @@ module.exports = {
       current: 'currentColor',
       gray: colors.trueGray,
       'main-gray': 'rgb(179, 179, 179)',
-      white: '#ffffff'
-    }
-  },
-  extend: {
-    transitionProperty: {
-      height: 'height',
+      white: '#ffffff',
+      green: colors.green,
+    },
+    fontSize: {
+      // base
+      'xs': '.75rem',
+      'sm': '.875rem',
+      'base': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '4rem',
+      // custom
+      'base-sm': 'calc(1rem - 1px)',
+      'base-lg': 'calc(1rem + 1px)',
     },
   },
+  extend: {
+    transform: ['hover']
+  },
   variants: {},
-  plugin: []
+  plugins: [
+    require('@tailwindcss/line-clamp')
+  ]
 }

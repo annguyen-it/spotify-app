@@ -1,9 +1,8 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { AUTHORIZATION_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
+import { AuthorizationService } from '@services/authorization.service';
 
 @Component({
   selector: 'spotify-root',
@@ -15,8 +14,9 @@ export class AppComponent implements OnInit, OnDestroy {
   authorizationFailureSub!: Subscription;
 
   constructor(
-    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService,
-    private route: ActivatedRoute
+    private authorizationService: AuthorizationService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +30,10 @@ export class AppComponent implements OnInit, OnDestroy {
         filter(params => !!params.accessToken)
       )
       .subscribe(
-        (loginInfo) => this.authorizationService.handleLoginSuccess(loginInfo)
+        (loginInfo) => {
+          this.authorizationService.handleLoginSuccess(loginInfo);
+          this.router.navigate([]);
+        }
       );
 
     this.authorizationFailureSub = this.route.queryParams
@@ -38,7 +41,10 @@ export class AppComponent implements OnInit, OnDestroy {
         filter(params => params.error !== undefined),
       )
       .subscribe(
-        () => this.authorizationService.handleLoginFailure()
+        () => {
+          this.authorizationService.handleLoginFailure();
+          this.router.navigate([]);
+        }
       );
   }
 

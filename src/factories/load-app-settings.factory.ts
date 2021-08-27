@@ -1,7 +1,7 @@
 import { AppSettings } from "@models/core/app-settings.model";
-import { AppSettingsService } from "@services/implementations/core/app-settings.service";
+import { SettingsService } from "@services/settings.service";
 
-export function loadAppSettingAsync(appSettingsService: AppSettingsService): () => Promise<AppSettings> {
+export function loadAppSettingAsync(appSettingsService: SettingsService): () => Promise<AppSettings> {
   return () => appSettingsService
     .loadAppSettingAsync()
     .toPromise();
