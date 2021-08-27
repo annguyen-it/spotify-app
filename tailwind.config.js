@@ -18,6 +18,7 @@ module.exports = {
       'main-gray': 'rgb(179, 179, 179)',
       white: '#ffffff',
       green: colors.green,
+      blue: colors.blue,
     },
     fontSize: {
       // base
