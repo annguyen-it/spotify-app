@@ -1,12 +1,9 @@
-import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
-import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
-import { AUTHORIZATION_SERVICE_INJECTOR, SIGN_UP_SERVICE_INJECTOR, UPGRADE_ACCOUNT_SERVICE_INJECTOR, USER_PROFILE_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { ISignUpService } from '@services/interfaces/core/sign-up-service.interface';
-import { IUpgradeAccountService } from '@services/interfaces/core/upgrade-account-service.interface';
-import { IUserProfileService } from '@services/interfaces/user-profile/user-profile-service.interface';
-import { take, tap } from 'rxjs/operators';
-import { UserProfile } from '@models/user-profile/user-profile.model';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
+import { UserProfileService } from '@services/user-profile.service';
+import { AuthorizationService } from '@services/authorization.service';
+import { AccountService } from '@services/account.service';
 
 @Component({
   selector: 'spotify-top-bar',
@@ -15,16 +12,15 @@ import { Subscription } from 'rxjs';
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   isAuthorized!: boolean;
-  userProfile?: UserProfile;
+  userProfile?: PublicUser;
   userProfileSub = new Subscription();
   openDropDown = false;
 
   constructor(
     private elementRef: ElementRef,
-    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService,
-    @Inject(SIGN_UP_SERVICE_INJECTOR) private signUpService: ISignUpService,
-    @Inject(UPGRADE_ACCOUNT_SERVICE_INJECTOR) private upgradeAccountService: IUpgradeAccountService,
-    @Inject(USER_PROFILE_SERVICE_INJECTOR) private currentUserProfileService: IUserProfileService,
+    private authorizationService: AuthorizationService,
+    private userProfileService: UserProfileService,
+    private accountService: AccountService,
   ) { }
 
   ngOnInit(): void {
@@ -33,10 +29,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
         if (isAuthorized) {
-          this.userProfileSub = this.currentUserProfileService.getCurrentUserProfile()
-            .pipe(take(1))
+          this.userProfileSub = this.userProfileService.getCurrentUserProfile()
             .subscribe((profile) => {
-              console.log(profile);
               this.userProfile = profile;
             });
         } else {
@@ -51,7 +45,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   signUp(): void {
-    this.signUpService.signUp();
+    this.accountService.signUp();
   }
 
   login(): void {
@@ -59,7 +53,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   upgrade(): void {
-    this.upgradeAccountService.upgrade();
+    this.accountService.upgrade();
   }
 
   toggleDropDown(): void {

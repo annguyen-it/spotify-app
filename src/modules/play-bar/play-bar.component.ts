@@ -1,12 +1,6 @@
-import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
-import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
-import { AUTHORIZATION_SERVICE_INJECTOR, SIGN_UP_SERVICE_INJECTOR, UPGRADE_ACCOUNT_SERVICE_INJECTOR, USER_PROFILE_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { ISignUpService } from '@services/interfaces/core/sign-up-service.interface';
-import { IUpgradeAccountService } from '@services/interfaces/core/upgrade-account-service.interface';
-import { IUserProfileService } from '@services/interfaces/user-profile/user-profile-service.interface';
-import { take, tap } from 'rxjs/operators';
-import { UserProfile } from '@models/user-profile/user-profile.model';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { PlaybackService } from '@services/playback.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-play-bar',
@@ -14,48 +8,28 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./play-bar.component.scss'],
 })
 export class PlayBarComponent implements OnInit {
-  isAuthorized!: boolean;
-  userProfile?: UserProfile;
-  userProfileSub = new Subscription();
-  openDropDown = false;
+  isPause?: boolean;
 
-  constructor(
-    private elementRef: ElementRef,
-    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService,
-    @Inject(SIGN_UP_SERVICE_INJECTOR) private signUpService: ISignUpService,
-    @Inject(UPGRADE_ACCOUNT_SERVICE_INJECTOR) private upgradeAccountService: IUpgradeAccountService,
-    @Inject(USER_PROFILE_SERVICE_INJECTOR) private currentUserProfileService: IUserProfileService,
-  ) { }
+  constructor(private playbackService: PlaybackService) { }
 
   ngOnInit(): void {
-    this.authorizationService
-      .isAuthorized()
-      .subscribe((isAuthorized) => {
-        this.isAuthorized = isAuthorized;
-        if (isAuthorized) {
-          this.userProfileSub = this.currentUserProfileService.getCurrentUserProfile()
-            .pipe(take(1))
-            .subscribe((profile) => {
-              console.log(profile);
-              this.userProfile = profile;
-            });
-        } else {
-          this.userProfileSub.unsubscribe();
-          this.userProfile = undefined;
-        }
-      });
+    this.playbackService.init();
+    this.playbackService.state
+      .pipe(
+        map((state) => state?.paused),
+      )
+      .subscribe((paused) => this.isPause = paused);
   }
-  ngOnDestroy(): void {
-    this.userProfileSub.unsubscribe();
+
+  async prev(): Promise<void> {
+    await this.playbackService.previousTrack();
   }
-  signUp(): void {
-    this.signUpService.signUp();
+
+  async togglePlay(): Promise<void> {
+    await this.playbackService.togglePlay();
   }
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent): void {
-    const targetElement = event.target as HTMLElement;
-    if (targetElement && !this.elementRef.nativeElement.contains(targetElement)) {
-      this.openDropDown = false;
-    }
+
+  async next(): Promise<void> {
+    await this.playbackService.nextTrack();
   }
 }

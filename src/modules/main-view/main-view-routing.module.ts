@@ -1,17 +1,14 @@
-import { MainViewComponent } from './main-view.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainViewComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: async() => (await import('../home/home.module')).HomeModule
-      }
-    ]
+    loadChildren: async () => (await import('../home/home.module')).HomeModule
+  },
+  {
+    path: 'playlist',
+    loadChildren: async () => (await import('../playlist/playlist.module')).PlaylistModule
   }
 ];
 
