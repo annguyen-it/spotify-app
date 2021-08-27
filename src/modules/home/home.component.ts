@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
         message: response.message,
         items: response.playlists.items
       });
-
     this.browseService.getListOfFeaturedPlaylists('US')
       .subscribe((response) => this.usViewModel = {
         message: response.message,

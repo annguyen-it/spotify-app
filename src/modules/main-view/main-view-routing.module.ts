@@ -4,9 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'library',
+    loadChildren: async () => (await import('../library/library.module')).LibraryModule
+  },
+  {
     path: '',
+    pathMatch: 'full',
     loadChildren: async () => (await import('../home/home.module')).HomeModule
-  }
+  },
 ];
 
 @NgModule({

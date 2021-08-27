@@ -5,7 +5,7 @@
 
   <div class="navigation control">
     <div class="home">
-      <button>
+      <button [routerLink]="['/']" [routerLinkActive]="'bg-green-500'">
         <i class="fas fa-home"></i>
         Home
       </button>
@@ -19,7 +19,7 @@
     </div>
   
     <div class="library">
-      <button>
+      <button [routerLink]="['/library']" [routerLinkActive]="'bg-green-500'">
         <i class="fas fa-books"></i>
         Your Library
       </button>
