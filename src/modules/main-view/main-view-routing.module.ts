@@ -5,13 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: MainViewComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: async() => (await import('../home/home.module')).HomeModule
-      }
-    ]
+    loadChildren: async () => (await import('../home/home.module')).HomeModule
   }
 ];
 

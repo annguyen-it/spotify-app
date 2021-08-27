@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { loadAppSettingAsync } from '@factories/load-app-settings.factory';
 import { InterceptorsModule } from '@interceptors/interceptors.module';
 
-import { TopBarModule } from '../top-bar/top-bar.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { PlayBarModule } from '../play-bar/play-bar.module';
 import { MainViewModule } from '../main-view/main-view.module';
@@ -23,7 +22,6 @@ import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.fac
     MainViewModule,
     PlayBarModule,
     SidebarModule,
-    TopBarModule,
     AppRoutingModule,
   ],
   declarations: [

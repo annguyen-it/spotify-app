@@ -1,4 +1,6 @@
-<div class="h-full flex justify-end items-center px-2 lg:px-9 bg-gray-900 text-sm">
+<div class="container sticky top-0 left-0 right-0 h-full 
+            flex justify-end items-center z-50
+            px-2 lg:px-9 bg-gray-900 text-sm">
   <!-- Display if unauthorized -->
   <div *ngIf="!isAuthorized">
     <button (click)="signUp()" class="px-10 py-3"> Sign up </button>

@@ -1,9 +1,8 @@
 :host {
   display: grid;
   grid-template-columns: 240px auto;
-  grid-template-rows: 60px auto 90px;
+  grid-template-rows: auto 90px;
   grid-template-areas: 
-    "sidebar top-bar"
     "sidebar main-view"
     "play-bar play-bar";
   height: 100vh;
@@ -19,8 +18,4 @@ spotify-sidebar {
 
 main-view {
   grid-area: main-view;
-}
-
-spotify-top-bar {
-  grid-area: top-bar;
 }
