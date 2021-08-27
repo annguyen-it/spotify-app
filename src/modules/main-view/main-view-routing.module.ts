@@ -3,13 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: async () => (await import('../home/home.module')).HomeModule
+    path: 'library',
+    loadChildren: async () => (await import('../library/library.module')).LibraryModule
   },
   {
     path: 'playlist',
     loadChildren: async () => (await import('../playlist/playlist.module')).PlaylistModule
-  }
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadChildren: async () => (await import('../home/home.module')).HomeModule
+  },
 ];
 
 @NgModule({
