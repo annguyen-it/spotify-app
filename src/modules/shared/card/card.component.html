@@ -26,7 +26,7 @@
     <!-- Information text -->
     <div class="title-wrapper">
       <h5 class="max-w-full font-bold line-clamp-1">{{ playlist.name }}</h5>
-      <p class="mt-1 text-main-gray line-clamp-2">{{ playlist.description }}</p>
+      <p class="mt-1 text-main-gray line-clamp-2">{{ playlist.description | removeTag }}</p>
     </div>
 
   </div>
