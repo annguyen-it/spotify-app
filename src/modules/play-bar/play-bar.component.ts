@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'spotify-play-bar',
   templateUrl: './play-bar.component.html',
-  styleUrls: ['./play-bar.component.scss']
+  styleUrls: ['./play-bar.component.scss'],
 })
 export class PlayBarComponent implements OnInit {
   isPause?: boolean;
