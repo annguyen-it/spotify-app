@@ -3,7 +3,7 @@
         <p>Spotify preview</p>
         <p>Subscribe for unlimited songs and postcards</p>
     </div>
-    <div class="right-box">
-        <button type="button" class="py-2 px-4 rounded-full bg-white text-red-800">Free Sign Up</button>
+    <div class="right-box" *ngIf="!isAuthorized">
+        <button (click)="signUp()" type="button" class="py-2 px-4 rounded-full bg-white text-red-800">Free Sign Up</button>
     </div>
 </div>
