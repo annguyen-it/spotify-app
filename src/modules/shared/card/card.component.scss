@@ -1,5 +1,6 @@
 .container {
   background-color: #181818;
+  flex: 1;
 
   &:hover {
     background-color: hsl(0, 0%, 16%);
