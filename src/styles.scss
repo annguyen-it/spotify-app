@@ -5,10 +5,11 @@
 
 html {
   font-size: 14px;
+  font-weight: 500;
 }
 
 body {
-  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  font-family: "Raleway", sans-serif;
   @apply text-white;
 }
 
@@ -17,7 +18,7 @@ h1 {
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 32px;
 }
 
 h3 {

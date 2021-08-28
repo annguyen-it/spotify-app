@@ -50,9 +50,9 @@ export class PlaybackService {
     // Playback status updates
     player.addListener('player_state_changed', (state: WebPlaybackState) => {
       this.state.next(state);
-      const currentTrackId = state.trackWindow?.currentTrack?.id;
+      const currentTrackId = state?.trackWindow?.currentTrack?.id;
       
-      if (!state.paused && currentTrackId) {
+      if (state && !state.paused && currentTrackId) {
         this.playerService.togglePlayback(this.deviceId.value, currentTrackId);
       }
     });
