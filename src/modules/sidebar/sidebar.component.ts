@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LibraryViewModel } from '@models/view/library-view.model';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaylistService } from '@services/playlist.service';
-import { PlaylistsService } from '@services/playlists.service';
+import { PlaylistService } from '@services/playlist.service';
 import { UserProfileService } from '@services/user-profile.service';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
   
   constructor(
     private userProfileService: UserProfileService,
-    private playlistsService: PlaylistsService,
+    private playlistsService: PlaylistService,
     private playlistService: PlaylistService,
     private authorizationService: AuthorizationService,
   ) { }
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
   }
 
   initViewModels(): void{
-    this.playlistsService.getListOfCurrentUserPlaylists()
+    this.playlistService.getListOfCurrentUserPlaylists()
       .subscribe((response) => this.viewModel = {
           href: response.href,
           items: response.items

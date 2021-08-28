@@ -12,7 +12,7 @@
   <div class="flex flex-col justify-end z-0">
     <h6 *ngIf="uponText" class="font-bold text-sm uppercase">{{ uponText }}</h6>
     <h1 *ngIf="title" class="font-black leading-tight tracking-tight" [class.text-7xl]="title.length > 15">{{ title }}</h1>
-    <h6 *ngIf="description" class="mt-2 font-semibold text-base text-main-gray">{{ description }}</h6>
+    <h6 *ngIf="description" class="mt-2 font-semibold text-base text-main-gray" [innerHTML]="description"></h6>
 
     <!-- Owner, release time, song numbers, durations -->
     <h6 class="mt-2 font-semibold text-base text-main-gray">
