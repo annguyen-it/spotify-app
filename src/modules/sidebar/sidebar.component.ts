@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Playlist } from '@models/playlist/playlist.model';
 import { LibraryViewModel } from '@models/view/library-view.model';
+import { PlaylistService } from '@services/playlist.service';
 import { PLaylistsService } from '@services/playlists.service';
 
 @Component({
@@ -10,17 +12,33 @@ import { PLaylistsService } from '@services/playlists.service';
 export class SidebarComponent implements OnInit {
   viewModel!: LibraryViewModel;
   constructor(
-    private playlistsService: PLaylistsService
+    private playlistsService: PLaylistsService,
+    private playlistService: PlaylistService
   ) { }
 
   ngOnInit(): void {
     this.initViewModels();
   }
+
+  ngOnChanges(): void {
+    this.createPlaylist()
+  }
+
   initViewModels(): void{
     this.playlistsService.getListOfCurrentUserPlaylists()
       .subscribe((response) => this.viewModel = {
           href: response.href,
           items: response.items
       });
+  }
+
+  createPlaylist(urlId?: string) {
+    this.playlistService.createPlaylist().subscribe();
+    this.initViewModels()
+  }
+
+  deletePlaylist() {
+    this.playlistService.deletePlaylist().subscribe();
+    this.initViewModels()
   }
 }

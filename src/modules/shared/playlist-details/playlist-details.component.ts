@@ -16,7 +16,6 @@ export class PlaylistDetailsComponent {
   constructor() { }
 
   onResized(event: ResizedEvent): void {
-    console.log(this.displayPlaylists)
     for (let i = 1; i < this.playlists.length; i++) {
       console.log(event)
       if (event.newWidth < i * 180 + (i - 1) * 22) {
