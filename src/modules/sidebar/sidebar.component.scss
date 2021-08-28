@@ -1,8 +1,12 @@
+:host {
+    @apply h-full;
+}
+
 .wrapper {
-    background-color: black;
-    color: #ffffffbf;
-    & > div {
-        padding: 10px 5px;
+    height: calc(100vh - 90px); // Play bar's height
+
+    > div > div {
+        @apply py-3 px-1.5;
     }
 
     .logo > * {
@@ -40,27 +44,5 @@
         height: 40px;
         padding: 0 16px;
         width: 100%;
-    }
-    button:hover {
-        color: white;
-    }
-
-    .playlist > button {
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        border-radius: 4px;
-        cursor: pointer;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        gap: 16px;
-        height: 30px;
-        padding: 0 16px;
-        width: 100%;
-    }
-    .custom-playlist {
-        overflow-y: auto;
-        max-height: 20rem;
     }
 }

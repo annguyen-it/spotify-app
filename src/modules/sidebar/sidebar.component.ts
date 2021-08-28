@@ -17,7 +17,6 @@ export class SidebarComponent implements OnInit {
   sub2!: Subscription;
   urlId!: string;
   length!: number;
-  
   constructor(
     private userProfileService: UserProfileService,
     private playlistService: PlaylistService,
@@ -41,7 +40,7 @@ export class SidebarComponent implements OnInit {
       });
   }
 
-  initViewModels(): void{
+  initViewModels(): void {
     this.playlistService.getListOfCurrentUserPlaylists()
       .subscribe((response) => this.viewModel = {
           href: response.href,
