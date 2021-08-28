@@ -1,5 +1,11 @@
+:host {
+    @apply h-full;
+}
+
 .wrapper {
-    > div {
+    height: calc(100vh - 90px); // Play bar's height
+
+    > div > div {
         @apply py-3 px-1.5;
     }
 
