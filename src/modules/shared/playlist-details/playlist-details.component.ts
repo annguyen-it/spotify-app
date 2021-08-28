@@ -11,7 +11,7 @@ export class PlaylistDetailsComponent {
   displayPlaylists: SimplifiedPlaylist[] = [];
 
   @Input() playlists!: SimplifiedPlaylist[];
-  @Input() message!: string;
+  @Input() message?: string;
 
   constructor() { }
 
