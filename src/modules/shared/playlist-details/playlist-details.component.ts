@@ -17,7 +17,6 @@ export class PlaylistDetailsComponent {
 
   onResized(event: ResizedEvent): void {
     for (let i = 1; i < this.playlists.length; i++) {
-      console.log(event)
       if (event.newWidth < i * 180 + (i - 1) * 22) {
         this.displayPlaylists = this.playlists.slice(0, i - 1);
         break;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LibraryViewModel } from '@models/view/library-view.model';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaylistService } from '@services/playlist.service';
-import { PLaylistsService } from '@services/playlists.service';
+import { PlaylistsService } from '@services/playlists.service';
 
 @Component({
   selector: 'spotify-sidebar',
@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   isAuthorized!: boolean;
   
   constructor(
-    private playlistsService: PLaylistsService,
+    private playlistsService: PlaylistsService,
     private playlistService: PlaylistService,
     private authorizationService: AuthorizationService,
   

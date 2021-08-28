@@ -1,0 +1,16 @@
+<div class="container h-vh-30 flex px-9 pb-7">
+  <div class="w-56 h-56 xl:w-64 xl:h-64 self-end mr-7">
+    <img [src]="image.url" />
+  </div>
+  <div class="flex flex-col justify-end">
+    <h6 *ngIf="uponText" class="font-bold text-sm uppercase">{{ uponText }}</h6>
+    <h1 *ngIf="title" class="font-black">{{ title }}</h1>
+    <h6 *ngIf="description" class="font-semibold text-base text-main-gray">{{ description }}</h6>
+    <h6 class="font-semibold text-base text-main-gray">
+      <span class="font-bold text-white">{{ owner.displayName }}</span> •
+      <span *ngIf="releaseTime">{{ releaseTime }} •</span>
+      <span>{{ tracks!.length }} Song{{tracks!.length === 1 ? '' : 's'}}</span>
+      <span>, {{ duration! | duration }}</span>
+    </h6>
+  </div>
+</div>
