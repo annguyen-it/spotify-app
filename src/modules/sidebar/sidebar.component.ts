@@ -3,6 +3,8 @@ import { LibraryViewModel } from '@models/view/library-view.model';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaylistService } from '@services/playlist.service';
 import { PlaylistsService } from '@services/playlists.service';
+import { UserProfileService } from '@services/user-profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'spotify-sidebar',
@@ -12,13 +14,14 @@ import { PlaylistsService } from '@services/playlists.service';
 export class SidebarComponent implements OnInit {
   viewModel!: LibraryViewModel;
   isAuthorized!: boolean;
+  sub!: Subscription;
+  urlId!: string;
   
   constructor(
+    private userProfileService: UserProfileService,
     private playlistsService: PlaylistsService,
     private playlistService: PlaylistService,
     private authorizationService: AuthorizationService,
-  
-
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +30,10 @@ export class SidebarComponent implements OnInit {
       .isAuthorized()
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
+        this.sub = this.userProfileService.getCurrentUserProfile()
+          .subscribe((response) => {
+            this.urlId = response.id
+          })
         this.initViewModels();
       });
   }
@@ -40,7 +47,7 @@ export class SidebarComponent implements OnInit {
   }
 
   createPlaylist(urlId?: string) {
-    this.playlistService.createPlaylist().subscribe((response) => { 
+    this.playlistService.createPlaylist(this.urlId).subscribe((response) => { 
       return this.initViewModels()
      })
   }

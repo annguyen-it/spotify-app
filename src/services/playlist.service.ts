@@ -21,7 +21,7 @@ export class PlaylistService extends BaseDataService {
     }
     return this.http
       .post<any>(
-        `${this.baseUrl}/v1/users/313rd24fobu56dorkjkvty5p6ata/playlists`,
+        `${this.baseUrl}/v1/users/${userId}/playlists`,
         newPlaylist
       )
   }
