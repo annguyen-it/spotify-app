@@ -33,12 +33,8 @@ export class SidebarComponent implements OnInit {
   }
 
   createPlaylist(urlId?: string) {
-    this.playlistService.createPlaylist().subscribe();
-    this.initViewModels()
-  }
-
-  deletePlaylist() {
-    this.playlistService.deletePlaylist().subscribe();
-    this.initViewModels()
+    this.playlistService.createPlaylist().subscribe((response) => { 
+      return this.initViewModels()
+     })
   }
 }

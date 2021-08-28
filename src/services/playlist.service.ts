@@ -15,7 +15,7 @@ export class PlaylistService extends BaseDataService {
 
   createPlaylist(userId?: string): Observable<Playlist> {
     const newPlaylist = {
-      "name": "New 1231231231",
+      "name": "New playlist",
       "description": "New playlist description",
       "public": false
     }
@@ -26,10 +26,4 @@ export class PlaylistService extends BaseDataService {
       )
   }
 
-  deletePlaylist(userId?: string): Observable<Playlist> {
-    return this.http
-      .delete<any>(
-        `${this.baseUrl}/v1/users/313rd24fobu56dorkjkvty5p6ata/playlists`,
-      )
-  }
 }
