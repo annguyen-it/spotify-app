@@ -26,7 +26,6 @@ export class LibraryComponent implements OnInit {
           href: response.href,
           items: response.items
         };
-        console.log(this.viewModel);
       });
   }
 }
