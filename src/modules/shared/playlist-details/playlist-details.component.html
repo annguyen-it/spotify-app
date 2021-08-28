@@ -15,6 +15,6 @@
   </div>
 
   <div class="card-container grid grid-rows-1 overflow-y-hidden" (resized)="onResized($event)">
-    <spotify-card *ngFor="let playlist of playlists" [playlist]="playlist"></spotify-card>
+    <spotify-card *ngFor="let playlist of displayPlaylists" [playlist]="playlist"></spotify-card>
   </div>
 </div>

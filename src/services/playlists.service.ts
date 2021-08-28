@@ -33,9 +33,9 @@ export class PlaylistsService extends BaseDataService {
 
   getPlaylist(playlistId: string): Observable<Playlist> {
     return this.http
-      .get<Playlist>(`${this.baseUrl}/v1/me/playlists/${playlistId}`)
+      .get<any>(`${this.baseUrl}/v1/playlists/${playlistId}`)
       .pipe(
-        tap(x => console.log(x))
-      )
+        map<any, Playlist>(x => Playlist.parse(x)),
+      );
   }
 }

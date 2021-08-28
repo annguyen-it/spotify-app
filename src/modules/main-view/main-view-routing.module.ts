@@ -12,13 +12,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    pathMatch: 'full',
     loadChildren: async () => (await import('../home/home.module')).HomeModule
   },
-  {
-    path: '**',
-    redirectTo: 'playlist/:playlist-id'
-  }
 ];
 
 @NgModule({

@@ -1,5 +1,11 @@
-<main>
-  <spotify-banner></spotify-banner>
+<main *ngIf="playlist">
+  <spotify-banner [image]="playlist.images[0]"
+                  [title]="playlist.name"
+                  [uponText]="'playlist'"
+                  [description]="playlist.description"
+                  [owner]="playlist.owner"
+                  [tracks]="playlist.tracks.items">
+  </spotify-banner>
   <spotify-banner-button-group></spotify-banner-button-group>
   <spotify-track-list></spotify-track-list>
 </main>

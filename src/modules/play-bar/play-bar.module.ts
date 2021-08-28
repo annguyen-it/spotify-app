@@ -4,15 +4,9 @@ import { PlayBarComponent } from './play-bar.component';
 
 
 @NgModule({
-  declarations: [
-    PlayBarComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    PlayBarComponent
-  ]
+  declarations: [PlayBarComponent],
+  imports: [CommonModule],
+  exports: [PlayBarComponent]
 })
 
 export class PlayBarModule { }
