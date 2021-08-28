@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
 import { LibraryViewModel } from '@models/view/library-view.model';
-import { PlaylistsService } from '@services/playlists.service';
+import { PlaylistService } from '@services/playlist.service';
 
 @Component({
   selector: 'spotify-library',
@@ -12,7 +11,7 @@ export class LibraryComponent implements OnInit {
   viewModel!: LibraryViewModel;
 
   constructor(
-    private playlistsService: PlaylistsService
+    private playlistService: PlaylistService
   ) { }
 
   ngOnInit(): void {
@@ -20,7 +19,7 @@ export class LibraryComponent implements OnInit {
   }
 
   initViewModels(): void {
-    this.playlistsService.getListOfCurrentUserPlaylists()
+    this.playlistService.getListOfCurrentUserPlaylists()
       .subscribe((response) => {
         this.viewModel = {
           href: response.href,

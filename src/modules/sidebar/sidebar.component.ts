@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LibraryViewModel } from '@models/view/library-view.model';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaylistService } from '@services/playlist.service';
-import { PlaylistsService } from '@services/playlists.service';
 
 @Component({
   selector: 'spotify-sidebar',
@@ -14,7 +13,6 @@ export class SidebarComponent implements OnInit {
   isAuthorized!: boolean;
   
   constructor(
-    private playlistsService: PlaylistsService,
     private playlistService: PlaylistService,
     private authorizationService: AuthorizationService,
   
@@ -32,7 +30,7 @@ export class SidebarComponent implements OnInit {
   }
 
   initViewModels(): void{
-    this.playlistsService.getListOfCurrentUserPlaylists()
+    this.playlistService.getListOfCurrentUserPlaylists()
       .subscribe((response) => this.viewModel = {
           href: response.href,
           items: response.items
