@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LibraryViewModel } from '@models/view/library-view.model';
+import { AuthorizationService } from '@services/authorization.service';
+import { PlaylistService } from '@services/playlist.service';
 import { PlaylistsService } from '@services/playlists.service';
 
 @Component({
@@ -9,18 +11,37 @@ import { PlaylistsService } from '@services/playlists.service';
 })
 export class SidebarComponent implements OnInit {
   viewModel!: LibraryViewModel;
+  isAuthorized!: boolean;
+  
   constructor(
-    private playlistsService: PlaylistsService
+    private playlistsService: PlaylistsService,
+    private playlistService: PlaylistService,
+    private authorizationService: AuthorizationService,
+  
+
   ) { }
 
   ngOnInit(): void {
     this.initViewModels();
+    this.authorizationService
+      .isAuthorized()
+      .subscribe((isAuthorized) => {
+        this.isAuthorized = isAuthorized;
+        this.initViewModels();
+      });
   }
+
   initViewModels(): void{
     this.playlistsService.getListOfCurrentUserPlaylists()
       .subscribe((response) => this.viewModel = {
           href: response.href,
           items: response.items
       });
+  }
+
+  createPlaylist(urlId?: string) {
+    this.playlistService.createPlaylist().subscribe((response) => { 
+      return this.initViewModels()
+     })
   }
 }

@@ -24,7 +24,7 @@ import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.fac
     SidebarModule,
     AppRoutingModule,
   ],
-  declarations: [	
+  declarations: [				
     AppComponent,
    ],
   providers: [
