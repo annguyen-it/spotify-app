@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Playlist } from '@models/playlist/playlist.model';
 import { GetListOfCurrentUserPlaylists } from '@models/response/get-list-of-current-user-playlists.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { BaseDataService } from './core/base-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PLaylistsService extends BaseDataService {
-
+export class PlaylistsService extends BaseDataService {
   constructor(private http: HttpClient) {
     super();
   }
@@ -29,5 +29,13 @@ export class PLaylistsService extends BaseDataService {
           }))
         })),
       );
+  }
+
+  getPlaylist(playlistId: string): Observable<Playlist> {
+    return this.http
+      .get<Playlist>(`${this.baseUrl}/v1/me/playlists/${playlistId}`)
+      .pipe(
+        tap(x => console.log(x))
+      )
   }
 }

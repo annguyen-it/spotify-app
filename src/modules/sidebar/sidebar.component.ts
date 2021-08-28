@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LibraryViewModel } from '@models/view/library-view.model';
-import { PLaylistsService } from '@services/playlists.service';
+import { PlaylistsService } from '@services/playlists.service';
 
 @Component({
   selector: 'spotify-sidebar',
@@ -10,7 +10,7 @@ import { PLaylistsService } from '@services/playlists.service';
 export class SidebarComponent implements OnInit {
   viewModel!: LibraryViewModel;
   constructor(
-    private playlistsService: PLaylistsService
+    private playlistsService: PlaylistsService
   ) { }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
 import { LibraryViewModel } from '@models/view/library-view.model';
-import { PLaylistsService } from '@services/playlists.service';
+import { PlaylistsService } from '@services/playlists.service';
 
 @Component({
   selector: 'spotify-library',
@@ -12,7 +12,7 @@ export class LibraryComponent implements OnInit {
   viewModel!: LibraryViewModel;
 
   constructor(
-    private playlistsService: PLaylistsService
+    private playlistsService: PlaylistsService
   ) { }
 
   ngOnInit(): void {

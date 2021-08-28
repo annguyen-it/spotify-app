@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: async () => (await import('../library/library.module')).LibraryModule
   },
   {
-    path: 'playlist',
+    path: 'playlist/:playlist-id',
     loadChildren: async () => (await import('../playlist/playlist.module')).PlaylistModule
   },
   {
@@ -15,6 +15,10 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: async () => (await import('../home/home.module')).HomeModule
   },
+  {
+    path: '**',
+    redirectTo: 'playlist/:playlist-id'
+  }
 ];
 
 @NgModule({
