@@ -4,13 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'library',
-    loadChildren: async () => (await import('../library/library.module')).LibraryModule
+    path: '',
+    // loadChildren: async () => (await import('../home/home.module')).HomeModule
+    loadChildren: () => import('../home/home.module').then(m => m.HomeModule)
+
   },
   {
-    path: '',
-    pathMatch: 'full',
-    loadChildren: async () => (await import('../home/home.module')).HomeModule
+    path: 'library',
+    loadChildren: async () => (await import('../library/library.module')).LibraryModule
   },
 ];
 

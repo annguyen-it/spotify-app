@@ -1,15 +1,16 @@
 .wrapper {
     background-color: black;
     color: #ffffffbf;
-    height: 100%;
     & > div {
-        padding: 20px;
+        padding: 10px 5px;
     }
 
-    .control {
-        & > div {
-            padding: 5px;
-        }
+    .logo > * {
+        padding: 10px 50px 0px 10px
+    }
+
+    .active {
+        @apply bg-gray-400 bg-opacity-25;
     }
 
     .ruler {
@@ -22,13 +23,44 @@
 
     .fas {
         margin-right: 10px;
+        font-size: 22px;
+        font-weight: 100;
+    }
+
+    button {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        border-radius: 4px;
+        cursor: pointer;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 16px;
+        height: 40px;
+        padding: 0 16px;
+        width: 100%;
     }
     button:hover {
         color: white;
     }
 
-    .playlist {
-        padding: 5px;
+    .playlist > button {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        border-radius: 4px;
+        cursor: pointer;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 16px;
+        height: 30px;
+        padding: 0 16px;
+        width: 100%;
     }
-
+    .custom-playlist {
+        overflow-y: scroll;
+        height: 500px;
+    }
 }

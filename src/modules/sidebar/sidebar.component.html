@@ -5,21 +5,21 @@
 
   <div class="navigation control">
     <div class="home">
-      <button [routerLink]="['/']" [routerLinkActive]="'bg-green-500'">
+      <button [routerLink]="['']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" >
         <i class="fas fa-home"></i>
         Home
       </button>
     </div>
   
     <div class="search">
-      <button>
+      <button  [routerLinkActive]="'active'">
         <i class="fas fa-search"></i>
         Search
       </button>
     </div>
   
     <div class="library">
-      <button [routerLink]="['/library']" [routerLinkActive]="'bg-green-500'">
+      <button [routerLink]="['library']" [routerLinkActive]="'active'">
         <i class="fas fa-books"></i>
         Your Library
       </button>
@@ -44,10 +44,10 @@
 
   <span class="ruler"></span>
   
-  <div class="custom-playlist h-2/4">
-    <div class="overflow-y-auto h-auto">
-      <div class="playlist {{i}}" *ngFor="let newPlaylist of viewModel?.items; let i = index">
-        <button>{{ newPlaylist.name }}</button>
+  <div class="custom-playlist">
+    <div *ngIf="isAuthorized">
+      <div class="playlist" *ngFor="let newPlaylist of viewModel?.items; let i = index">
+        <button [routerLinkActive]="'active'">{{ newPlaylist.name }}</button>
       </div>
     </div>
   </div>
