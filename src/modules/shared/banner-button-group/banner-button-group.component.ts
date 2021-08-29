@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class BannerButtonGroupComponent implements OnInit {
   @Input() playlist!: SimplifiedPlaylist;
+  @Input() like!:any;
 
   constructor(
     private playbackService: PlaybackService,

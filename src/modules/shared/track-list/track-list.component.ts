@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PlaylistTrack } from '@models/track/play-list-track.model';
+import { LikeService } from '@services/like.service';
 
 @Component({
   selector: 'spotify-track-list',
@@ -7,11 +8,15 @@ import { PlaylistTrack } from '@models/track/play-list-track.model';
   styleUrls: ['./track-list.component.scss']
 })
 export class TrackListComponent implements OnInit {
-  @Input() tracks?: PlaylistTrack[];
+  @Input() tracks!: PlaylistTrack[];
 
-  constructor() { }
+  constructor(private likeService: LikeService) { }
 
   ngOnInit(): void {
   }
-
+  likePlaylist(i:number):void {
+    this.likeService.followPlaylist(this.tracks[i].track.id)
+      .subscribe()
+    console.log(this.tracks[i].track.id)
+  }
 }
