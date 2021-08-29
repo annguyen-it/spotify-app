@@ -15,9 +15,9 @@ export class PlaylistService extends BaseDataService {
     super();
   }
 
-  createPlaylist(userId?: string): Observable<Playlist> {
+  createPlaylist(userId: string, length:number): Observable<Playlist> {
     const newPlaylist = {
-      "name": "New playlist",
+      "name": `New Playlist #${length + 1}`,
       "description": "New playlist description",
       "public": false
     };

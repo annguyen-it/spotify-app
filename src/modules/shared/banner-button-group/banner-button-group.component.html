@@ -1,1 +1,29 @@
-<p>banner-button-group works!</p>
+<div class="container">
+    <div class="wrapper flex">
+        <!-- Raising button -->
+        <button (click)="playPlaylist($event)"
+        class="w-16 h-16 mr-9
+            flex justify-center items-center 
+            rounded-full bg-green-500
+            transform duration-300">
+            <svg height="28" role="img" width="28" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
+            </svg>
+        </button>
+
+        <!--Like button -->
+        <button
+        class="w-16 h-16 mr-9
+            flex justify-center items-center 
+            transform duration-300">
+            <i class="fal fa-heart text-3xl font-thin"></i>
+        </button>
+
+        <!-- setting button -->
+        <button class="setting">
+            <svg class="text-white" role="img" height="32" width="32" viewBox="0 0 32 32">
+                <path d="M5.998 13.999A2 2 0 105.999 18a2 2 0 00-.001-4zm10.001 0A2 2 0 1016 18a2 2 0 000-4zm10.001 0A2 2 0 1026.001 18 2 2 0 0026 14z"></path>
+            </svg>
+        </button>
+    </div>
+</div>

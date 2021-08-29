@@ -5,29 +5,39 @@
 .wrapper {
     height: calc(100vh - 90px); // Play bar's height
 
-    > div > div {
-        @apply py-3 px-1.5;
-    }
-
-    .logo > * {
-        @apply pt-3 pr-1.5 pb-0 pl-3;
-    }
-
-    .active {
-        @apply bg-gray-400 bg-opacity-25;
-    }
-
-    .ruler {
-        background-color: rgba(255, 255, 255, 0.425);
-    }
-
     i {
         @apply mr-3 text-2xl font-thin;
     }
 
     button {
-        @apply flex items-center w-full h-11;
-        @apply py-0 px-5 rounded cursor-pointer font-bold;
-        @apply transition duration-300 hover:text-white;
+        @apply w-full h-11 flex items-center py-0 px-4;
+        @apply rounded font-semibold cursor-pointer hover:text-white;
+    }
+
+    .logo {
+        > svg {
+            max-width: 130px
+        }
+    }
+
+    .navigation {
+        .active {
+            @apply bg-gray-400 bg-opacity-25 text-white;
+
+            i {
+                @apply font-black;
+            }
+        }
+    }
+
+    .ruler {
+        @apply block w-4/5 h-px m-auto;
+        background-color: #282828;
+    }
+
+    .playlist {
+        .active {
+            @apply text-white;
+        }
     }
 }

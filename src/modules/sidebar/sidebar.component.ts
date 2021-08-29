@@ -14,8 +14,9 @@ export class SidebarComponent implements OnInit {
   viewModel!: LibraryViewModel;
   isAuthorized!: boolean;
   sub!: Subscription;
+  sub2!: Subscription;
   urlId!: string;
-
+  length!: number;
   constructor(
     private userProfileService: UserProfileService,
     private playlistService: PlaylistService,
@@ -23,15 +24,18 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initViewModels();
     this.authorizationService
       .isAuthorized()
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
         this.sub = this.userProfileService.getCurrentUserProfile()
           .subscribe((response) => {
-            this.urlId = response.id;
-          });
+            this.urlId = response.id
+          })
+        this.sub2 = this.playlistService.getListOfCurrentUserPlaylists()
+          .subscribe((response) => {
+            this.length = response.items.length
+          })
         this.initViewModels();
       });
   }
@@ -39,14 +43,14 @@ export class SidebarComponent implements OnInit {
   initViewModels(): void {
     this.playlistService.getListOfCurrentUserPlaylists()
       .subscribe((response) => this.viewModel = {
-        href: response.href,
-        items: response.items
+          href: response.href,
+          items: response.items,
       });
   }
 
   createPlaylist(urlId?: string) {
-    this.playlistService.createPlaylist(this.urlId).subscribe((response) => {
-      return this.initViewModels();
-    });
+    this.playlistService.createPlaylist(this.urlId, this.length).subscribe((response) => {
+      return this.initViewModels()
+     })
   }
 }
