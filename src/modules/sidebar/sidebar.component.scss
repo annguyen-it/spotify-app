@@ -9,40 +9,37 @@
         @apply py-3 px-1.5;
     }
 
-    .logo > * {
-        padding: 10px 50px 0px 10px
-    }
-
-    .active {
-        @apply bg-gray-400 bg-opacity-25;
-    }
-
-    .ruler {
-        width: 80%;
-        height: 1px;
-        background-color: rgba(255, 255, 255, 0.425);
-        display: block;
-        margin: auto;
-    }
-
-    .fas {
-        margin-right: 10px;
-        font-size: 22px;
-        font-weight: 100;
+    i {
+        @apply mr-3 text-2xl font-thin;
     }
 
     button {
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        border-radius: 4px;
-        cursor: pointer;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        gap: 16px;
-        height: 40px;
-        padding: 0 16px;
-        width: 100%;
+        @apply w-full h-11 flex items-center py-0 px-4;
+        @apply rounded font-semibold cursor-pointer hover:text-white;
+    }
+
+    .logo > * {
+        @apply pt-3 pr-14 pb-0 pl-3;
+    }
+
+    .navigation {
+        .active {
+            @apply bg-gray-400 bg-opacity-25 text-white;
+
+            i {
+                @apply font-black;
+            }
+        }
+    }
+
+    .ruler {
+        @apply block w-4/5 h-px m-auto;
+        background-color: #282828;
+    }
+
+    .playlist {
+        .active {
+            @apply text-white;
+        }
     }
 }

@@ -1,4 +1,4 @@
-<div class="wrapper flex flex-col flex-1 overflow-auto bg-gray-900 text-main-gray">
+<div class="wrapper flex flex-col flex-1 overflow-auto bg-black text-main-gray">
   <div>
     <!-- Logo -->
     <div class="logo">
@@ -9,7 +9,7 @@
     </div>
 
     <!-- Navigation -->
-    <div>
+    <div class="navigation">
       <div>
         <button [routerLink]="['']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
           <i class="fas fa-home"></i>
@@ -53,10 +53,10 @@
     <span class="ruler block w-4/5 h-px m-auto" *ngIf="isAuthorized"></span>
   </div>
 
-  <div class="overflow-y-auto" *ngIf="isAuthorized">
+  <div class="playlist overflow-y-auto" *ngIf="isAuthorized">
     <!-- Playlists -->
     <div>
-      <div class="playlist" *ngFor="let playlist of viewModel?.items">
+      <div *ngFor="let playlist of viewModel?.items">
         <button class="!transition-none !font-medium !h-8"
                 [routerLink]="['/playlist', playlist.id]"
                 [routerLinkActive]="'active'">
