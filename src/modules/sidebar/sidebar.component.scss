@@ -11,7 +11,8 @@
 
     button {
         @apply w-full h-11 flex items-center py-0 px-4;
-        @apply rounded font-semibold cursor-pointer hover:text-white;
+        @apply rounded font-semibold cursor-pointer;
+        @apply transition duration-300 hover:text-white;
     }
 
     .logo {
