@@ -17,25 +17,27 @@ module.exports = {
       gray: colors.trueGray,
       'main-gray': 'rgb(179, 179, 179)',
       white: '#ffffff',
+      black: '#000000',
       green: colors.green,
       blue: colors.blue,
     },
-    fontSize: {
-      // base
-      'xs': '.75rem',
-      'sm': '.875rem',
-      'base': '1rem',
-      'lg': '1.125rem',
-      'xl': '1.25rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem',
-      '5xl': '3rem',
-      '6xl': '4rem',
-      // custom
-      'base-sm': 'calc(1rem - 1px)',
-      'base-lg': 'calc(1rem + 1px)',
-    },
+    extend: {
+      height: {
+        'vh-10': '10vh',
+        'vh-20': '20vh',
+        'vh-30': '30vh',
+        'vh-40': '40vh',
+        'vh-50': '50vh',
+        'vh-60': '60vh',
+        'vh-70': '70vh',
+        'vh-80': '80vh',
+        'vh-90': '90vh',
+      },
+      fontSize: {
+        'base-sm': 'calc(1rem - 1px)',
+        'base-lg': 'calc(1rem + 1px)',
+      },
+    }
   },
   extend: {
     transform: ['hover']

@@ -10,7 +10,7 @@ import { PlayerService } from '@services/player.service';
 })
 export class CardComponent {
   @Input() playlist!: SimplifiedPlaylist;
-
+  
   constructor(
     private playerService: PlayerService,
     private playbackService: PlaybackService

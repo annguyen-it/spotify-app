@@ -11,8 +11,10 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./play-bar.component.scss'],
 })
 export class PlayBarComponent implements OnInit {
-  isPause?: boolean;
+  isPause = true;
   isAuthorized!: boolean;
+  sdkIsReady = false;
+
   userProfileSub = new Subscription();
 
   constructor(
@@ -24,6 +26,7 @@ export class PlayBarComponent implements OnInit {
   ngOnInit(): void {
     this.initPlaybackService();
     this.subscribeAuthorizationService();
+    this.waitSdkToInit();
   }
 
   initPlaybackService(): void {
@@ -32,7 +35,7 @@ export class PlayBarComponent implements OnInit {
       .pipe(
         map((state) => state?.paused),
       )
-      .subscribe((paused) => this.isPause = paused);
+      .subscribe((paused) => this.isPause = !!paused);
   }
 
   subscribeAuthorizationService(): void {
@@ -41,6 +44,12 @@ export class PlayBarComponent implements OnInit {
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
       });
+  }
+
+  waitSdkToInit(): void {
+    this.playbackService
+      .deviceId
+      .subscribe(id => this.sdkIsReady = !!id);
   }
 
   async prev(): Promise<void> {

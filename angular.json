@@ -34,7 +34,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/fonts.scss",
+              "src/styles/reset.scss"
             ],
             "scripts": []
           },
@@ -102,7 +104,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/fonts.scss",
+              "src/styles/reset.scss"
             ],
             "scripts": []
           }

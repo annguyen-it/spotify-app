@@ -10,11 +10,7 @@ import { TopBarModule } from '@modules/top-bar/top-bar.module';
     MainViewRoutingModule,
     TopBarModule,
   ],
-  declarations: [
-    MainViewComponent,
-  ],
-  exports: [
-    MainViewComponent
-  ]
+  declarations: [MainViewComponent],
+  exports: [MainViewComponent]
 })
 export class MainViewModule { }
