@@ -16,7 +16,7 @@
 
     <!-- Owner, release time, song numbers, durations -->
     <h6 class="mt-2 font-semibold text-base text-main-gray">
-      <span class="font-bold text-white">{{ owner.displayName }}</span>
+      <a class="font-bold text-white hover:underline" href>{{ owner.displayName }}</a>
       <span *ngIf="releaseTime"> • {{ releaseTime }}</span>
       <span> • {{ tracks!.length }} Song{{tracks!.length === 1 ? '' : 's'}}</span>
       <span>, {{ duration! | duration }}</span>

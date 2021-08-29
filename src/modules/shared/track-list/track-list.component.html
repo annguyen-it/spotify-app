@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative" *ngIf="tracks">
   <!-- Header -->
   <div class="header tile sticky h-10 border-b z-10 font-semibold text-sm text-main-gray uppercase">
     <div>#</div>
@@ -10,26 +10,29 @@
   <!-- Body -->
   <div>
     <div class="tile h-16 hover:bg-white hover:bg-opacity-10" *ngFor="let track of tracks; index as i">
-      <!-- Index -->
-      <div>{{ i + 1 }}</div>
+      <ng-template *ngIf="track">
 
-      <!-- Title -->
-      <div>
-        <span class="line-clamp-1">{{ track.track.name }}</span>
-      </div>
+        <!-- Index -->
+        <div>{{ i + 1 }}</div>
 
-      <!-- Album -->
-      <div>
-        <span class="line-clamp-1">{{ track.track.album.name }}</span>
-      </div>
+        <!-- Title -->
+        <div>
+          <span class="line-clamp-1">{{ track.track.name }}</span>
+        </div>
 
-      <!-- Button group -->
-      <div>
-        <button class="like-btn invisible mr-5"><i class="fal fa-heart"></i></button>
-        <span class="mr-5">{{ track.track.durationMs | duration:'short' }}</span>
-        <button class="more-btn invisible"><i class="far fa-ellipsis-h"></i></button>
-      </div>
+        <!-- Album -->
+        <div>
+          <span class="line-clamp-1">{{ track.track.album.name }}</span>
+        </div>
 
+        <!-- Button group -->
+        <div>
+          <button class="like-btn invisible mr-5"><i class="fal fa-heart"></i></button>
+          <span class="mr-5">{{ track.track.durationMs | duration:'short' }}</span>
+          <button class="more-btn invisible"><i class="far fa-ellipsis-h"></i></button>
+        </div>
+        
+      </ng-template>
     </div>
   </div>
 </div>

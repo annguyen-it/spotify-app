@@ -6,7 +6,7 @@
 ::ng-deep {
   h6 {
     a {
-      @apply text-white;
+      @apply text-white hover:underline;
     } 
   }
 }
