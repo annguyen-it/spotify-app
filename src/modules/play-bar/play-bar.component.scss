@@ -36,9 +36,8 @@ input[type=range]::-ms-track {
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 6px;
+  height: 4px;
   cursor: pointer;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: gray;
   border-radius: 5rem;
 }
@@ -49,16 +48,15 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 input[type=range]::-moz-range-track {
   width: 100%;
-  height: 6px;
+  height: 4px;
   cursor: pointer;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: gray;
   border-radius: 5rem;
 }
 
 input[type=range]::-ms-track {
   width: 100%;
-  height: 6px;
+  height: 4px;
   cursor: pointer;
   background: transparent;
   border-color: transparent;
@@ -67,18 +65,14 @@ input[type=range]::-ms-track {
 }
 input[type=range]::-ms-fill-lower {
   background: #1ed760;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border-radius: 2.4px;
 }
 input[type=range]:focus::-ms-fill-lower {
   background: #fff;
 }
 input[type=range]::-ms-fill-upper {
   background: #1ed760;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border-radius: 2.4px;
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #fff;
@@ -86,22 +80,18 @@ input[type=range]:focus::-ms-fill-upper {
 /* Special styling for WebKit/Blink */
 input[type=range]:hover::-webkit-slider-thumb {
   -webkit-appearance: none;
-  border: 1px solid #000000;
   height: 12px;
   width: 12px;
   background: #fff;
   border-radius: 100%;
   cursor: pointer;
-  transform: translateY(-25%);
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  transform: translateY(-35%);
 }
 
  
 
 /* All the same stuff for Firefox */
 input[type=range]:hover::-moz-range-thumb {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  border: 1px solid #000000;
   height: 12px;
   width: 12px;
   border-radius: 100%;
@@ -112,11 +102,9 @@ input[type=range]:hover::-moz-range-thumb {
 
 /* All the same stuff for IE */
 input[type=range]:hover::-ms-thumb {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  border: 1px solid #000000;
   height: 36px;
   width: 16px;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
