@@ -50,7 +50,7 @@
     </div>
 
     <!-- Ruler -->
-    <span class="ruler block w-4/5 h-px m-auto"></span>
+    <span class="ruler block w-4/5 h-px m-auto" *ngIf="isAuthorized"></span>
   </div>
 
   <div class="overflow-y-auto" *ngIf="isAuthorized">
