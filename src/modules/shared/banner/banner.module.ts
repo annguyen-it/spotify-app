@@ -6,7 +6,8 @@ import { PipesModule } from '@pipes/pipes.module';
 @NgModule({
   imports: [
     CommonModule,
-    PipesModule
+    PipesModule,
+    
   ],
   declarations: [BannerComponent],
   exports: [BannerComponent]
