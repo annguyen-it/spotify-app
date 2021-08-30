@@ -25,5 +25,15 @@
     .more-btn {
       @apply visible;
     }
+    .number a {
+      opacity: 0;
+    }
+    .number i {
+      opacity: 1;
+    }
+    div .line-clamp-1 {
+      color: #fff;
+    }
   }
 }
+
