@@ -15,6 +15,7 @@ export class WebPlaybackState {
     skippingPrev: boolean;
   };
   paused!: boolean;
+  duration!: number;
   position!: number;
   repeatMode!: number;
   shuffle!: boolean;
@@ -24,9 +25,9 @@ export class WebPlaybackState {
     nextTracks: WebPlaybackTrack[];
   };
 
-  static parse(obj: any): WebPlaybackState | null {
+  static parse(obj: any): WebPlaybackState | undefined {
     if (!obj){
-      return null;
+      return undefined;
     }
 
     return {

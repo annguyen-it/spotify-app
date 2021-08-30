@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebPlaybackState } from '@models/playback/web-playback-state.model';
 import { WebPlaybackTrack } from '@models/playback/web-playback-track.model';
 import { AccountService } from '@services/account.service';
 import { AuthorizationService } from '@services/authorization.service';
@@ -12,10 +13,8 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./play-bar.component.scss'],
 })
 export class PlayBarComponent implements OnInit {
-  isPause = true;
   isAuthorized!: boolean;
-  sdkIsReady = false;
-  track?: WebPlaybackTrack;
+  playBackState?: WebPlaybackState;
 
   userProfileSub = new Subscription();
 
@@ -28,7 +27,6 @@ export class PlayBarComponent implements OnInit {
   ngOnInit(): void {
     this.initPlaybackService();
     this.subscribeAuthorizationService();
-    this.waitSdkToInit();
   }
 
   initPlaybackService(): void {
@@ -36,8 +34,7 @@ export class PlayBarComponent implements OnInit {
     this.playbackService.state
       .pipe(
         tap((state) => {
-          this.isPause = state?.paused ?? true;
-          this.track = state?.trackWindow?.currentTrack;
+          this.playBackState = state;
         })
       )
       .subscribe();
@@ -49,12 +46,6 @@ export class PlayBarComponent implements OnInit {
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
       });
-  }
-
-  waitSdkToInit(): void {
-    this.playbackService
-      .deviceId
-      .subscribe(id => this.sdkIsReady = !!id);
   }
 
   async prev(): Promise<void> {

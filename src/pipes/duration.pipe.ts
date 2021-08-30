@@ -4,7 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'duration'
 })
 export class DurationPipe implements PipeTransform {
-  transform(value: number, format?: string): string {
+  transform(value?: number, format?: string): string {
+    if (value === undefined) {
+      return '';
+    }
+
     let seconds = Math.floor(value / 1000);
     const hours = Math.floor(seconds / 3600);
 
