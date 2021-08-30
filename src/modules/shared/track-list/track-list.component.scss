@@ -1,0 +1,39 @@
+.tile {
+  grid-template-columns: 16px 4fr 2fr minmax(120px, 1fr);
+  @apply grid px-5;
+
+  &.header {
+    top: 60px;
+    background-color: #181818;
+    border-color: rgba(255,255,255,.1)
+  }
+
+  > * {
+    @apply flex items-center;
+  }
+
+  > :nth-clike-nth-child(3) {
+    @apply justify-self-start;
+  }
+
+  > :nth-child(4) {
+    @apply justify-self-end;
+  }
+
+  &:hover {
+    .like-btn,
+    .more-btn {
+      @apply visible;
+    }
+    .number a {
+      opacity: 0;
+    }
+    .number i {
+      opacity: 1;
+    }
+    div .line-clamp-1 {
+      color: #fff;
+    }
+  }
+}
+

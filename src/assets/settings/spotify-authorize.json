@@ -1,0 +1,21 @@
+{
+  "clientId": "4731a0c7da61412dae10f6c4ce6e76f5",
+  "clientSecret": "a3e1d9da1c5446e1939bb82c5213ed8c",
+  "scope": [
+    "user-read-recently-played",
+    "user-top-read",
+    "user-read-playback-position",
+    "user-read-playback-state",
+    "user-modify-playback-state",
+    "user-read-currently-playing",
+    "streaming",
+    "playlist-modify-public",
+    "playlist-modify-private",
+    "playlist-read-private",
+    "playlist-read-collaborative",
+    "user-library-modify",
+    "user-library-read",
+    "user-read-email",
+    "user-read-private"
+  ]
+}
