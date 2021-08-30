@@ -1,85 +1,171 @@
-<div *ngIf="!isAuthorized" class="play-bar flex justify-between items-center h-full px-7">
-  <div class="left-box">
-    <p class="uppercase">Spotify preview</p>
-    <p>Subscribe for unlimited songs and postcards</p>
-  </div>
-  <div class="right-box flex items-center">
-    <button type="button"
-            (click)="signUp()"
-            class="py-2 px-4 rounded-full bg-white text-blue-600 font-semibold
-                       transition duration-300 hover:scale-110">
-      Free Sign Up
-    </button>
-  </div>
-</div>
-
-<div *ngIf="isAuthorized" class="text-white h-full 
-                                bg-gray-900 border-t 
-                                border-gray-700 flex 
-                                items-center flex-row pr-5 pl-5">
-
-  <div class="left-playbox playing-song flex-1 flex">
-    <img src="https://i.scdn.co/image/ab67616d000048512a038d3bf875d23e4aeaa84e" alt="">
-    <div class="flex justify-center flex-col w-38 pr-4 pl-4 font-normal">
-      <p class="artist-name text-lg hover:underline cursor-pointer">Getting Older</p>
-      <p class="song-name text-sm text-gray-400 hover:underline cursor-pointer">Billie Eilish</p>
+<div class="h-full">
+  <!-- If unauthorized -->
+  <div *ngIf="!isAuthorized" class="advertisement flex justify-between items-center h-full px-7">
+    <!-- Left box -->
+    <div class="left-box">
+      <p class="uppercase">Spotify preview</p>
+      <p>Subscribe for unlimited songs and postcards</p>
     </div>
-    <button><i class="far fa-heart pl-2 pr-2 font-extralight hover:text-gray-300 visited:text-purple-600"></i></button>
+
+    <!-- Right box -->
+    <div class="right-box flex items-center">
+      <button (click)="signUp()"
+              type="button"
+              class="py-2 px-4 rounded-full bg-white text-blue-600 font-semibold
+                     transition duration-300 hover:scale-110">
+        Free Sign Up
+      </button>
+    </div>
+
   </div>
 
-  <div class="center-playbox flex-1 flex justify-center mx-8">
-    <div class="player-controls flex flex-col justify-center items-center w-full pl-3 pr-3">
-      <div class="player-control-button flex flex-row">
-        <div class="player-control-left flex">
-          <button><i class="fas fa-random text-base font-medium text-gray-400 mr-3 ml-3 hover:text-white"></i></button>
-          <button (click)="prev()"><i class="fas fa-step-backward text-base text-gray-400 mr-3 ml-3 hover:text-white"></i></button>
+
+
+  <!-- If authorized -->
+  <div *ngIf="isAuthorized"
+       class="fixed bottom-24 left-3 right-3 h-16
+              flex items-center flex-row p-3 rounded-md
+            bg-gray-900 border-gray-700 text-white
+              sm:static sm:h-full sm:rounded-none sm:px-2.5 sm:py-0 sm:border-t md:px-4">
+
+    <!-- Left box -->
+    <div class="left-box w-1/3 flex flex-1">
+      <div *ngIf="playBackState?.trackWindow?.currentTrack" class="flex">
+        <a class="image relative block" href>
+
+          <div class="w-12 h-12 sm:w-16 sm:h-16">
+            <img [src]="playBackState!.trackWindow.currentTrack.album.images[0]?.url"
+                 *ngIf="playBackState!.trackWindow.currentTrack.album?.images && 
+                        playBackState!.trackWindow.currentTrack.album.images.length > 0"
+                 class="rounded-md sm:rounded-none"
+                 alt="">
+          </div>
+
+          <!-- Raise button -->
+          <button class="absolute top-1.5 right-1.5 w-7 h-7
+                       hidden sm:flex items-center justify-center
+                       bg-gray-900 bg-opacity-70 hover:bg-opacity-80 rounded-full 
+                       text-main-gray hover:text-white hover:scale-105 invisible">
+            <i class="fal fa-chevron-up"></i>
+          </button>
+        </a>
+
+        <!-- Song information -->
+        <div class="flex justify-center flex-col w-38 px-3 md:px-4 font-normal">
+          <a class="font-semibold line-clamp-1 hover:underline" href>{{ playBackState!.trackWindow.currentTrack.name }}</a>
+          <span class="text-sm text-gray-400 font-semibold line-clamp-1">
+            <ng-container *ngFor="let artist of playBackState!.trackWindow.currentTrack.artists; last as last">
+              <a class="hover:underline hover:text-white" href>{{ artist.name }}</a>
+              <ng-container *ngIf="!last">, </ng-container>
+            </ng-container>
+          </span>
         </div>
 
-        <button (click)="togglePlay()" [disabled]="!sdkIsReady">
-          <svg *ngIf="isPause"
-               stroke="currentColor" fill="currentColor" stroke-width="0"
-               viewBox="0 0 1024 1024" class="mr-3 ml-3 text-4xl hover:scale-110"
-               height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-            <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 
-                        64zm144.1 454.9L437.7 677.8a8.02 8.02 0 0 1-12.7-6.5V353.7a8 8 0 0 1 12.7-6.5L656.1 506a7.9 7.9 0 0 1 0 12.9z">
-            </path>
-          </svg>
+        <div class="hidden sm:flex items-center">
+          <button class="pl-2 pr-2 font-extralight text-main-gray hover:text-white">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
 
-          <svg *ngIf="!isPause" stroke="currentColor" fill="currentColor" stroke-width="0" class="mr-3 ml-3 text-4xl hover:scale-110"
-               viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-            <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 
-                        64 512 64zm-80 600c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 
-                        0 8 3.6 8 8v304zm224 0c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304z">
-            </path>
+      </div>
+    </div>
+
+    <!-- Center box -->
+    <div class="center-box hidden sm:flex w-5/12 flex-1 justify-center">
+      <div class="flex flex-col justify-center items-center w-full">
+        <div class="btn-group flex flex-row">
+
+          <!-- Left button group -->
+          <div>
+            <div>
+              <button><i class="far fa-random"></i></button>
+            </div>
+            <div>
+              <button (click)="prev()"><i class="fas fa-step-backward"></i></button>
+            </div>
+          </div>
+
+          <!-- Toggle button -->
+          <button (click)="togglePlay()"
+                  [disabled]="playBackState === undefined"
+                  class="toggle-btn w-9 h-9 flex justify-center items-center bg-white rounded-full text-4xl 
+                         hover:scale-105 disabled:hover:transform-none disabled:bg-main-gray">
+
+            <svg role="img" height="16" width="16" viewBox="0 0 24 24" *ngIf="playBackState === undefined || playBackState.paused">
+              <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="#000000"></polygon>
+            </svg>
+            <svg role="img" height="16" width="16" viewBox="0 0 16 16" *ngIf="playBackState !== undefined && !playBackState.paused">
+              <path fill="none" d="M0 0h16v16H0z"></path>
+              <path fill="#000000" d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
+            </svg>
+          </button>
+
+          <!-- Right button group -->
+          <div>
+            <div>
+              <button (click)="next()"><i class="fas fa-step-forward"></i></button>
+            </div>
+            <div>
+              <button><i class="fas fa-repeat"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time slider -->
+        <div class="playback-bar flex w-full justify-center items-center mt-3">
+          <div class="text-gray-400 text-sm">{{ playBackState?.position | duration:'short' }}</div>
+          <input type="range" class="rounded-xl bg-white outline-none flex items-center w-full mr-1 ml-1"
+                 id="progress-bar" min="0" max="100" value="0" step="1">
+          <div class="right-0 text-gray-400 text-sm">{{ playBackState?.duration | duration:'short' }}</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right box -->
+    <div class="right-box hidden sm:flex flex-1 w-1/4 justify-end">
+      <button>
+        <i class="fas fa-music mx-2 text-base text-gray-400 hover:text-white"></i>
+      </button>
+      <button>
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="ml-2 text-gray-400 hover:text-white"
+             viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 9H2v2h17V9zm0-4H2v2h17V5zM2 15h13v-2H2v2zm15-2v6l5-3-5-3z"></path>
+        </svg>
+      </button>
+      <div class="volume flex items-center relative justify-center w-36 outline-none mx-2">
+        <button><i class="fas fa-volume-up ml-1 text-base font-medium text-gray-400 hover:text-white"></i></button>
+        <input type="range" class="volumn-bar rounded-md outline-none relative bg-white"
+               id="volumn-bar" min="0" max="100" value="0" step="1">
+      </div>
+      <button><i class="fas fa-expand-alt mr-2 text-gray-400 hover:text-white"></i></button>
+    </div>
+
+    <!-- Mobile right box -->
+    <div class="mobile-right-box flex">
+
+      <div>
+        <button>
+          <i class="fal fa-heart text-2xl"></i>
+        </button>
+      </div>
+
+      <div>
+        <button (click)="togglePlay()"
+                [disabled]="playBackState === undefined"
+                class="px-2 disabled:text-main-gray">
+
+          <svg role="img" height="23" width="23" viewBox="0 0 24 24" *ngIf="playBackState === undefined || playBackState.paused" fill="currentColor">
+            <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
+          </svg>
+          <svg role="img" height="23" width="23" viewBox="0 0 16 16" *ngIf="playBackState !== undefined && !playBackState.paused">
+            <path fill="none" d="M0 0h16v16H0z"></path>
+            <path fill="currentColor" d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
           </svg>
         </button>
+      </div>
 
-        <div class="player-control-right flex">
-          <button (click)="next()"><i class="fas fa-step-forward text-base text-gray-400 mr-3 ml-3 hover:text-white"></i></button>
-          <button><i class="fas fa-repeat text-base font-medium text-gray-400 mr-3 ml-3 hover:text-white"></i></button>
-        </div>
-      </div>
-      <div class="playback-bar flex w-full justify-center items-center mt-3">
-        <span class="time left text-gray-400 text-sm">00:00</span>
-        <input type="range" class="progress-bar rounded-xl bg-white outline-none flex items-center w-full mr-1 ml-1"
-               id="progress-bar" min="0" max="100" value="0" step="1">
-        <span class="time right right-0 text-gray-400 text-sm">04:22</span>
-      </div>
     </div>
-  </div>
-  <div class="right-playbox flex-1 flex justify-end">
-    <button><i class="fas fa-music mx-2 text-base text-gray-400 hover:text-white"></i></button>
-    <button>
-      <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="ml-2 text-base text-xl text-gray-400 hover:text-white"
-           viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 9H2v2h17V9zm0-4H2v2h17V5zM2 15h13v-2H2v2zm15-2v6l5-3-5-3z"></path>
-      </svg>
-    </button>
-    <div class="volume flex items-center relative justify-center w-36 outline-none mx-2">
-      <button><i class="fas fa-volume-up ml-1 text-base font-medium text-gray-400 hover:text-white"></i></button>
-      <input type="range" class="volumn-bar rounded-md outline-none relative bg-white"
-             id="volumn-bar" min="0" max="100" value="0" step="1">
-    </div>
-    <button><i class="fas fa-expand-alt mr-2 text-gray-400 hover:text-white"></i></button>
+
   </div>
 </div>

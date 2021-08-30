@@ -1,32 +1,86 @@
-.play-bar {
+.advertisement {
     background: linear-gradient(90deg,#af2896,#509bf5);
-    font-size: 16px;
+    @apply text-lg;
 }
 
+.left-box {
+  min-width: 180px;
 
-input {
-    margin: .4rem;
+  .image {
+    &:hover {
+      button {
+        @apply visible;
+      }
+    }
+  }
+}
+
+.center-box {
+  max-width: 722px;
+
+  .btn-group {
+    > * {
+      @apply flex items-center;
+      
+      &:first-child,
+      &:last-child {
+        > div {
+          @apply mx-3.5;
+          
+          button {
+            @apply text-base font-medium text-gray-400 hover:text-white;
+          }
+        }
+      }
+    }
+
+    > button {
+      @apply mx-1.5;
+    }
+
+    .toggle-btn {
+      > :first-child {
+        @apply -ml-px;
+      }
+    }
+  }
+
+  .playback-bar {
+    > div {
+      min-width: 40px;
+      @apply text-center;
+    }
+  }
+}
+
+.mobile-right-box {
+  > div {
+    @apply sm:hidden flex items-center mx-1.5;
+
+    button {
+      @apply px-2;
+    }
+  }
+}
+
+.right-box {
+  min-width: 180px;
 }
 
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
-  background: #fff; /* Otherwise white in Chrome */
+  @apply w-full m-1.5 bg-white
 }
 
- 
+// Style for slider
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
 
- 
-
 input[type=range]:focus {
   outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 }
-
- 
 
 input[type=range]::-ms-track {
   width: 100%;

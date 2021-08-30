@@ -2,13 +2,13 @@
   <div class="flex items-end mb-5">
     <!-- Title -->
     <div class="flex-grow">
-      <h2 class="font-bold">{{ message }}</h2>
+      <h2 class="text-3xl lg:text-4xl font-bold line-clamp-1">{{ message }}</h2>
       <p class="text-main-gray font-semibold"></p>
     </div>
 
     <!-- See all button -->
     <a href=""
-       class="block uppercase text-main-gray text-sm tracking-wider font-bold hover:underline"
+       class="block flex-shrink-0 uppercase text-main-gray text-sm tracking-wider font-bold hover:underline"
        *ngIf="displayPlaylists.length < playlists.length">
       See all
     </a>
