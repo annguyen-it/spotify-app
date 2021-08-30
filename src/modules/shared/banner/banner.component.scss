@@ -1,5 +1,12 @@
-.container {
+.wrapper {
   min-height: 340px;
   max-height: 500px;
-  margin-top: -60px; // Top bar's height
+}
+
+::ng-deep {
+  h6 {
+    a {
+      @apply text-white hover:underline;
+    } 
+  }
 }

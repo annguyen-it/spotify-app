@@ -1,4 +1,4 @@
-<div class="container block w-full p-4 rounded transition duration-300 cursor-pointer"
+<div class="wrapper block w-full p-4 rounded transition duration-300 cursor-pointer"
      (click)="openPlaylist($event)"
      *ngIf="playlist.images.length > 0"
      href>
@@ -26,7 +26,7 @@
     <!-- Information text -->
     <div class="title-wrapper">
       <h5 class="max-w-full font-bold line-clamp-1">{{ playlist.name }}</h5>
-      <p class="mt-1 text-main-gray line-clamp-2">{{ playlist.description | removeTag }}</p>
+      <p class="mt-1 text-main-gray line-clamp-2 leading-tight">{{ playlist.description | removeTag }}</p>
     </div>
 
   </div>

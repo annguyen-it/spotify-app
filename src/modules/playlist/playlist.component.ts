@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Playlist } from '@models/playlist/playlist.model';
-import { PlaylistsService } from '@services/playlists.service';
+import { PlaylistService } from '@services/playlist.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -16,14 +16,14 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private playlistsService: PlaylistsService
+    private playlistService: PlaylistService
   ) { }
 
   ngOnInit(): void {
     this.sub = this.route.params
       .pipe(
         map((params) => {
-          this.playlistsService
+          this.playlistService
             .getPlaylist(params['playlist-id'])
             .subscribe((playlist) => {
               this.playlist = playlist;

@@ -6,6 +6,7 @@
                   [owner]="playlist.owner"
                   [tracks]="playlist.tracks.items">
   </spotify-banner>
-  <spotify-banner-button-group></spotify-banner-button-group>
-  <spotify-track-list></spotify-track-list>
+  <spotify-banner-button-group [playlist]="playlist"></spotify-banner-button-group>
+  <spotify-track-list
+                      [tracks]="playlist.tracks.items"></spotify-track-list>
 </main>

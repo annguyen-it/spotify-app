@@ -5,6 +5,7 @@ const routes: Routes = [
   {
     path: 'library',
     loadChildren: async () => (await import('../library/library.module')).LibraryModule
+
   },
   {
     path: 'playlist/:playlist-id',
