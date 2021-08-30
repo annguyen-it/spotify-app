@@ -1,4 +1,4 @@
-<main *ngIf="playlist">
+<main *ngIf="playlist" class="pb-5">
   <spotify-banner [image]="playlist.images[0]"
                   [title]="playlist.name"
                   [uponText]="'playlist'"
@@ -7,6 +7,5 @@
                   [tracks]="playlist.tracks.items">
   </spotify-banner>
   <spotify-banner-button-group [playlist]="playlist"></spotify-banner-button-group>
-  <spotify-track-list
-                      [tracks]="playlist.tracks.items"></spotify-track-list>
+  <spotify-track-list [tracks]="playlist.tracks.items"></spotify-track-list>
 </main>
