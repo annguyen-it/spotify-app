@@ -48,8 +48,8 @@ export class PlaybackService {
     player.addListener('playback_error', ({ message }: any) => { console.error(message); });
 
     // Playback status updates
-    player.addListener('player_state_changed', (state: WebPlaybackState) => {
-      this.state.next(state);
+    player.addListener('player_state_changed', (state: any) => {
+      this.state.next(WebPlaybackState.parse(state));
       const currentTrackId = state?.trackWindow?.currentTrack?.id;
       
       if (state && !state.paused && currentTrackId) {
