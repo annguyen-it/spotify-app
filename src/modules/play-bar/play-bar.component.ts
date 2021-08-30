@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WebPlaybackState } from '@models/playback/web-playback-state.model';
-import { WebPlaybackTrack } from '@models/playback/web-playback-track.model';
 import { AccountService } from '@services/account.service';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaybackService } from '@services/playback.service';
+import { VibrantService } from '@services/vibrant.service';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -15,6 +15,7 @@ import { tap } from 'rxjs/operators';
 export class PlayBarComponent implements OnInit {
   isAuthorized!: boolean;
   playBackState?: WebPlaybackState;
+  mobileBackgroundColor = 'rgb(179, 179, 179)';
 
   userProfileSub = new Subscription();
 
@@ -33,8 +34,9 @@ export class PlayBarComponent implements OnInit {
     this.playbackService.init();
     this.playbackService.state
       .pipe(
-        tap((state) => {
+        tap(async (state) => {
           this.playBackState = state;
+          await this.generateMobileBackgroundColor(state?.trackWindow.currentTrack.album.images);
         })
       )
       .subscribe();
@@ -46,6 +48,14 @@ export class PlayBarComponent implements OnInit {
       .subscribe((isAuthorized) => {
         this.isAuthorized = isAuthorized;
       });
+  }
+
+  async generateMobileBackgroundColor(images: { url: string; }[] | undefined): Promise<void> {
+    if (images && images.length > 0) {
+      this.mobileBackgroundColor = await VibrantService.generateColor(images[0].url);
+    } else {
+      this.mobileBackgroundColor = 'rgb(179, 179, 179)';
+    }
   }
 
   async prev(): Promise<void> {
