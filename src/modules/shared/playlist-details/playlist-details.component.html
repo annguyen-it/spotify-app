@@ -1,20 +1,21 @@
-<div class="wrapper flex flex-col mb-11 min-w-full">
-  <div class="flex items-end mb-5">
+<div class="wrapper flex flex-col sm:mb-11">
+  <div class="flex items-end mb-3.5 sm:mb-5">
     <!-- Title -->
     <div class="flex-grow">
-      <h2 class="font-bold">{{ message }}</h2>
+      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold line-clamp-1">{{ message }}</h2>
       <p class="text-main-gray font-semibold"></p>
     </div>
 
     <!-- See all button -->
     <a href=""
-       class="block uppercase text-main-gray text-sm tracking-wider font-bold hover:underline"
+       class="hidden sm:block flex-shrink-0 pl-4
+              uppercase text-main-gray text-sm tracking-wider font-bold hover:underline"
        *ngIf="displayPlaylists.length < playlists.length">
       See all
     </a>
   </div>
 
-  <div class="card-container grid grid-rows-1 overflow-y-hidden" (resized)="onResized($event)">
+  <div class="card-container flex sm:grid grid-rows-1 overflow-y-hidden" (resized)="onResized($event)">
     <spotify-card *ngFor="let playlist of displayPlaylists" [playlist]="playlist"></spotify-card>
   </div>
 </div>

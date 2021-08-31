@@ -1,34 +1,53 @@
 <div class="relative" *ngIf="tracks">
   <!-- Header -->
-  <div class="header tile sticky h-10 border-b z-10 font-semibold text-sm text-main-gray uppercase">
-    <div>#</div>
-    <div>Title</div>
-    <div>Album</div>
-    <div><i class="fal fa-clock mr-9 text-base"></i></div>
+  <div class="header tile sticky h-10 mb-2 border-b font-bold text-sm 
+            text-main-gray uppercase tracking-widest z-10">
+    <div class="flex justify-end">#</div>
+    <div class="ml-6 pr-3">Title</div>
+    <div class="">Album</div>
+    <div><i class="fal fa-clock text-base mr-10"></i></div>
   </div>
 
   <!-- Body -->
   <div>
-    <div class="tile h-16 hover:bg-white hover:bg-opacity-10" *ngFor="let track of tracks; index as i">
+    <ng-container *ngFor="let track of tracks; index as i">
+      <div *ngIf="track.track"
+           class="tile h-16 rounded-md transition-all
+                hover:bg-white hover:bg-opacity-10 hover:text-white">
+
         <!-- Index -->
-        <div>{{ i + 1 }}</div>
+        <div class="number relative flex justify-end">
+          <a class="text-right">{{ i + 1 }}</a>
+          <i class="fas fa-play absolute opacity-0"></i>
+        </div>
 
         <!-- Title -->
-        <div>
-          <span class="line-clamp-1">{{ track.track.name }}</span>
+        <div class="flex ml-6 pr-3">
+          <img [src]="track.track.album.images[0].url" class="w-12 h-12">
+          <div>
+            <span class="line-clamp-1 pl-3 cursor-default text-left">{{ track.track.name }}</span>
+            <span class="line-clamp-1 pl-3 text-main-gray text-sm">
+              <ng-container *ngFor="let artist of track.track.artists; last as last">
+                <a class="hover:underline hover:text-white" href>{{ artist.name }}</a>
+                <ng-container *ngIf="!last">, </ng-container>
+              </ng-container>
+            </span>
+          </div>
         </div>
 
         <!-- Album -->
         <div>
-          <span class="line-clamp-1">{{ track.track.album.name }}</span>
+          <span class="line-clamp-1 text-main-gray cursor-pointer hover:underline">{{ track.track.album.name }}</span>
         </div>
 
         <!-- Button group -->
         <div>
-          <button class="like-btn invisible mr-5"><i class="fal fa-heart"></i></button>
-          <span class="mr-5">{{ track.track.durationMs | duration:'short' }}</span>
-          <button class="more-btn invisible"><i class="far fa-ellipsis-h"></i></button>
+          <button class="like-btn invisible mr-2.5 lg:mr-5"><i class="fal fa-heart text-main-gray hover:text-white"></i></button>
+          <span class="mr-2.5 lg:mr-5">{{ track.track.durationMs | duration:'short' }}</span>
+          <button class="more-btn invisible"><i class="far fa-ellipsis-h text-main-gray hover:text-white"></i></button>
         </div>
-    </div>
+
+      </div>
+    </ng-container>
   </div>
 </div>
