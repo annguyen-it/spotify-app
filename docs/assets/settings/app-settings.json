@@ -1,0 +1,7 @@
+{
+  "baseUrl": "https://api.spotify.com",
+  "authorizeUrl": "https://accounts.spotify.com/authorize",
+  "redirectUrl": "http://localhost:4200",
+  "signUpUrl": "https://spotify.com/signup",
+  "upgradeAccountUrl": "https://spotify.com/premium"
+}
