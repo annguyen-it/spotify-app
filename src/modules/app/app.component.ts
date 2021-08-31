@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { AuthorizationService } from '@services/authorization.service';
+import { ClientCredentialsService } from '@services/client-credentials.service';
 
 @Component({
   selector: 'spotify-root',
@@ -12,11 +13,13 @@ import { AuthorizationService } from '@services/authorization.service';
 export class AppComponent implements OnInit, OnDestroy {
   authorizationSuccessSub!: Subscription;
   authorizationFailureSub!: Subscription;
+  clientCredentialsSub!: Subscription;
 
   constructor(
-    private authorizationService: AuthorizationService,
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
+    private authorizationService: AuthorizationService,
+    private clientCredentialsService: ClientCredentialsService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,17 @@ export class AppComponent implements OnInit, OnDestroy {
           this.router.navigate([]);
         }
       );
+
+    this.clientCredentialsSub = this.clientCredentialsService
+      .gotCredentials()
+      .pipe(
+        map(async (gotCredentials) => {
+          if (!gotCredentials){
+            await this.clientCredentialsService.requestCredentials().toPromise();
+          }
+        })
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

@@ -17,14 +17,23 @@ export class AuthorizeHeaderInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loginToken = sessionStorage.getItem(SessionStorageKeyConstant.accessToken);
-    if (!loginToken) {
-      return next.handle(request);
-    }
+    const clientCredentials = sessionStorage.getItem(SessionStorageKeyConstant.clientCredentials);
 
-    let headers = request.headers
-      .set('Authorization', `Bearer ${loginToken}`)
-      .set('Accept', 'application/json')
-      .set('Content-Type', 'application/json');
+    let headers;
+
+    if (loginToken) {
+      headers = request.headers
+        .set('Authorization', `Bearer ${loginToken}`)
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json');
+    } else if (clientCredentials) {
+      headers = request.headers
+        .set('Authorization', `Bearer ${clientCredentials}`)
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json');
+    } else {
+      next.handle(request);
+    }
 
     const clonedRequest = request.clone({
       headers,

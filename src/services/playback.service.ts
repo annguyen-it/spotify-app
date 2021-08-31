@@ -11,13 +11,16 @@ export class PlaybackService {
   playerSession = new BehaviorSubject<any>(null);
   state = new BehaviorSubject<WebPlaybackState | undefined>(undefined);
   deviceId = new BehaviorSubject<string | null>(null);
+  Player: any;
 
   constructor(
     private authorizationService: AuthorizationService,
     private playerService: PlayerService
   ) { }
 
-  init(): void {
+  async init(): Promise<void> {
+    this.Player = await this.waitForSdkToLoad();
+
     this.authorizationService.isAuthorized()
       .pipe(
         filter((isAuthorized) => isAuthorized),
@@ -31,9 +34,7 @@ export class PlaybackService {
   }
 
   private async initSdk(token: string, volume: number) {
-    const { Player } = await this.waitForSdkToLoad();
-
-    const player = new Player({
+    const player = new this.Player({
       name: 'Spotify App',
       getOAuthToken: (cb: Function) => cb(token),
       volume

@@ -54,7 +54,7 @@
     </ul>
 
     <!-- Ruler -->
-    <span class="ruler hidden sm:block w-4/5 h-px m-auto" *ngIf="isAuthorized"></span>
+    <span class="ruler hidden sm:block w-4/5 h-px m-auto" spotifyAuthCheck></span>
 
     <ul class="sm:hidden">
       <li>
@@ -70,8 +70,8 @@
   </nav>
 
   <!-- Playlists -->
-  <nav class="hidden sm:block playlist py-2.5 overflow-y-auto" *ngIf="isAuthorized">
-    <ul *ngFor="let playlist of viewModel?.items">
+  <nav class="hidden sm:block playlist py-2.5 overflow-y-auto" spotifyAuthCheck>
+    <ul *ngFor="let playlist of playlists">
       <li>
         <button class="!transition-none !font-medium !h-8"
                 [routerLink]="['/playlist', playlist.id]"
