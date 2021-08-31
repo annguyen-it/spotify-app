@@ -1,3 +1,5 @@
+@import '/src/styles/responsive.scss';
+
 :host {
     @apply h-full;
 }
@@ -45,10 +47,8 @@
             @apply text-white;
         }
     }
-}
 
-@media (min-width: 640px) {   
-    .wrapper {
+    @include responsive(sm) {
         height: calc(100vh - 90px);
     }
 }

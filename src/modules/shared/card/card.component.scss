@@ -1,3 +1,5 @@
+@import '/src/styles/responsive.scss';
+
 .wrapper {
   background-color: #181818;
   flex: 1;
@@ -5,14 +7,12 @@
   button {
     box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
   }
-}
+  
+  .title-wrapper {
+    min-height: 62px;
+  }
 
-.title-wrapper {
-  min-height: 62px;
-}
-
-@media (min-width: 640px) {
-  .wrapper {
+  @include responsive(sm) {
     &:hover {
       background-color: hsl(0, 0%, 16%);
 
