@@ -12,7 +12,7 @@
     @apply flex items-center;
   }
 
-  > :nth-clike-btnhild(3) {
+  > :nth-clike-nth-child(3) {
     @apply justify-self-start;
   }
 
@@ -25,5 +25,15 @@
     .more-btn {
       @apply visible;
     }
+    .number a {
+      opacity: 0;
+    }
+    .number i {
+      opacity: 1;
+    }
+    div .line-clamp-1 {
+      color: #fff;
+    }
   }
 }
+
