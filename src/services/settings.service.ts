@@ -25,7 +25,12 @@ export class SettingsService {
       return of(APP_SETTINGS);
     }
 
-    const filePath = `assets/settings/${environment.production ? 'app-settings.prod' : 'app-settings'}.json`;
+    let filePath = 'assets/settings/app-settings.json';
+
+    if (environment.production) {
+      filePath = 'assets/settings/app-settings.prod.json';
+    }
+
     return this.httpClient
       .get<AppSettings>(filePath)
       .pipe(
