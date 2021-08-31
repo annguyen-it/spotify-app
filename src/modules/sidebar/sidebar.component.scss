@@ -1,30 +1,62 @@
+@import '/src/styles/responsive.scss';
+
+:host {
+    @apply h-full;
+}
+
 .wrapper {
-    background-color: black;
-    color: #ffffffbf;
-    height: 100%;
-    & > div {
-        padding: 20px;
+    i {
+        @apply text-2xl font-thin sm:mr-3;
     }
 
-    .control {
-        & > div {
-            padding: 5px;
+    button {
+        @apply h-11 flex flex-col items-center py-0 px-4;
+        @apply rounded font-medium text-sm cursor-pointer select-none;
+        @apply transition duration-300 active:text-gray-500;
+        @apply sm:w-full sm:flex-row sm:font-semibold sm:text-base sm:hover:text-white sm:active:text-white;
+    }
+
+    > nav {
+        &:first-child {
+            @include responsive(sm) {
+
+            }
+        }
+    }
+
+    .logo {
+        > svg {
+            max-width: 130px
+        }
+    }
+
+    .navigation {
+        li {
+            @apply flex justify-center items-center w-1/3;
+            @apply sm:list-item sm:w-auto;
+        }
+
+        .active {
+            @apply text-white sm:bg-gray-400 sm:bg-opacity-25;
+
+            i {
+                @apply font-black;
+            }
         }
     }
 
     .ruler {
-        width: 80%;
-        height: 1px;
-        background-color: rgba(255, 255, 255, 0.425);
-        display: block;
-        margin: auto;
+        @apply block w-4/5 h-px m-auto;
+        background-color: #282828;
     }
 
-    .fas {
-        margin-right: 10px;
-    }
-    button:hover {
-        color: white;
+    .playlist {
+        .active {
+            @apply text-white;
+        }
     }
 
+    @include responsive(sm) {
+        height: calc(100vh - 90px);
+    }
 }

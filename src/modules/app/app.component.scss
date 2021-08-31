@@ -1,21 +1,27 @@
+@import '/src/styles/responsive.scss';
+
 :host {
-  display: grid;
-  grid-template-columns: 240px auto;
-  grid-template-rows: auto 90px;
-  grid-template-areas: 
+  display: flex;
+
+  @include responsive(sm)  {
+    display: grid;
+    grid-template-columns: 230px auto;
+    grid-template-rows: auto 90px;
+    grid-template-areas: 
     "sidebar main-view"
     "play-bar play-bar";
-  height: 100vh;
-}
-
-spotify-play-bar {
-  grid-area: play-bar;
-}
-
-spotify-sidebar {
-  grid-area: sidebar;
-}
-
-main-view {
-  grid-area: main-view;
+    height: 100vh;
+  
+    spotify-play-bar {
+      grid-area: play-bar;
+    }
+    
+    spotify-sidebar {
+      grid-area: sidebar;
+    }
+    
+    main-view {
+      grid-area: main-view;
+    }
+  }  
 }

@@ -1,24 +1,29 @@
-.container {
-  background-color: #181818;
+@import '/src/styles/responsive.scss';
+
+.wrapper {
   flex: 1;
-
-  &:hover {
-    background-color: hsl(0, 0%, 16%);
-
-    button {
-      @apply -translate-y-2.5 opacity-100;
-
-      &:hover {
-        @apply -translate-y-2.5 opacity-100 scale-110;
-      }
-    }
-  }
 
   button {
     box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
   }
-}
+  
+  .title-wrapper {
+    min-height: 62px;
+  }
 
-.title-wrapper {
-  min-height: 62px;
+  @include responsive(sm) {
+    background-color: #181818;
+
+    &:hover {
+      background-color: hsl(0, 0%, 16%);
+
+      button {
+        @apply -translate-y-2.5 opacity-100;
+  
+        &:hover {
+          @apply -translate-y-2.5 opacity-100 scale-110;
+        }
+      }
+    }
+  }
 }

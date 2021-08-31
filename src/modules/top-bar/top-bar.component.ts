@@ -11,7 +11,6 @@ import { AccountService } from '@services/account.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit, OnDestroy {
-  isAuthorized!: boolean;
   userProfile?: PublicUser;
   userProfileSub = new Subscription();
   openDropDown = false;
@@ -27,7 +26,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
     this.authorizationService
       .isAuthorized()
       .subscribe((isAuthorized) => {
-        this.isAuthorized = isAuthorized;
         if (isAuthorized) {
           this.userProfileSub = this.userProfileService.getCurrentUserProfile()
             .subscribe((profile) => {

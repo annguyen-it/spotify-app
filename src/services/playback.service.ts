@@ -9,7 +9,7 @@ import { PlayerService } from './player.service';
 @Injectable({ providedIn: 'root' })
 export class PlaybackService {
   playerSession = new BehaviorSubject<any>(null);
-  state = new BehaviorSubject<WebPlaybackState | null>(null);
+  state = new BehaviorSubject<WebPlaybackState | undefined>(undefined);
   deviceId = new BehaviorSubject<string | null>(null);
 
   constructor(
@@ -48,12 +48,14 @@ export class PlaybackService {
     player.addListener('playback_error', ({ message }: any) => { console.error(message); });
 
     // Playback status updates
-    player.addListener('player_state_changed', (state: WebPlaybackState) => {
-      this.state.next(state);
-      const currentTrackId = state.trackWindow?.currentTrack?.id;
-      
-      if (!state.paused && currentTrackId) {
-        this.playerService.togglePlayback(this.deviceId.value, currentTrackId);
+    player.addListener('player_state_changed', (state: any) => {
+      if (state){
+        this.state.next(WebPlaybackState.parse(state));
+        const currentTrackId = state?.trackWindow?.currentTrack?.id;
+        
+        if (state && !state.paused && currentTrackId) {
+          this.playerService.togglePlayback(this.deviceId.value, currentTrackId);
+        }
       }
     });
 

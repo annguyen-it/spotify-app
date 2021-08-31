@@ -1,4 +1,174 @@
-.play-bar {
+.advertisement {
     background: linear-gradient(90deg,#af2896,#509bf5);
-    font-size: 16px;
+    @apply text-lg;
 }
+
+.left-box {
+  min-width: 180px;
+
+  .image {
+    &:hover {
+      button {
+        @apply visible;
+      }
+    }
+  }
+}
+
+.center-box {
+  max-width: 722px;
+
+  .btn-group {
+    > * {
+      @apply flex items-center;
+      
+      &:first-child,
+      &:last-child {
+        > div {
+          @apply mx-3.5;
+          
+          button {
+            @apply text-base font-medium text-gray-400 hover:text-white;
+          }
+        }
+      }
+    }
+
+    > button {
+      @apply mx-1.5;
+    }
+
+    .toggle-btn {
+      > :first-child {
+        @apply -ml-px;
+      }
+    }
+  }
+
+  .playback-bar {
+    > div {
+      min-width: 40px;
+      @apply text-center;
+    }
+  }
+}
+
+.mobile-right-box {
+  > div {
+    @apply sm:hidden flex items-center mx-1.5;
+
+    button {
+      @apply px-2;
+    }
+  }
+}
+
+.right-box {
+  min-width: 180px;
+}
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  @apply w-full m-1.5 bg-white
+}
+
+// Style for slider
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: gray;
+  border-color: transparent;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: gray;
+  border-radius: 5rem;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #fff;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: gray;
+  border-radius: 5rem;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #1ed760;
+  border-radius: 2.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #fff;
+}
+input[type=range]::-ms-fill-upper {
+  background: #1ed760;
+  border-radius: 2.4px;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #fff;
+}
+/* Special styling for WebKit/Blink */
+input[type=range]:hover::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  background: #fff;
+  border-radius: 100%;
+  cursor: pointer;
+  transform: translateY(-35%);
+}
+
+ 
+
+/* All the same stuff for Firefox */
+input[type=range]:hover::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+ 
+
+/* All the same stuff for IE */
+input[type=range]:hover::-ms-thumb {
+  height: 36px;
+  width: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
