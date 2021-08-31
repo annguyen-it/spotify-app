@@ -13,7 +13,6 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./play-bar.component.scss'],
 })
 export class PlayBarComponent implements OnInit {
-  isAuthorized!: boolean;
   playBackState?: WebPlaybackState;
   mobileBackgroundColor = 'rgb(179, 179, 179)';
 
@@ -22,12 +21,10 @@ export class PlayBarComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private playbackService: PlaybackService,
-    private authorizationService: AuthorizationService,
   ) { }
 
   ngOnInit(): void {
     this.initPlaybackService();
-    this.subscribeAuthorizationService();
   }
 
   initPlaybackService(): void {
@@ -40,14 +37,6 @@ export class PlayBarComponent implements OnInit {
         })
       )
       .subscribe();
-  }
-
-  subscribeAuthorizationService(): void {
-    this.authorizationService
-      .isAuthorized()
-      .subscribe((isAuthorized) => {
-        this.isAuthorized = isAuthorized;
-      });
   }
 
   async generateMobileBackgroundColor(images: { url: string; }[] | undefined): Promise<void> {

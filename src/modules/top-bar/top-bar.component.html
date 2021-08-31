@@ -2,13 +2,13 @@
             flex justify-end items-center z-50
             px-2 lg:px-9 text-sm">
   <!-- Display if unauthorized -->
-  <div *ngIf="!isAuthorized">
+  <div spotifyAuthCheck [displayIfAuth]="false">
     <button (click)="signUp()" class="px-10 py-3"> Sign up </button>
     <button (click)="login()" class="px-10 py-3 bg-white text-gray-700"> Log in </button>
   </div>
 
   <!-- Display if authorized -->
-  <div *ngIf="isAuthorized && userProfile?.displayName"
+  <div spotifyAuthCheck *ngIf="userProfile?.displayName"
        class="relative flex">
 
     <button (click)="upgrade()"
