@@ -149,7 +149,8 @@
     <div class="mobile-right-box flex">
 
       <div>
-        <button>
+        <button [disabled]="playBackState === undefined"
+                class="px-2 disabled:text-main-gray">
           <i class="fal fa-heart text-2xl"></i>
         </button>
       </div>

@@ -1,7 +1,6 @@
 @import '/src/styles/responsive.scss';
 
 .wrapper {
-  background-color: #181818;
   flex: 1;
 
   button {
@@ -13,6 +12,8 @@
   }
 
   @include responsive(sm) {
+    background-color: #181818;
+
     &:hover {
       background-color: hsl(0, 0%, 16%);
 

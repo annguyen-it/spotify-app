@@ -14,7 +14,8 @@ import { tap } from 'rxjs/operators';
 })
 export class PlayBarComponent implements OnInit {
   playBackState?: WebPlaybackState;
-  mobileBackgroundColor = 'rgb(179, 179, 179)';
+  defaultMobileBackgroundColor = 'rgb(31, 31, 31)';
+  mobileBackgroundColor = this.defaultMobileBackgroundColor;
 
   userProfileSub = new Subscription();
 
@@ -43,7 +44,7 @@ export class PlayBarComponent implements OnInit {
     if (images && images.length > 0) {
       this.mobileBackgroundColor = await VibrantService.generateColor(images[0].url);
     } else {
-      this.mobileBackgroundColor = 'rgb(179, 179, 179)';
+      this.mobileBackgroundColor = this.defaultMobileBackgroundColor;
     }
   }
 
