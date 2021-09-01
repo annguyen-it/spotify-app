@@ -32,7 +32,7 @@ export class AuthorizeHeaderInterceptor implements HttpInterceptor {
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json');
     } else {
-      next.handle(request);
+      return next.handle(request);
     }
 
     const clonedRequest = request.clone({

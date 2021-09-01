@@ -19,7 +19,7 @@ export class PlaybackService {
   ) { }
 
   async init(): Promise<void> {
-    this.Player = await this.waitForSdkToLoad();
+    this.Player = (await this.waitForSdkToLoad()).Player;
 
     this.authorizationService.isAuthorized()
       .pipe(

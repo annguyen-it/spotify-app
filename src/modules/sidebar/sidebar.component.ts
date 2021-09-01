@@ -17,8 +17,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   userId!: string;
 
   constructor(
-    private userProfileService: UserProfileService,
     private playlistService: PlaylistService,
+    private userProfileService: UserProfileService,
     private authorizationService: AuthorizationService,
   ) { }
 
@@ -53,6 +53,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   createPlaylist() {
     this.playlistService
       .createPlaylist(this.userId, this.playlists.length + 1)
-      .subscribe(this.refreshPlaylists);
+      .subscribe(() => this.refreshPlaylists());
   }
 }
