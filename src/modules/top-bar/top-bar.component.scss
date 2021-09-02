@@ -21,13 +21,3 @@ div > button {
     }
   }
 }
-
-.dropdown {
-  button {
-    @apply flex justify-between items-center px-2.5 py-3.5 w-52 font-bold text-base-sm text-main-gray;
-
-    &:hover {
-      @apply bg-gray-700 text-white;
-    }
-  }
-}
