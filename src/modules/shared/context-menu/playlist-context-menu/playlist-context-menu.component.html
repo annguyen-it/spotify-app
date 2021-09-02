@@ -1,0 +1,12 @@
+<button (click)="addToQueue()">Add to queue</button>
+<button (click)="goToPlaylistRadio()">Go to playlist radio</button>
+<button (click)="addToLibrary()">Add to Your Library</button>
+<div class="sub">Share <i class="fas fa-caret-right"></i></div>
+<button (click)="aboutRecommendations()">About recommendations</button>
+<button (click)="openInDesktopApp()">Open in Desktop app</button>
+
+<div [ngStyle]="{'right': subRight ? 'calc(-100% + 3px)' : 'calc(100% - 3px)'}"
+     class="sub-menu">
+  <button (click)="copyPlaylistLink()">Copy link to playlist</button>
+  <button (click)="embedPlaylist()">Embed playlist</button>
+</div>
