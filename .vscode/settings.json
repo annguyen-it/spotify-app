@@ -8,4 +8,5 @@
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.rootFontSize": 14,
   "typescript.format.semicolons": "insert",
+  "typescript.preferences.quoteStyle": "single"
 }

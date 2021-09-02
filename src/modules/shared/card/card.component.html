@@ -1,7 +1,9 @@
-<div class="wrapper block sm:p-4 rounded transition duration-300 cursor-pointer"
-     *ngIf="playlist.images.length > 0"
+<div contextMenu
+     [popup]="type === 'playlist' ? playlistContext! : podcastContext!"
+     [event]="['contextmenu']"
      [routerLink]="['/playlist', playlist.id]"
-     href>
+     class="wrapper relative block sm:p-4 rounded transition duration-300 cursor-pointer">
+     
   <div class="h-full">
     <!-- Image -->
     <div class="image-wrapper relative mb-2 sm:mb-5">
@@ -25,9 +27,12 @@
 
     <!-- Information text -->
     <div class="title-wrapper">
-      <h5 class="hidden max-w-full text-lg font-bold sm:line-clamp-1">{{ playlist.name }}</h5>
+      <h5 class="hidden max-w-full text-lg font-bold sm:line-clamp-1">{{ playlist.name | removeTag }}</h5>
       <p class="mt-1 text-base-sm text-main-gray line-clamp-2 leading-tight">{{ playlist.description | removeTag }}</p>
     </div>
 
   </div>
 </div>
+
+<spotify-playlist-context-menu #playlistContext [hidden]="type !== 'playlist'" class="fixed" ></spotify-playlist-context-menu>
+<spotify-podcast-context-menu #podcastContext [hidden]="type !== 'podcast'" class="fixed" ></spotify-podcast-context-menu>

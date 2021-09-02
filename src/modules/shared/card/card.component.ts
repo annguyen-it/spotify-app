@@ -10,15 +10,12 @@ import { PlayerService } from '@services/player.service';
 })
 export class CardComponent {
   @Input() playlist!: SimplifiedPlaylist;
+  @Input() type: 'playlist' | 'podcast' = 'playlist';
   
   constructor(
     private playerService: PlayerService,
     private playbackService: PlaybackService
   ) { }
-
-  openPlaylist(event: Event): void {
-    /// TODO: Implement here
-  }
 
   playPlaylist(event: Event): void {
     event.stopPropagation();

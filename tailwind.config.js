@@ -34,6 +34,8 @@ module.exports = {
         'vh-90': '90vh',
       },
       fontSize: {
+        '2xl': ['1.5rem', '2.4rem'],
+        '3xl': ['1.875rem', '2.8rem'],
         'base-sm': 'calc(1rem - 1px)',
         'base-lg': 'calc(1rem + 1px)',
       },
