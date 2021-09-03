@@ -3,7 +3,7 @@
         <!-- Raising button -->
         <button (click)="playPlaylist($event)"
         class="w-16 h-16 mr-9
-            flex justify-center items-center 
+            flex justify-center items-center
             rounded-full bg-green-500
             transform duration-300">
             <svg height="28" role="img" width="28" viewBox="0 0 24 24" aria-hidden="true">
@@ -12,11 +12,11 @@
         </button>
 
         <!--Like button -->
-        <button
+        <button (click)="toggleLike(liked)"
         class="w-16 h-16 mr-9
-            flex justify-center items-center 
+            flex justify-center items-center
             transform duration-300">
-            <i class="fal fa-heart text-3xl font-thin"></i>
+            <i class="fas fa-heart text-3xl font-thin" [class.active]="liked"></i>
         </button>
 
         <!-- setting button -->

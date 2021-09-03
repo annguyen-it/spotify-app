@@ -16,7 +16,7 @@ export class UserProfileService {
         map<any, PublicUser>((profile) => ({
           ...profile,
           displayName: profile.display_name,
-          externalUrls: profile.external_urls
+          externalUrls: profile.external_urls,
         }))
       );
   }

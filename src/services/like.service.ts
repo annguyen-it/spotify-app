@@ -9,9 +9,18 @@ import { BaseDataService } from './core/base-data.service';
 })
 export class LikeService extends BaseDataService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+  ) {
     super();
   }
+
+  // getLikeSongs(): Observable<any> {
+  //   return this.http
+  //     .get<any>(
+  //       `${this.baseUrl}v1/me/tracks`
+  //     )
+  // }
 
   followPlaylist(playlistId:string): Observable<Playlist> {
     const contentType = {
@@ -31,7 +40,7 @@ export class LikeService extends BaseDataService {
       )
   }
 
-  checkIfFollowPlaylist(playlistId:string, ids: string): Observable<Playlist> {
+  checkIfFollowPlaylist(playlistId:string, ids: string): Observable<any> {
     return this.http
       .get<any>(
         `${this.baseUrl}/v1/playlists/${playlistId}/followers/contains`,
@@ -42,4 +51,5 @@ export class LikeService extends BaseDataService {
         }
       )
   }
+
 }

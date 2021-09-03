@@ -16,7 +16,9 @@ export class TrackListComponent implements OnInit {
   }
   likePlaylist(i:number):void {
     this.likeService.followPlaylist(this.tracks[i].track.id)
-      .subscribe()
-    console.log(this.tracks[i].track.id)
+      .subscribe((liked) => {
+        console.log(this.tracks[i].track.id)
+      })
+
   }
 }

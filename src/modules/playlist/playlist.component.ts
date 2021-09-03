@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Playlist } from '@models/playlist/playlist.model';
-import { LikeService } from '@services/like.service';
 import { PlaylistService } from '@services/playlist.service';
-import { Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -12,37 +11,37 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
-  playlist!: Playlist;
-  liked!: any;
+  playlist$!: Observable<Playlist>;
   sub?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private playlistService: PlaylistService,
-    private likeService: LikeService,
   ) { }
 
   ngOnInit(): void {
-    this.sub = this.route.params
+    // this.sub =
+      this.route.params
       .pipe(
         map((params) => {
-          this.playlistService
+          this.playlist$ = this.playlistService
             .getPlaylist(params['playlist-id'])
-            .subscribe((playlist) => {
-              this.playlist = playlist;
-              console.log(this.playlist.id)
-              this.likeService.checkIfFollowPlaylist(this.playlist.id,'313rd24fobu56dorkjkvty5p6ata').subscribe((response) => this.liked = response)
-            });
+            // .subscribe((playlist) => {
+            //   this.playlist = playlist;
+            //   this.initLike()
+            // });
         })
       )
-      .subscribe();
+      .subscribe()
 
-    
   }
 
   ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+
   }
+
+
 }
