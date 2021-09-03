@@ -13,23 +13,15 @@ export class UserProfileService {
     return this.http
       .get<any>(`${APP_SETTINGS.baseUrl}/v1/me`)
       .pipe(
-        map<any, PublicUser>((profile) => ({
-          ...profile,
-          displayName: profile.display_name,
-          externalUrls: profile.external_urls,
-        }))
+        map<any, PublicUser>(x => PublicUser.parse(x))
       );
-  }
+     }
 
   getProfile(userId: string): Observable<PublicUser> {
     return this.http
       .get<any>(`${APP_SETTINGS.baseUrl}/v1/${userId}`)
       .pipe(
-        map<any, PublicUser>((profile) => ({
-          ...profile,
-          displayName: profile.display_name,
-          externalUrls: profile.external_urls
-        }))
+        map<any, PublicUser>(x => PublicUser.parse(x))
       );
   }
 }

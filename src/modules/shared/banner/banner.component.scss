@@ -1,4 +1,4 @@
-.container {
+.wrapper {
   min-height: 340px;
   max-height: 500px;
 }
@@ -6,7 +6,7 @@
 ::ng-deep {
   h6 {
     a {
-      @apply text-white;
+      @apply text-white hover:underline;
     } 
   }
 }

@@ -1,9 +1,12 @@
 .wrapper {
     padding: 32px 24px;
+
     .setting svg {
-        color: rgba(255,255,255,.6);fill: currentcolor
+        fill: rgba(255,255,255,.6);
+
+        &:hover {
+            fill: #ffffff;
+        }
+
     }
-  .active{
-    color: green;
-  }
 }

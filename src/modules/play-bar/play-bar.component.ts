@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { WebPlaybackState } from '@models/playback/web-playback-state.model';
+import { WebPlaybackTrack } from '@models/playback/web-playback-track.model';
 import { AccountService } from '@services/account.service';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaybackService } from '@services/playback.service';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-play-bar',
@@ -11,8 +13,9 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./play-bar.component.scss'],
 })
 export class PlayBarComponent implements OnInit {
-  isPause?: boolean;
   isAuthorized!: boolean;
+  playBackState?: WebPlaybackState;
+
   userProfileSub = new Subscription();
 
   constructor(
@@ -30,9 +33,11 @@ export class PlayBarComponent implements OnInit {
     this.playbackService.init();
     this.playbackService.state
       .pipe(
-        map((state) => state?.paused),
+        tap((state) => {
+          this.playBackState = state;
+        })
       )
-      .subscribe((paused) => this.isPause = paused);
+      .subscribe();
   }
 
   subscribeAuthorizationService(): void {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { Image } from '@models/core/image.model';
 import { PlaylistTrack } from '@models/track/play-list-track.model';
 import { PublicUser } from '@models/user/public-user.model';
@@ -9,7 +9,7 @@ import Vibrant from 'node-vibrant';
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements OnInit, AfterViewInit {
+export class BannerComponent implements OnChanges, AfterViewInit {
   duration?: number;
 
   @Input() image!: Image;
@@ -24,10 +24,14 @@ export class BannerComponent implements OnInit, AfterViewInit {
 
   constructor(private renderer: Renderer2) { }
 
-  ngOnInit(): void {
-    this.duration = this.tracks?.reduce((acc, curr) => {
-      return acc + curr.track!.durationMs;
-    }, 0);
+  ngOnChanges(changes: SimpleChanges): void {
+    const tracks = changes.tracks.currentValue;
+    
+    if (tracks){
+      this.duration = tracks.reduce((acc: number, curr: PlaylistTrack) => {
+        return acc + (curr.track ? curr.track.durationMs : 0);
+      }, 0);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -35,7 +39,6 @@ export class BannerComponent implements OnInit, AfterViewInit {
       .quality(5)
       .getPalette()
       .then((palette: any) => {
-        console.log(palette);
         this.renderer.setStyle(this.background.nativeElement, 'background-color', `rgb(${palette.DarkMuted._rgb.join(',')})`);
       });
 
