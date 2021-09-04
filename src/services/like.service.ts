@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Playlist } from '@models/playlist/playlist.model';
 import { Observable } from 'rxjs';
+import { isDeepStrictEqual } from 'util';
 import { BaseDataService } from './core/base-data.service';
 
 @Injectable({
@@ -15,12 +16,17 @@ export class LikeService extends BaseDataService {
     super();
   }
 
-  // getLikeSongs(): Observable<any> {
-  //   return this.http
-  //     .get<any>(
-  //       `${this.baseUrl}v1/me/tracks`
-  //     )
-  // }
+  checkCurrentUserSavedSong(ids:any): Observable<any> {
+    return this.http
+      .get<any>(
+        `${this.baseUrl}/v1/me/tracks/contains`,
+        {
+          params: {
+            ids: ids,
+          }
+        }
+      )
+  }
 
   followPlaylist(playlistId:string): Observable<Playlist> {
     const contentType = {

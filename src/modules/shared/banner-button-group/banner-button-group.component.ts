@@ -26,7 +26,6 @@ export class BannerButtonGroupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.playlist)
     this.userProfileService
       .getCurrentUserProfile()
       .pipe(

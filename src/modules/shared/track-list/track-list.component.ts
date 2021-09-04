@@ -9,15 +9,27 @@ import { LikeService } from '@services/like.service';
 })
 export class TrackListComponent implements OnInit {
   @Input() tracks!: PlaylistTrack[];
+  liked!: boolean[];
+  track!: any[]
+  songId!: any[];
+  
 
   constructor(private likeService: LikeService) { }
 
   ngOnInit(): void {
+    
+    this.track = this.tracks.map((x) => {
+      x.track
+    })
+    this.songId = this.track.map((y) => {
+      console.log(y)
+    })
+    this.initLikeSong()
   }
-  likePlaylist(i:number):void {
-    this.likeService.followPlaylist(this.tracks[i].track.id)
+  initLikeSong():void {
+    this.likeService.checkCurrentUserSavedSong(this.songId)
       .subscribe((liked) => {
-        console.log(this.tracks[i].track.id)
+        return this.liked = liked
       })
 
   }
