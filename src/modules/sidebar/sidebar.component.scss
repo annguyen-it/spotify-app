@@ -10,10 +10,11 @@
     }
 
     button {
-        @apply relative flex flex-col items-center py-0;
+        @apply relative flex flex-col items-center;
         @apply rounded font-medium text-sm cursor-pointer select-none;
         @apply transition duration-300 active:text-gray-500 z-10;
-        @apply sm:w-full sm:h-11 sm:flex-row sm:font-semibold sm:text-base sm:hover:text-white sm:active:text-white;
+        @apply sm:w-full sm:h-11 sm:flex-row sm:px-4;
+        @apply sm:font-semibold sm:text-base sm:hover:text-white sm:active:text-white;
     }
 
     .logo {
