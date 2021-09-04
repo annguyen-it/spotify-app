@@ -1,3 +1,5 @@
+@import '/src/styles/responsive.scss';
+
 :host {
     @apply h-full;
 }
@@ -9,9 +11,17 @@
 
     button {
         @apply h-11 flex flex-col items-center py-0 px-4;
-        @apply rounded font-medium text-sm cursor-pointer;
+        @apply rounded font-medium text-sm cursor-pointer select-none;
         @apply transition duration-300 active:text-gray-500;
         @apply sm:w-full sm:flex-row sm:font-semibold sm:text-base sm:hover:text-white sm:active:text-white;
+    }
+
+    > nav {
+        &:first-child {
+            @include responsive(sm) {
+
+            }
+        }
     }
 
     .logo {
@@ -45,10 +55,8 @@
             @apply text-white;
         }
     }
-}
 
-@media (min-width: 640px) {   
-    .wrapper {
+    @include responsive(sm) {
         height: calc(100vh - 90px);
     }
 }

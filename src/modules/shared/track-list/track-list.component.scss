@@ -1,9 +1,9 @@
 .tile {
-  grid-template-columns: 16px 4fr 2fr minmax(120px, 1fr);
-  @apply grid px-5;
+  grid-template-columns: 16px 4fr 2fr minmax(100px, 1fr);
+  @apply grid mx-2 px-3 md:mx-5 lg:mx-10 md:px-5;
 
   &.header {
-    top: 60px;
+    top: 60px;  // Top bar's height
     background-color: #181818;
     border-color: rgba(255,255,255,.1)
   }

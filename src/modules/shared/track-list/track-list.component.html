@@ -1,18 +1,19 @@
 <div class="relative" *ngIf="tracks">
   <!-- Header -->
-  <div class="header tile sticky h-10 border-b z-10 font-bold text-sm 
-            text-main-gray uppercase ml-10 mr-10 bg-none mb-2">
+  <div class="header tile sticky h-10 mb-2 border-b font-bold text-sm 
+            text-main-gray uppercase tracking-widest z-10">
     <div class="flex justify-end">#</div>
-    <div class="pl-3 tracking-widest">Title</div>
-    <div class="tracking-widest">Album</div>
+    <div class="ml-6 pr-3">Title</div>
+    <div class="">Album</div>
     <div><i class="fal fa-clock text-base mr-10"></i></div>
   </div>
 
   <!-- Body -->
   <div>
-    <ng-container *ngFor="let track of tracks; index as i py-px">
-      <div class="tile h-16 hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md 
-        mr-10 ml-10 transition-all"  *ngIf="track.track">
+    <ng-container *ngFor="let track of tracks; index as i">
+      <div *ngIf="track.track"
+           class="tile h-16 rounded-md transition-all
+                hover:bg-white hover:bg-opacity-10 hover:text-white">
 
         <!-- Index -->
         <div class="number relative flex justify-end">
@@ -21,7 +22,7 @@
         </div>
 
         <!-- Title -->
-        <div class="flex pl-3">
+        <div class="flex ml-6 pr-3">
           <img [src]="track.track.album.images[0].url" class="w-12 h-12">
           <div>
             <span class="line-clamp-1 pl-3 cursor-default text-left">{{ track.track.name }}</span>
@@ -41,10 +42,11 @@
 
         <!-- Button group -->
         <div>
-          <button class="like-btn invisible mr-5"><i class="fal fa-heart text-main-gray hover:text-white"></i></button>
-          <span class="mr-5">{{ track.track.durationMs | duration:'short' }}</span>
+          <button class="like-btn invisible mr-2.5 lg:mr-5"><i class="fal fa-heart text-main-gray hover:text-white"></i></button>
+          <span class="mr-2.5 lg:mr-5">{{ track.track.durationMs | duration:'short' }}</span>
           <button class="more-btn invisible"><i class="far fa-ellipsis-h text-main-gray hover:text-white"></i></button>
         </div>
+
       </div>
     </ng-container>
   </div>

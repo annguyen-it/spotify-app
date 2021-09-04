@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar.component';
 import { RouterModule } from '@angular/router';
+import { DirectivesModule } from '@directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    DirectivesModule
   ],
   exports: [
     SidebarComponent,
