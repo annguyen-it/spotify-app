@@ -22,14 +22,7 @@ export class BrowseService extends BaseDataService {
         }
       )
       .pipe(
-        map<any, GetListOfFeaturedPlaylistsResponse>((response) => ({
-          ...response,
-          playlists: {
-            ...response.playlists,
-            externalUrls: response.playlists.external_urls,
-            snapshotId: response.playlists.snapshot_id,
-          }
-        })),
+        map((response) => (GetListOfFeaturedPlaylistsResponse.parse(response))),
       );
   }
 }

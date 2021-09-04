@@ -91,23 +91,14 @@ export class PlaybackService {
     await this.playerSession.value?.disconnect();
   }
 
-  async getCurrentState(): Promise<WebPlaybackState> {
-    const state = this.playerSession.value?.getCurrentState();
+  async getCurrentState(): Promise<WebPlaybackState | undefined> {
+    const state = await this.playerSession.value?.getCurrentState();
 
     if (!state) {
       return state;
     }
 
-    return {
-      ...state,
-      disallows: {
-        ...state.disallows,
-        peekingNext: state.disallows?.peeking_next,
-        peekingPrev: state.disallows?.peeking_prev,
-        skippingNext: state.disallows?.skipping_next,
-        skippingPrev: state.disallows?.skipping_prev,
-      }
-    };
+    return WebPlaybackState.parse(state);
   }
 
   async getVolume(): Promise<number> {

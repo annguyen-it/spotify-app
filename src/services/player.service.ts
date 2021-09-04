@@ -12,12 +12,7 @@ export class PlayerService extends BaseDataService {
   }
 
   getCurrentUserRecentlyPlayedTracks(): Observable<GetCurrentUserRecentlyPlayedTracksResponse> {
-    return this.http.get<any>(`${this.baseUrl}/v1/me/player/recently-played`)
-      .pipe(
-        map<any, GetCurrentUserRecentlyPlayedTracksResponse>((response => ({
-          ...response
-        })))
-      );
+    return this.http.get<GetCurrentUserRecentlyPlayedTracksResponse>(`${this.baseUrl}/v1/me/player/recently-played`);
   }
 
   transferUserPlayback(deviceId: string): Observable<void> {
