@@ -16,9 +16,9 @@ module.exports = {
       current: 'currentColor',
       gray: colors.trueGray,
       'main-gray': 'rgb(179, 179, 179)',
+      'main-green': 'rgb(30, 215, 96)',
       white: '#ffffff',
       black: '#000000',
-      green: colors.green,
       blue: colors.blue,
     },
     extend: {

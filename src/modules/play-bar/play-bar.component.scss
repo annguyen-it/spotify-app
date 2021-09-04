@@ -28,7 +28,7 @@
           @apply mx-3.5;
           
           button {
-            @apply text-base font-medium text-gray-400 hover:text-white;
+            @apply text-base font-medium text-main-gray hover:text-white disabled:text-gray-600;
           }
         }
       }
