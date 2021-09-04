@@ -32,15 +32,23 @@
             @apply hover:text-white disabled:text-gray-600;
 
             > .dot {
-              @apply absolute hidden w-1 h-1 left-1/2 -translate-x-1/2 rounded-full bg-main-green-dark duration-500;
+              @apply absolute block w-1 h-1 left-1/2 -translate-x-1/2;
+              @apply opacity-0 rounded-full bg-main-green-dark duration-500;
+            }
 
+            > .number {
+              @apply  duration-500;
+
+              &.active {
+                @apply opacity-100;
+              }
             }
             
             &.active {
               @apply text-main-green-dark;
               
               > .dot {
-                @apply block;
+                @apply opacity-100;
               }
 
               &:hover {
@@ -58,9 +66,7 @@
 
     > button {
       @apply mx-1.5;
-    }
 
-    .toggle-btn {
       > :first-child {
         @apply -ml-px;
       }
@@ -89,108 +95,71 @@
   min-width: 180px;
 }
 
+// Custom slider
+
 input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  @apply w-full m-1.5 bg-white
+  // Common
+  @apply flex items-center w-full h-5 m-1.5;
+  @apply bg-transparent overflow-hidden appearance-none;
+  
+  &:focus {
+    @apply outline-none shadow-none;
+  }
+  
+  // Webkit
+  &::-webkit-slider-runnable-track {
+    background: var(--time-slider-background);
+    height: 4px;
+    @apply content-[''] rounded-lg pointer-events-none;
+  }
+
+  &::-webkit-slider-thumb {
+    transform: translateY(-4px);
+    @apply w-3.5 h-3.5 rounded-full;
+    @apply cursor-pointer appearance-none;
+  }
+  &:not(:disabled):hover::-webkit-slider-thumb {
+    background: #fff;
+  }
+
+  // IE
+  &::-ms-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  &::-ms-fill-lower {
+    background: #1ed760;
+    border-radius: 2.4px;
+  }
+  &::-ms-fill-upper {
+    background: #1ed760;
+    border-radius: 2.4px;
+  }
+  &:hover::-ms-thumb {
+    height: 36px;
+    width: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  // Mozilla
+  &::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: gray;
+    border-radius: 5rem;
+  }
+
+  &:hover::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    cursor: pointer;
+  }
 }
-
-// Style for slider
-
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-}
-
-input[type=range]:focus {
-  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
-}
-
-input[type=range]::-ms-track {
-  width: 100%;
-  cursor: pointer;
-  background: gray;
-  border-color: transparent;
-}
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 4px;
-  cursor: pointer;
-  background: gray;
-  border-radius: 5rem;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #fff;
-}
-
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 4px;
-  cursor: pointer;
-  background: gray;
-  border-radius: 5rem;
-}
-
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 4px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  border-width: 16px 0;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #1ed760;
-  border-radius: 2.4px;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #fff;
-}
-input[type=range]::-ms-fill-upper {
-  background: #1ed760;
-  border-radius: 2.4px;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #fff;
-}
-/* Special styling for WebKit/Blink */
-input[type=range]:hover::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 12px;
-  width: 12px;
-  background: #fff;
-  border-radius: 100%;
-  cursor: pointer;
-  transform: translateY(-35%);
-}
-
- 
-
-/* All the same stuff for Firefox */
-input[type=range]:hover::-moz-range-thumb {
-  height: 12px;
-  width: 12px;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
- 
-
-/* All the same stuff for IE */
-input[type=range]:hover::-ms-thumb {
-  height: 36px;
-  width: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-
-
-
-
-
-
-
-
-
-

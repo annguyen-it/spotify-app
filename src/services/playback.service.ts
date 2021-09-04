@@ -123,8 +123,8 @@ export class PlaybackService {
     return this.playerSession.value?.togglePlay();
   }
 
-  async seek(): Promise<number> {
-    return this.playerSession.value?.seek();
+  async seek(timeInMs: number): Promise<void> {
+    return this.playerSession.value?.seek(timeInMs);
   }
 
   async previousTrack(): Promise<number> {

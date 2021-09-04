@@ -87,7 +87,7 @@
             <div>
               <button (click)="toggleShuffle()"
                       [class.active]="playBackState?.shuffle"
-                      [disabled]="playBackState === undefined">
+                      [disabled]="!playBackState">
                 <i class="fal fa-random"></i>
                 <span class="dot"></span>
               </button>
@@ -95,7 +95,7 @@
 
             <div>
               <button (click)="prev()"
-                      [disabled]="playBackState === undefined || playBackState?.disallows?.skippingPrev">
+                      [disabled]="!playBackState || playBackState?.disallows?.skippingPrev">
                 <i class="fas fa-step-backward"></i>
               </button>
             </div>
@@ -104,11 +104,11 @@
 
           <!-- Toggle button -->
           <button (click)="togglePlay()"
-                  [disabled]="playBackState === undefined"
+                  [disabled]="!playBackState"
                   class="toggle-btn w-9 h-9 flex justify-center items-center bg-white rounded-full text-4xl 
                          hover:scale-105 disabled:hover:transform-none disabled:bg-main-gray">
 
-            <svg role="img" height="16" width="16" viewBox="0 0 24 24" *ngIf="playBackState === undefined || playBackState.paused">
+            <svg role="img" height="16" width="16" viewBox="0 0 24 24" *ngIf="!playBackState || playBackState.paused">
               <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="#000000"></polygon>
             </svg>
             <svg role="img" height="16" width="16" viewBox="0 0 16 16" *ngIf="playBackState !== undefined && !playBackState.paused">
@@ -122,21 +122,21 @@
 
             <div>
               <button (click)="next()"
-                      [disabled]="playBackState === undefined || playBackState?.disallows?.skippingNext">
+                      [disabled]="!playBackState || playBackState?.disallows?.skippingNext">
                 <i class="fas fa-step-forward"></i>
               </button>
             </div>
-            
+
             <div>
               <button (click)="setRepeatMode()"
                       [class.active]="playBackState?.repeatMode"
-                      [disabled]="playBackState === undefined">
+                      [disabled]="!playBackState">
                 <i class="fal fa-repeat"></i>
                 <span class="dot"></span>
-                <span *ngIf="playBackState?.repeatMode === 2"
-                class="absolute top-0.5 -right-0.5 w-2.5 h-2.5 flex justify-center items-center rounded-full 
-                           bg-main-green-dark text-gray-800 font-bold font-sans" 
-                           style="font-size: 9px;">
+                <span [class.active]="playBackState?.repeatMode === 2"
+                      class="number absolute top-0.5 -right-0.5 w-2.5 h-2.5 flex justify-center items-center
+                             rounded-full opacity-0 bg-main-green-dark text-gray-800 font-bold font-sans"
+                      style="font-size: 9px;">
                   1
                 </span>
               </button>
@@ -147,9 +147,17 @@
 
         <!-- Time slider -->
         <div class="playback-bar flex w-full justify-center items-center mt-3">
-          <div class="text-gray-400 text-sm">{{ playBackState?.position | duration:'short' }}</div>
-          <input type="range" class="rounded-xl bg-white outline-none flex items-center w-full mr-1 ml-1"
-                 id="progress-bar" min="0" max="100" value="0" step="1">
+          <div class="text-gray-400 text-sm">{{ timeValue | duration:'short' }}</div>
+          <input (input)="onDragSlider(timeSlider.value)"
+                 (change)="onTimeSliderChange(timeSlider)"
+                 min="0"
+                 [value]="timeValue"
+                 [max]="playBackState?.duration"
+                 [disabled]="!playBackState"
+                 [style.--time-slider-background]="sliderBackground"
+                 type="range"
+                 id="progress-bar"
+                 #timeSlider>
           <div class="right-0 text-gray-400 text-sm">{{ playBackState?.duration | duration:'short' }}</div>
         </div>
 
@@ -169,7 +177,7 @@
       </button>
       <div class="volume flex items-center relative justify-center w-36 outline-none mx-2">
         <button><i class="fas fa-volume-up ml-1 text-base font-medium text-gray-400 hover:text-white"></i></button>
-        <input type="range" class="volumn-bar rounded-md outline-none relative bg-white"
+        <input type="range" class="volumn-bar"
                id="volumn-bar" min="0" max="100" value="0" step="1">
       </div>
       <button><i class="fas fa-expand-alt mr-2 text-gray-400 hover:text-white"></i></button>
@@ -179,7 +187,7 @@
     <div class="mobile-right-box flex">
 
       <div>
-        <button [disabled]="playBackState === undefined"
+        <button [disabled]="!playBackState"
                 class="px-2 disabled:text-main-gray">
           <i class="fal fa-heart text-2xl"></i>
         </button>
@@ -187,10 +195,10 @@
 
       <div>
         <button (click)="togglePlay()"
-                [disabled]="playBackState === undefined"
+                [disabled]="!playBackState"
                 class="px-2 disabled:text-main-gray">
 
-          <svg role="img" height="23" width="23" viewBox="0 0 24 24" *ngIf="playBackState === undefined || playBackState.paused" fill="currentColor">
+          <svg role="img" height="23" width="23" viewBox="0 0 24 24" *ngIf="!playBackState || playBackState.paused" fill="currentColor">
             <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
           </svg>
           <svg role="img" height="23" width="23" viewBox="0 0 16 16" *ngIf="playBackState !== undefined && !playBackState.paused">
