@@ -28,7 +28,29 @@
           @apply mx-3.5;
           
           button {
-            @apply text-base font-medium text-main-gray hover:text-white disabled:text-gray-600;
+            @apply relative text-base font-medium text-main-gray duration-500;
+            @apply hover:text-white disabled:text-gray-600;
+
+            > .dot {
+              @apply absolute hidden w-1 h-1 left-1/2 -translate-x-1/2 rounded-full bg-main-green-dark duration-500;
+
+            }
+            
+            &.active {
+              @apply text-main-green-dark;
+              
+              > .dot {
+                @apply block;
+              }
+
+              &:hover {
+                @apply text-main-green;
+
+                > .dot {
+                  @apply text-main-green;
+                }
+              }
+            }
           }
         }
       }

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WebPlaybackState } from '@models/playback/web-playback-state.model';
 import { AccountService } from '@services/account.service';
-import { AuthorizationService } from '@services/authorization.service';
 import { PlaybackService } from '@services/playback.service';
 import { VibrantService } from '@services/vibrant.service';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-play-bar',
@@ -34,15 +33,20 @@ export class PlayBarComponent implements OnInit {
       .pipe(
         tap(async (state) => {
           this.playBackState = state;
-          await this.generateMobileBackgroundColor(state?.trackWindow.currentTrack.album.images);
-        })
+          console.log(state);
+        }),
+        map(state => state?.trackWindow.currentTrack.album.images[0].url),
+        distinctUntilChanged(),
+        tap(async (imageUrl) => {
+          await this.generateMobileBackgroundColor(imageUrl);
+        }),
       )
       .subscribe();
   }
 
-  async generateMobileBackgroundColor(images: { url: string; }[] | undefined): Promise<void> {
-    if (images && images.length > 0) {
-      this.mobileBackgroundColor = await VibrantService.generateColor(images[0].url);
+  async generateMobileBackgroundColor(imageUrl: string | undefined): Promise<void> {
+    if (imageUrl) {
+      this.mobileBackgroundColor = await VibrantService.generateColor(imageUrl);
     } else {
       this.mobileBackgroundColor = this.defaultMobileBackgroundColor;
     }
@@ -58,6 +62,14 @@ export class PlayBarComponent implements OnInit {
 
   async next(): Promise<void> {
     await this.playbackService.nextTrack();
+  }
+
+  toggleShuffle(): void {
+    this.playbackService.toggleShuffle();
+  }
+
+  setRepeatMode(): void {
+    this.playbackService.setRepeatMode();
   }
 
   signUp(): void {

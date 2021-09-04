@@ -10,13 +10,13 @@ module.exports = {
     ]
   },
   theme: {
-    fontFamily: false,
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       gray: colors.trueGray,
       'main-gray': 'rgb(179, 179, 179)',
       'main-green': 'rgb(30, 215, 96)',
+      'main-green-dark': 'rgb(29, 184, 84)',
       white: '#ffffff',
       black: '#000000',
       blue: colors.blue,
@@ -61,7 +61,7 @@ module.exports = {
         '1/3': '33.333%',
         '2/3': '66.667%',
         '3/3': '100%',
-      },
+      }
     }
   },
   extend: {

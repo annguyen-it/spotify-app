@@ -50,10 +50,10 @@ export class PlaybackService {
 
     // Playback status updates
     player.addListener('player_state_changed', (state: any) => {
-      if (state){
+      if (state) {
         this.state.next(WebPlaybackState.parse(state));
         const currentTrackId = state?.trackWindow?.currentTrack?.id;
-        
+
         if (state && !state.paused && currentTrackId) {
           this.playerService.togglePlayback(this.deviceId.value, currentTrackId);
         }
@@ -133,5 +133,26 @@ export class PlaybackService {
 
   async nextTrack(): Promise<number> {
     return this.playerSession.value?.nextTrack();
+  }
+
+  setRepeatMode(): void {
+    let currentRepeatMode = this.state.value?.repeatMode;
+    const modeMap = ['off', 'context', 'track'];
+
+    if (currentRepeatMode != undefined) {
+      this.playerService
+        .setRepeatMode(this.deviceId.value, ++currentRepeatMode > 2 ? modeMap[0] : modeMap[currentRepeatMode])
+        .subscribe();
+    }
+  }
+
+  toggleShuffle(): void {
+    let currentShuffle = this.state.value?.shuffle;
+
+    if (currentShuffle != undefined) {
+      this.playerService
+        .toggleShuffle(this.deviceId.value, !currentShuffle)
+        .subscribe();
+    }
   }
 }

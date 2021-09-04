@@ -83,12 +83,23 @@
 
           <!-- Left button group -->
           <div>
+
             <div>
-              <button><i class="far fa-random"></i></button>
+              <button (click)="toggleShuffle()"
+                      [class.active]="playBackState?.shuffle"
+                      [disabled]="playBackState === undefined">
+                <i class="fal fa-random"></i>
+                <span class="dot"></span>
+              </button>
             </div>
+
             <div>
-              <button (click)="prev()"><i class="fas fa-step-backward"></i></button>
+              <button (click)="prev()"
+                      [disabled]="playBackState === undefined || playBackState?.disallows?.skippingPrev">
+                <i class="fas fa-step-backward"></i>
+              </button>
             </div>
+
           </div>
 
           <!-- Toggle button -->
@@ -108,12 +119,29 @@
 
           <!-- Right button group -->
           <div>
+
             <div>
-              <button (click)="next()"><i class="fas fa-step-forward"></i></button>
+              <button (click)="next()"
+                      [disabled]="playBackState === undefined || playBackState?.disallows?.skippingNext">
+                <i class="fas fa-step-forward"></i>
+              </button>
             </div>
+            
             <div>
-              <button><i class="fas fa-repeat"></i></button>
+              <button (click)="setRepeatMode()"
+                      [class.active]="playBackState?.repeatMode"
+                      [disabled]="playBackState === undefined">
+                <i class="fal fa-repeat"></i>
+                <span class="dot"></span>
+                <span *ngIf="playBackState?.repeatMode === 2"
+                class="absolute top-0.5 -right-0.5 w-2.5 h-2.5 flex justify-center items-center rounded-full 
+                           bg-main-green-dark text-gray-800 font-bold font-sans" 
+                           style="font-size: 9px;">
+                  1
+                </span>
+              </button>
             </div>
+
           </div>
         </div>
 
