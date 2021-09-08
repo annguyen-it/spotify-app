@@ -20,42 +20,42 @@
   .btn-group {
     > * {
       @apply flex items-center;
-      
-      &:first-child,
-      &:last-child {
-        > div {
-          @apply mx-3.5;
-          
-          button {
-            @apply relative text-base font-medium text-main-gray duration-500;
-            @apply hover:text-white disabled:text-gray-600;
+    }
 
-            > .dot {
-              @apply absolute block w-1 h-1 left-1/2 -translate-x-1/2;
-              @apply opacity-0 rounded-full bg-main-green-dark duration-500;
-            }
+    .btn-group-left,
+    .btn-group-right {
+      > div {
+        @apply mx-3.5;
+        
+        button {
+          @apply relative text-base font-medium text-main-gray duration-500;
+          @apply hover:text-white disabled:text-gray-600;
 
-            > .number {
-              @apply  duration-500;
+          > .dot {
+            @apply absolute block w-1 h-1 left-1/2 -translate-x-1/2;
+            @apply opacity-0 rounded-full bg-main-green-dark duration-500;
+          }
 
-              &.active {
-                @apply opacity-100;
-              }
-            }
-            
+          > .number {
+            @apply  duration-500;
+
             &.active {
-              @apply text-main-green-dark;
-              
+              @apply opacity-100;
+            }
+          }
+          
+          &.active {
+            @apply text-main-green-dark;
+            
+            > .dot {
+              @apply opacity-100;
+            }
+
+            &:hover {
+              @apply text-main-green;
+
               > .dot {
-                @apply opacity-100;
-              }
-
-              &:hover {
                 @apply text-main-green;
-
-                > .dot {
-                  @apply text-main-green;
-                }
               }
             }
           }
@@ -75,7 +75,6 @@
   .playback-bar {
     > div {
       min-width: 40px;
-      @apply text-center;
     }
   }
 }
