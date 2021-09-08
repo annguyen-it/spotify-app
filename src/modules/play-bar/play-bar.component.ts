@@ -118,13 +118,10 @@ export class PlayBarComponent implements OnInit {
 
   onDragSlider(value: any): void {
     clearInterval(this.timeIntervalFunction);
-    console.log(this.timeValue);
     this.refreshTimeSliderBackground(value, this.playBackState?.duration);
   }
 
   increaseTime(): void {
-    console.log(this.timeValue);
-    this.timeValue += 1000;
     this.refreshTimeSliderBackground(this.timeValue, this.playBackState?.duration);
   }
 }
