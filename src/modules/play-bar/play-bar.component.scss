@@ -1,6 +1,5 @@
 .advertisement {
-    background: linear-gradient(90deg,#af2896,#509bf5);
-    @apply text-lg;
+  background: linear-gradient(90deg,#af2896,#509bf5);
 }
 
 .left-box {
@@ -21,42 +20,42 @@
   .btn-group {
     > * {
       @apply flex items-center;
-      
-      &:first-child,
-      &:last-child {
-        > div {
-          @apply mx-3.5;
-          
-          button {
-            @apply relative text-base font-medium text-main-gray duration-500;
-            @apply hover:text-white disabled:text-gray-600;
+    }
 
-            > .dot {
-              @apply absolute block w-1 h-1 left-1/2 -translate-x-1/2;
-              @apply opacity-0 rounded-full bg-main-green-dark duration-500;
-            }
+    .btn-group-left,
+    .btn-group-right {
+      > div {
+        @apply mx-3.5;
+        
+        button {
+          @apply relative text-base font-medium text-main-gray duration-500;
+          @apply hover:text-white disabled:text-gray-600;
 
-            > .number {
-              @apply  duration-500;
+          > .dot {
+            @apply absolute block w-1 h-1 left-1/2 -translate-x-1/2;
+            @apply opacity-0 rounded-full bg-main-green-dark duration-500;
+          }
 
-              &.active {
-                @apply opacity-100;
-              }
-            }
-            
+          > .number {
+            @apply  duration-500;
+
             &.active {
-              @apply text-main-green-dark;
-              
+              @apply opacity-100;
+            }
+          }
+          
+          &.active {
+            @apply text-main-green-dark;
+            
+            > .dot {
+              @apply opacity-100;
+            }
+
+            &:hover {
+              @apply text-main-green;
+
               > .dot {
-                @apply opacity-100;
-              }
-
-              &:hover {
                 @apply text-main-green;
-
-                > .dot {
-                  @apply text-main-green;
-                }
               }
             }
           }
@@ -76,7 +75,6 @@
   .playback-bar {
     > div {
       min-width: 40px;
-      @apply text-center;
     }
   }
 }
@@ -96,16 +94,15 @@
 }
 
 // Custom slider
-
 input[type=range] {
   // Common
   @apply flex items-center w-full h-5 m-1.5;
   @apply bg-transparent overflow-hidden appearance-none;
-  
+
   &:focus {
     @apply outline-none shadow-none;
   }
-  
+
   // Webkit
   &::-webkit-slider-runnable-track {
     background: var(--time-slider-background);
@@ -119,47 +116,38 @@ input[type=range] {
     @apply cursor-pointer appearance-none;
   }
   &:not(:disabled):hover::-webkit-slider-thumb {
-    background: #fff;
+    @apply bg-white;
   }
 
   // IE
   &::-ms-track {
-    width: 100%;
+    background: var(--time-slider-background);
     height: 4px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    border-width: 16px 0;
-    color: transparent;
+    @apply content-[''] rounded-lg pointer-events-none;
   }
-  &::-ms-fill-lower {
-    background: #1ed760;
-    border-radius: 2.4px;
+
+  &::-ms-thumb {
+    transform: translateY(-4px);
+    @apply w-3.5 h-3.5 rounded-full;
+    @apply cursor-pointer appearance-none;
   }
-  &::-ms-fill-upper {
-    background: #1ed760;
-    border-radius: 2.4px;
-  }
-  &:hover::-ms-thumb {
-    height: 36px;
-    width: 16px;
-    border-radius: 4px;
-    cursor: pointer;
+  &:not(:disabled):hover::-ms-thumb {
+    @apply bg-white;
   }
 
   // Mozilla
   &::-moz-range-track {
-    width: 100%;
+    background: var(--time-slider-background);
     height: 4px;
-    cursor: pointer;
-    background: gray;
-    border-radius: 5rem;
+    @apply content-[''] rounded-lg pointer-events-none;
   }
 
-  &:hover::-moz-range-thumb {
-    height: 12px;
-    width: 12px;
-    border-radius: 100%;
-    cursor: pointer;
+  &::-moz-range-thumb {
+    transform: translateY(-4px);
+    @apply w-3.5 h-3.5 rounded-full;
+    @apply cursor-pointer appearance-none;
+  }
+  &:not(:disabled):hover::-moz-range-thumb {
+    @apply bg-white;
   }
 }

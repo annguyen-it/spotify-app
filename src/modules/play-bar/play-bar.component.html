@@ -2,7 +2,7 @@
   <!-- If unauthorized -->
   <div spotifyAuthCheck [displayIfAuth]=false [display]="'flex'"
        class="advertisement fixed bottom-0 left-0 right-0 h-20 
-              justify-between items-center px-7
+              justify-between items-center px-7 text-lg
               sm:static sm:h-full">
     <!-- Left box -->
     <div class="left-box">
@@ -82,7 +82,7 @@
         <div class="btn-group flex flex-row">
 
           <!-- Left button group -->
-          <div>
+          <div class="btn-group-left">
 
             <div>
               <button (click)="toggleShuffle()"
@@ -118,7 +118,7 @@
           </button>
 
           <!-- Right button group -->
-          <div>
+          <div class="btn-group-right">
 
             <div>
               <button (click)="next()"
@@ -146,8 +146,8 @@
         </div>
 
         <!-- Time slider -->
-        <div class="playback-bar flex w-full justify-center items-center mt-3">
-          <div class="text-gray-400 text-sm">{{ timeValue | duration:'short' }}</div>
+        <div class="playback-bar flex w-full justify-center items-center mt-3 text-gray-400 text-sm text-center">
+          <div>{{ timeValue | duration:'short' }}</div>
           <input (input)="onDragSlider(timeSlider.value)"
                  (change)="onTimeSliderChange(timeSlider)"
                  min="0"
@@ -158,7 +158,7 @@
                  type="range"
                  id="progress-bar"
                  #timeSlider>
-          <div class="right-0 text-gray-400 text-sm">{{ playBackState?.duration | duration:'short' }}</div>
+          <div>{{ playBackState?.duration | duration:'short' }}</div>
         </div>
 
       </div>
