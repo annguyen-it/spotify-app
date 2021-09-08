@@ -1,0 +1,57 @@
+input[type=range] {
+  // Common
+  @apply flex items-center w-full h-5 m-1.5;
+  @apply bg-transparent overflow-hidden appearance-none;
+
+  &:focus {
+    @apply outline-none shadow-none;
+  }
+
+  // Webkit
+  &::-webkit-slider-runnable-track {
+    background: var(--time-slider-background);
+    height: 4px;
+    @apply content-[''] rounded-lg pointer-events-none;
+  }
+
+  &::-webkit-slider-thumb {
+    transform: translateY(-4px);
+    @apply w-3.5 h-3.5 rounded-full;
+    @apply cursor-pointer appearance-none;
+  }
+  &:not(:disabled):hover::-webkit-slider-thumb {
+    @apply bg-white;
+  }
+
+  // IE
+  &::-ms-track {
+    background: var(--time-slider-background);
+    height: 4px;
+    @apply content-[''] rounded-lg pointer-events-none;
+  }
+
+  &::-ms-thumb {
+    transform: translateY(-4px);
+    @apply w-3.5 h-3.5 rounded-full;
+    @apply cursor-pointer appearance-none;
+  }
+  &:not(:disabled):hover::-ms-thumb {
+    @apply bg-white;
+  }
+
+  // Mozilla
+  &::-moz-range-track {
+    background: var(--time-slider-background);
+    height: 4px;
+    @apply content-[''] rounded-lg pointer-events-none;
+  }
+
+  &::-moz-range-thumb {
+    transform: translateY(-4px);
+    @apply w-3.5 h-3.5 rounded-full;
+    @apply cursor-pointer appearance-none;
+  }
+  &:not(:disabled):hover::-moz-range-thumb {
+    @apply bg-white;
+  }
+}

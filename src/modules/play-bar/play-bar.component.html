@@ -133,9 +133,11 @@
                       [disabled]="!playBackState">
                 <i class="fal fa-repeat"></i>
                 <span class="dot"></span>
-                <span [class.active]="playBackState?.repeatMode === 2"
-                      class="number absolute top-0.5 -right-0.5 w-2.5 h-2.5 flex justify-center items-center
-                             rounded-full opacity-0 bg-main-green-dark text-gray-800 font-bold font-sans"
+                <span [class.opacity-100]="playBackState?.repeatMode === 2"
+                      class="number absolute top-0.5 -right-0.5 w-2.5 h-2.5
+                             flex justify-center items-center
+                             rounded-full opacity-0 bg-main-green-dark 
+                             text-gray-800 font-bold font-sans duration-500"
                       style="font-size: 9px;">
                   1
                 </span>
