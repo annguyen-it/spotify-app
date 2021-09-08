@@ -34,10 +34,10 @@ export class WebPlaybackState {
       ...obj,
       disallows: {
         ...obj.disallows,
-        peekingNext: obj.peeking_next,
-        peekingPrev: obj.peeking_prev,
-        skippingNext: obj.skipping_next,
-        skippingPrev: obj.skipping_prev
+        peekingNext: obj.disallows.peeking_next,
+        peekingPrev: obj.disallows.peeking_prev,
+        skippingNext: obj.disallows.skipping_next,
+        skippingPrev: obj.disallows.skipping_prev
       },
       repeatMode: obj.repeat_mode,
       trackWindow: {

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LibraryViewModel } from '@models/view/library-view.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaylistService } from '@services/playlist.service';
 import { UserProfileService } from '@services/user-profile.service';
@@ -10,16 +10,15 @@ import { Subscription } from 'rxjs';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
-  viewModel!: LibraryViewModel;
-  isAuthorized!: boolean;
-  sub!: Subscription;
-  sub2!: Subscription;
-  urlId!: string;
-  length!: number;
+export class SidebarComponent implements OnInit, OnDestroy {
+  playlists: SimplifiedPlaylist[] = [];
+  profileSub!: Subscription;
+  playlistSub!: Subscription;
+  userId!: string;
+
   constructor(
-    private userProfileService: UserProfileService,
     private playlistService: PlaylistService,
+    private userProfileService: UserProfileService,
     private authorizationService: AuthorizationService,
   ) { }
 
@@ -27,30 +26,33 @@ export class SidebarComponent implements OnInit {
     this.authorizationService
       .isAuthorized()
       .subscribe((isAuthorized) => {
-        this.isAuthorized = isAuthorized;
-        this.sub = this.userProfileService.getCurrentUserProfile()
-          .subscribe((response) => {
-            this.urlId = response.id
-          })
-        this.sub2 = this.playlistService.getListOfCurrentUserPlaylists()
-          .subscribe((response) => {
-            this.length = response.items.length
-          })
-        this.initViewModels();
+        if (isAuthorized) {
+          this.profileSub = this.userProfileService
+            .getCurrentUserProfile()
+            .subscribe((response) => {
+              this.userId = response.id;
+            });
+            
+          this.refreshPlaylists();
+        }
       });
   }
 
-  initViewModels(): void {
-    this.playlistService.getListOfCurrentUserPlaylists()
-      .subscribe((response) => this.viewModel = {
-          href: response.href,
-          items: response.items,
-      });
+  ngOnDestroy(): void {
+    if (this.profileSub) this.profileSub.unsubscribe();
+    if (this.profileSub) this.profileSub.unsubscribe();
+    if (this.playlistSub) this.playlistSub.unsubscribe();
   }
 
-  createPlaylist(urlId?: string) {
-    this.playlistService.createPlaylist(this.urlId, this.length).subscribe((response) => {
-      return this.initViewModels()
-     })
+  refreshPlaylists(): void {
+    this.playlistService
+      .getListOfCurrentUserPlaylists()
+      .subscribe((response) => this.playlists = response.items);
+  }
+
+  createPlaylist() {
+    this.playlistService
+      .createPlaylist(this.userId, this.playlists.length + 1)
+      .subscribe(() => this.refreshPlaylists());
   }
 }

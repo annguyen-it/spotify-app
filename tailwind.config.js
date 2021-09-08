@@ -10,15 +10,15 @@ module.exports = {
     ]
   },
   theme: {
-    fontFamily: false,
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       gray: colors.trueGray,
       'main-gray': 'rgb(179, 179, 179)',
+      'main-green': 'rgb(30, 215, 96)',
+      'main-green-dark': 'rgb(29, 184, 84)',
       white: '#ffffff',
       black: '#000000',
-      green: colors.green,
       blue: colors.blue,
     },
     extend: {
@@ -34,6 +34,8 @@ module.exports = {
         'vh-90': '90vh',
       },
       fontSize: {
+        '2xl': ['1.5rem', '2.4rem'],
+        '3xl': ['1.875rem', '2.8rem'],
         'base-sm': 'calc(1rem - 1px)',
         'base-lg': 'calc(1rem + 1px)',
       },
@@ -59,7 +61,7 @@ module.exports = {
         '1/3': '33.333%',
         '2/3': '66.667%',
         '3/3': '100%',
-      },
+      }
     }
   },
   extend: {

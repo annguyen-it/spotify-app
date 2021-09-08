@@ -1,6 +1,7 @@
 {
   "baseUrl": "https://api.spotify.com",
   "authorizeUrl": "https://accounts.spotify.com/authorize",
+  "clientCredentialsUrl": "https://accounts.spotify.com/api/token",
   "redirectUrl": "https://annguyen-it.github.io/spotify-app",
   "signUpUrl": "https://spotify.com/signup",
   "upgradeAccountUrl": "https://spotify.com/premium"

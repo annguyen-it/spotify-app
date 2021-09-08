@@ -1,0 +1,28 @@
+:host,
+.sub-menu {
+  background-color: #282828;
+  box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
+  @apply flex flex-col items-start p-1 rounded-md select-none z-50;
+
+  > * {
+    color: rgba(255, 255, 255, 0.9);
+    @apply flex justify-between items-center w-full;
+    @apply rounded-sm font-semibold text-base-sm;
+
+    &:not(.sub-menu){
+      @apply p-3 pr-3.5 hover:bg-gray-700;
+    }
+  }
+}
+
+.sub {
+  ~ .sub-menu {
+    @apply absolute hidden;
+  }
+
+  ~ .sub-menu:hover,
+  &:hover ~ .sub-menu {
+    @apply flex;
+  }
+}
+

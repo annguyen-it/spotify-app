@@ -1,7 +1,7 @@
 <div class="wrapper fixed left-0 bottom-0 right-0 h-20 z-10
-            flex flex-col flex-1
-          bg-black text-main-gray overflow-hidden
-            sm:static sm:transform-none sm:py-7 sm:px-2.5 sm:overflow-y-auto">
+            flex flex-col flex-1 text-main-gray 
+            sm:static sm:transform-none sm:py-7 sm:px-2.5 
+           sm:bg-black sm:overflow-y-auto">
   <nav class="h-full px-1/12 sm:h-auto sm:px-0">
     <!-- Logo -->
     <div class="logo hidden sm:block px-6 mb-7">
@@ -54,24 +54,15 @@
     </ul>
 
     <!-- Ruler -->
-    <span class="ruler hidden sm:block w-4/5 h-px m-auto" *ngIf="isAuthorized"></span>
-
-    <ul class="sm:hidden">
-      <li>
-        <button></button>
-      </li>
-      <li>
-        <button></button>
-      </li>
-      <li>
-        <button></button>
-      </li>
-    </ul>
+    <span class="ruler hidden sm:block w-4/5 h-px m-auto" spotifyAuthCheck></span>
   </nav>
 
+  <!-- Gradient background for mobile view -->
+  <div class="gradient-box absolute sm:hidden bottom-0 left-0 right-0 h-52 z-0"></div>
+
   <!-- Playlists -->
-  <nav class="hidden sm:block playlist py-2.5 overflow-y-auto" *ngIf="isAuthorized">
-    <ul *ngFor="let playlist of viewModel?.items">
+  <nav class="!hidden sm:!block playlist py-2.5 overflow-y-auto" spotifyAuthCheck>
+    <ul *ngFor="let playlist of playlists">
       <li>
         <button class="!transition-none !font-medium !h-8"
                 [routerLink]="['/playlist', playlist.id]"

@@ -1,7 +1,9 @@
-<div class="wrapper block sm:p-4 rounded transition duration-300 cursor-pointer"
-     *ngIf="playlist.images.length > 0"
+<div contextMenu
+     [popup]="type === 'playlist' ? playlistContext! : podcastContext!"
+     [event]="['contextmenu']"
      [routerLink]="['/playlist', playlist.id]"
-     href>
+     class="wrapper relative block sm:p-4 rounded transition duration-300 cursor-pointer">
+     
   <div class="h-full">
     <!-- Image -->
     <div class="image-wrapper relative mb-2 sm:mb-5">
@@ -13,7 +15,7 @@
       <button (click)="playPlaylist($event)"
               class="absolute bottom-0 right-2 w-11 h-11 
                      hidden sm:flex justify-center items-center 
-                     rounded-full bg-green-500 opacity-0
+                     rounded-full bg-main-green opacity-0
                      transform duration-300">
         <svg height="16" role="img" width="16" viewBox="0 0 24 24" aria-hidden="true">
           <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
@@ -25,9 +27,12 @@
 
     <!-- Information text -->
     <div class="title-wrapper">
-      <h5 class="hidden max-w-full text-lg font-bold sm:line-clamp-1">{{ playlist.name }}</h5>
+      <h5 class="hidden max-w-full text-lg font-bold sm:line-clamp-1">{{ playlist.name | removeTag }}</h5>
       <p class="mt-1 text-base-sm text-main-gray line-clamp-2 leading-tight">{{ playlist.description | removeTag }}</p>
     </div>
 
   </div>
 </div>
+
+<spotify-playlist-context-menu #playlistContext [hidden]="type !== 'playlist'" class="fixed" ></spotify-playlist-context-menu>
+<spotify-podcast-context-menu #podcastContext [hidden]="type !== 'podcast'" class="fixed" ></spotify-podcast-context-menu>
