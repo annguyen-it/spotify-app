@@ -12,12 +12,7 @@ export class PlayerService extends BaseDataService {
   }
 
   getCurrentUserRecentlyPlayedTracks(): Observable<GetCurrentUserRecentlyPlayedTracksResponse> {
-    return this.http.get<any>(`${this.baseUrl}/v1/me/player/recently-played`)
-      .pipe(
-        map<any, GetCurrentUserRecentlyPlayedTracksResponse>((response => ({
-          ...response
-        })))
-      );
+    return this.http.get<GetCurrentUserRecentlyPlayedTracksResponse>(`${this.baseUrl}/v1/me/player/recently-played`);
   }
 
   transferUserPlayback(deviceId: string): Observable<void> {
@@ -56,5 +51,23 @@ export class PlayerService extends BaseDataService {
 
   startNewPlayback(deviceId: string | null, contextUri: string): Observable<void> {
     return this.startOrResumeUserPlayback(deviceId, { contextUri });
+  }
+
+  setRepeatMode(deviceId: string | null, state: string): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/v1/me/player/repeat`, {}, {
+      params: {
+        device_ids: deviceId ?? '',
+        state: state
+      }
+    });
+  }
+
+  toggleShuffle(deviceId: string | null, state: boolean): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/v1/me/player/shuffle`, {}, {
+      params: {
+        device_ids: deviceId ?? '',
+        state: state
+      }
+    });
   }
 }

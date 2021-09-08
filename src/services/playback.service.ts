@@ -50,10 +50,10 @@ export class PlaybackService {
 
     // Playback status updates
     player.addListener('player_state_changed', (state: any) => {
-      if (state){
+      if (state) {
         this.state.next(WebPlaybackState.parse(state));
         const currentTrackId = state?.trackWindow?.currentTrack?.id;
-        
+
         if (state && !state.paused && currentTrackId) {
           this.playerService.togglePlayback(this.deviceId.value, currentTrackId);
         }
@@ -91,23 +91,14 @@ export class PlaybackService {
     await this.playerSession.value?.disconnect();
   }
 
-  async getCurrentState(): Promise<WebPlaybackState> {
-    const state = this.playerSession.value?.getCurrentState();
+  async getCurrentState(): Promise<WebPlaybackState | undefined> {
+    const state = await this.playerSession.value?.getCurrentState();
 
     if (!state) {
       return state;
     }
 
-    return {
-      ...state,
-      disallows: {
-        ...state.disallows,
-        peekingNext: state.disallows?.peeking_next,
-        peekingPrev: state.disallows?.peeking_prev,
-        skippingNext: state.disallows?.skipping_next,
-        skippingPrev: state.disallows?.skipping_prev,
-      }
-    };
+    return WebPlaybackState.parse(state);
   }
 
   async getVolume(): Promise<number> {
@@ -132,8 +123,8 @@ export class PlaybackService {
     return this.playerSession.value?.togglePlay();
   }
 
-  async seek(): Promise<number> {
-    return this.playerSession.value?.seek();
+  async seek(timeInMs: number): Promise<void> {
+    return this.playerSession.value?.seek(timeInMs);
   }
 
   async previousTrack(): Promise<number> {
@@ -142,5 +133,26 @@ export class PlaybackService {
 
   async nextTrack(): Promise<number> {
     return this.playerSession.value?.nextTrack();
+  }
+
+  setRepeatMode(): void {
+    let currentRepeatMode = this.state.value?.repeatMode;
+    const modeMap = ['off', 'context', 'track'];
+
+    if (currentRepeatMode != undefined) {
+      this.playerService
+        .setRepeatMode(this.deviceId.value, ++currentRepeatMode > 2 ? modeMap[0] : modeMap[currentRepeatMode])
+        .subscribe();
+    }
+  }
+
+  toggleShuffle(): void {
+    let currentShuffle = this.state.value?.shuffle;
+
+    if (currentShuffle != undefined) {
+      this.playerService
+        .toggleShuffle(this.deviceId.value, !currentShuffle)
+        .subscribe();
+    }
   }
 }
