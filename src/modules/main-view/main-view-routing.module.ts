@@ -8,6 +8,11 @@ const routes: Routes = [
 
   },
   {
+    path: 'seach',
+    loadChildren: async () => (await import('../seach/seach/seach.module')).SeachModule
+
+  },
+  {
     path: 'playlist/:playlist-id',
     loadChildren: async () => (await import('../playlist/playlist.module')).PlaylistModule
   },

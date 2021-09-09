@@ -1,3 +1,4 @@
+import { SeachModule } from './../seach/seach/seach.module';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,6 +23,7 @@ import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.fac
     MainViewModule,
     PlayBarModule,
     SidebarModule,
+    SeachModule,
     AppRoutingModule,
   ],
   declarations: [				
