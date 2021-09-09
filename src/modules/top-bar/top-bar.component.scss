@@ -1,7 +1,12 @@
+@import '/src/styles/responsive.scss';
+
 .wrapper {
-  left: 230px;  // Sidebar's width
-  height: 60px;
   background-color: #141414;
+
+  @include responsive(sm) {
+    left: 230px;  // Sidebar's width
+    height: 60px;
+  }
 }
 
 div > button {
@@ -13,16 +18,6 @@ div > button {
 
     &:hover {
       @apply transform scale-105;
-    }
-  }
-}
-
-.dropdown {
-  button {
-    @apply flex justify-between items-center px-2.5 py-3.5 w-52 font-bold text-base-sm text-main-gray;
-
-    &:hover {
-      @apply bg-gray-700 text-white;
     }
   }
 }

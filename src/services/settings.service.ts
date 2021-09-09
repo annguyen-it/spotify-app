@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { AppSettings } from '@models/core/app-settings.model';
 import { LocalStorageKeyConstant } from '@constants/local-storage-key.constants';
 import { SpotifyAuthorize } from '@models/core/spotify-authorize.model';
+import { environment } from '@environments/environment';
 
 export let APP_SETTINGS: AppSettings;
 export let SPOTIFY_AUTHORIZE: SpotifyAuthorize;
@@ -24,7 +25,12 @@ export class SettingsService {
       return of(APP_SETTINGS);
     }
 
-    const filePath = 'assets/settings/app-settings.json';
+    let filePath = 'assets/settings/app-settings.json';
+
+    if (environment.production) {
+      filePath = 'assets/settings/app-settings.prod.json';
+    }
+
     return this.httpClient
       .get<AppSettings>(filePath)
       .pipe(

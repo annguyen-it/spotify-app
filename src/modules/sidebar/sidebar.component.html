@@ -2,7 +2,7 @@
             flex flex-col flex-1
           bg-black text-main-gray overflow-hidden
             sm:static sm:transform-none sm:py-7 sm:px-2.5 sm:overflow-y-auto">
-  <nav class="h-full px-32 sm:h-auto sm:px-0">
+  <nav class="h-full px-1/12 sm:h-auto sm:px-0">
     <!-- Logo -->
     <div class="logo hidden sm:block px-6 mb-7">
       <svg class="h-11 w-full" viewBox="0 0 1134 340">
@@ -13,7 +13,7 @@
 
     <!-- Navigation -->
     <ul class="navigation flex items-center h-full
-               sm:inline sm:mb-5 sm:h-auto">
+               sm:block sm:mb-5 sm:h-auto">
       <li>
         <button [routerLink]="['']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
           <i class="fas fa-home"></i>
@@ -22,7 +22,7 @@
       </li>
 
       <li>
-        <button [routerLinkActive]="'active'">
+        <button [routerLink]="['seach']" [routerLinkActive]="'active'">
           <i class="fas fa-search"></i>
           Search
         </button>
@@ -54,7 +54,7 @@
     </ul>
 
     <!-- Ruler -->
-    <span class="ruler hidden sm:block w-4/5 h-px m-auto" *ngIf="isAuthorized"></span>
+    <span class="ruler hidden sm:block w-4/5 h-px m-auto" spotifyAuthCheck></span>
 
     <ul class="sm:hidden">
       <li>
@@ -70,8 +70,8 @@
   </nav>
 
   <!-- Playlists -->
-  <nav class="hidden sm:block playlist py-2.5 overflow-y-auto" *ngIf="isAuthorized">
-    <ul *ngFor="let playlist of viewModel?.items">
+  <nav class="hidden sm:block playlist py-2.5 overflow-y-auto" spotifyAuthCheck>
+    <ul *ngFor="let playlist of playlists">
       <li>
         <button class="!transition-none !font-medium !h-8"
                 [routerLink]="['/playlist', playlist.id]"

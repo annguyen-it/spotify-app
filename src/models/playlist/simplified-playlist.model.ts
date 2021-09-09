@@ -10,7 +10,7 @@ export class SimplifiedPlaylist {
   href!: string;
   id!: string;
   images!: Image[];
-  name!: String;
+  name!: string;
   owner!: PublicUser;
   public!: boolean;
   snapshotId!: string;

@@ -1,11 +1,11 @@
-<div class="wrapper relative h-vh-30 flex px-9 pb-7">
+<div class="wrapper relative h-vh-30 flex px-3 md:px-5 lg:px-7 xl:px-9 pb-7">
   <!-- Background and gradient -->
   <div class="absolute inset-0" #background></div>
   <div class="absolute inset-0" #gradient></div>
 
   <!-- Image -->
-  <div class="w-56 h-56 xl:w-64 xl:h-64 self-end mr-7 z-0">
-    <img [src]="image.url" />
+  <div class="w-56 h-56 flex flex-shrink-0 xl:w-64 xl:h-64 self-end mr-7 z-0">
+    <img [src]="image.url" class="self-end"/>
   </div>
 
   <!-- Details -->

@@ -15,11 +15,11 @@ export class PlaylistService extends BaseDataService {
     super();
   }
 
-  createPlaylist(userId: string, length:number): Observable<Playlist> {
+  createPlaylist(userId: string, length: number): Observable<Playlist> {
     const newPlaylist = {
-      "name": `New Playlist #${length + 1}`,
-      "description": "New playlist description",
-      "public": false
+      'name': `New Playlist #${length + 1}`,
+      'description': 'New playlist description',
+      'public': false
     };
     return this.http
       .post<any>(

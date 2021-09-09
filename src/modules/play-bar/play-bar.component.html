@@ -1,18 +1,21 @@
 <div class="h-full">
   <!-- If unauthorized -->
-  <div *ngIf="!isAuthorized" class="advertisement flex justify-between items-center h-full px-7">
+  <div spotifyAuthCheck [displayIfAuth]=false [display]="'flex'"
+       class="advertisement fixed bottom-0 left-0 right-0 h-20 
+              justify-between items-center px-7
+              sm:static sm:h-full">
     <!-- Left box -->
     <div class="left-box">
-      <p class="uppercase">Spotify preview</p>
-      <p>Subscribe for unlimited songs and postcards</p>
+      <p class="text-lg uppercase">Spotify preview</p>
+      <p class="text-base-sm">Subscribe for unlimited songs and postcards</p>
     </div>
 
     <!-- Right box -->
     <div class="right-box flex items-center">
       <button (click)="signUp()"
               type="button"
-              class="py-2 px-4 rounded-full bg-white text-blue-600 font-semibold
-                     transition duration-300 hover:scale-110">
+              class="py-2 px-4 rounded-full bg-white text-base sm:text-lg text-blue-600 font-semibold
+                     transition duration-300 sm:hover:scale-110">
         Free Sign Up
       </button>
     </div>
@@ -22,11 +25,12 @@
 
 
   <!-- If authorized -->
-  <div *ngIf="isAuthorized"
+  <div spotifyAuthCheck [display]="'flex'"
        class="fixed bottom-24 left-3 right-3 h-16
               flex items-center flex-row p-3 rounded-md
-            bg-gray-900 border-gray-700 text-white
-              sm:static sm:h-full sm:rounded-none sm:px-2.5 sm:py-0 sm:border-t md:px-4">
+            sm:!bg-gray-900 border-gray-700 text-white
+              sm:static sm:h-full sm:rounded-none sm:px-2.5 sm:py-0 sm:border-t md:px-4"
+       [ngStyle]="{'background-color': mobileBackgroundColor}">
 
     <!-- Left box -->
     <div class="left-box w-1/3 flex flex-1">
@@ -145,7 +149,8 @@
     <div class="mobile-right-box flex">
 
       <div>
-        <button>
+        <button [disabled]="playBackState === undefined"
+                class="px-2 disabled:text-main-gray">
           <i class="fal fa-heart text-2xl"></i>
         </button>
       </div>

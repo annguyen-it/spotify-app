@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
 import { UserProfileService } from '@services/user-profile.service';
@@ -11,13 +11,10 @@ import { AccountService } from '@services/account.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit, OnDestroy {
-  isAuthorized!: boolean;
   userProfile?: PublicUser;
   userProfileSub = new Subscription();
-  openDropDown = false;
 
   constructor(
-    private elementRef: ElementRef,
     private accountService: AccountService,
     private userProfileService: UserProfileService,
     private authorizationService: AuthorizationService,
@@ -27,7 +24,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
     this.authorizationService
       .isAuthorized()
       .subscribe((isAuthorized) => {
-        this.isAuthorized = isAuthorized;
         if (isAuthorized) {
           this.userProfileSub = this.userProfileService.getCurrentUserProfile()
             .subscribe((profile) => {
@@ -54,21 +50,5 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   upgrade(): void {
     this.accountService.upgrade();
-  }
-
-  toggleDropDown(): void {
-    this.openDropDown = !this.openDropDown;
-  }
-
-  logOut(): void {
-    this.authorizationService.logOut();
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent): void {
-    const targetElement = event.target as HTMLElement;
-    if (targetElement && !this.elementRef.nativeElement.contains(targetElement)) {
-      this.openDropDown = false;
-    }
   }
 }
