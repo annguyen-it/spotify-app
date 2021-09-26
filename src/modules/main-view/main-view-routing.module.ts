@@ -8,8 +8,8 @@ const routes: Routes = [
 
   },
   {
-    path: 'seach',
-    loadChildren: async () => (await import('../seach/seach/seach.module')).SeachModule
+    path: 'search',
+    loadChildren: async () => (await import('../search/search.module')).SearchModule
 
   },
   {

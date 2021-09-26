@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { GetDetailSearchService } from '@services/getDetailSearch.service';
 
 @Component({
-  selector: 'spotify-seach',
-  templateUrl: './seach.component.html',
-  styleUrls: ['./seach.component.scss']
+  selector: 'spotify-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-export class SeachComponent implements OnInit {
+export class SearchComponent implements OnInit {
   dataDetailSearch:any;
   dataDetailSearchTop:any;
   constructor(

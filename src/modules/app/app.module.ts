@@ -1,4 +1,3 @@
-import { SeachModule } from './../seach/seach/seach.module';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsService } from '@services/settings.service';
 import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.factory';
+import { SearchModule } from '@modules/search/search.module';
 
 @NgModule({
   imports: [
@@ -23,7 +23,7 @@ import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.fac
     MainViewModule,
     PlayBarModule,
     SidebarModule,
-    SeachModule,
+    SearchModule,
     AppRoutingModule,
   ],
   declarations: [				
