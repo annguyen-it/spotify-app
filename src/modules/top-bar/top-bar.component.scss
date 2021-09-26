@@ -9,15 +9,28 @@
   }
 }
 
-div > button {
+.btn-group > button {
   @apply rounded-full font-bold;
 
   &:not(.user) {
     letter-spacing: 1.76px;
-    @apply uppercase;
+    @apply px-10 uppercase;
 
     &:hover {
       @apply transform scale-105;
+    }
+  }
+}
+
+.navigation-btn-group {
+  button {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    font-weight: 900;
+    
+    &:disabled {
+      background-color: rgba(0, 0, 0, .7);
     }
   }
 }
