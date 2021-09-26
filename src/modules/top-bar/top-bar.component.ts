@@ -1,16 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
 import { UserProfileService } from '@services/user-profile.service';
 import { AuthorizationService } from '@services/authorization.service';
 import { AccountService } from '@services/account.service';
+import { BaseComponent } from '@modules/app/base/base.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.scss'],
 })
-export class TopBarComponent implements OnInit, OnDestroy {
+export class TopBarComponent extends BaseComponent implements OnInit {
   userProfile?: PublicUser;
   userProfileSub = new Subscription();
 
@@ -18,14 +20,22 @@ export class TopBarComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private userProfileService: UserProfileService,
     private authorizationService: AuthorizationService,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.authorizationService
       .isAuthorized()
+      .pipe(
+        takeUntil(this.destroy$),
+      )
       .subscribe((isAuthorized) => {
         if (isAuthorized) {
           this.userProfileSub = this.userProfileService.getCurrentUserProfile()
+            .pipe(
+              takeUntil(this.destroy$),
+            )
             .subscribe((profile) => {
               this.userProfile = profile;
             });
@@ -34,10 +44,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
           this.userProfile = undefined;
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this.userProfileSub.unsubscribe();
   }
 
   signUp(): void {

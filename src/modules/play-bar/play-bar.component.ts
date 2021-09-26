@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { WebPlaybackState } from '@models/playback/web-playback-state.model';
+import { BaseComponent } from '@modules/app/base/base.component';
 import { AccountService } from '@services/account.service';
 import { AuthorizationService } from '@services/authorization.service';
 import { PlaybackService } from '@services/playback.service';
 import { VibrantService } from '@services/vibrant.service';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-play-bar',
   templateUrl: './play-bar.component.html',
   styleUrls: ['./play-bar.component.scss'],
 })
-export class PlayBarComponent implements OnInit {
+export class PlayBarComponent extends BaseComponent implements OnInit {
   playBackState?: WebPlaybackState;
   defaultMobileBackgroundColor = 'rgb(31, 31, 31)';
   mobileBackgroundColor = this.defaultMobileBackgroundColor;
@@ -22,7 +23,9 @@ export class PlayBarComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private playbackService: PlaybackService,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.initPlaybackService();
@@ -35,7 +38,8 @@ export class PlayBarComponent implements OnInit {
         tap(async (state) => {
           this.playBackState = state;
           await this.generateMobileBackgroundColor(state?.trackWindow.currentTrack.album.images);
-        })
+        }),
+        takeUntil(this.destroy$),
       )
       .subscribe();
   }
