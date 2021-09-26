@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { SettingsService } from '@services/settings.service';
 import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.factory';
 import { SearchModule } from '@modules/search/search.module';
+import { BaseComponent } from './base/base.component';
 
 @NgModule({
   imports: [
@@ -26,9 +27,9 @@ import { SearchModule } from '@modules/search/search.module';
     SearchModule,
     AppRoutingModule,
   ],
-  declarations: [				
-    AppComponent,
-   ],
+  declarations: [
+    AppComponent
+  ],
   providers: [
     SettingsService,
     {

@@ -1,17 +1,18 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { AuthorizationService } from '@services/authorization.service';
 import { ClientCredentialsService } from '@services/client-credentials.service';
 import { ContextMenuService } from '@services/context-menu.service';
+import { BaseComponent } from './base/base.component';
 
 @Component({
   selector: 'spotify-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent extends BaseComponent implements OnInit {
   authorizationSuccessSub!: Subscription;
   authorizationFailureSub!: Subscription;
   clientCredentialsSub!: Subscription;
@@ -22,7 +23,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private contextMenuService: ContextMenuService,
     private authorizationService: AuthorizationService,
     private clientCredentialsService: ClientCredentialsService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.authorizationSuccessSub = this.route.fragment
@@ -32,7 +35,8 @@ export class AppComponent implements OnInit, OnDestroy {
         map(params => ({
           accessToken: params.get('access_token'),
         })),
-        filter(params => !!params.accessToken)
+        filter(params => !!params.accessToken),
+        takeUntil(this.destroy$)
       )
       .subscribe(
         (loginInfo) => {
@@ -44,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authorizationFailureSub = this.route.queryParams
       .pipe(
         filter(params => params.error !== undefined),
+        takeUntil(this.destroy$),
       )
       .subscribe(
         () => {
@@ -56,17 +61,13 @@ export class AppComponent implements OnInit, OnDestroy {
       .gotCredentials()
       .pipe(
         map(async (gotCredentials) => {
-          if (!gotCredentials){
+          if (!gotCredentials) {
             await this.clientCredentialsService.requestCredentials().toPromise();
           }
-        })
+        }),
+        takeUntil(this.destroy$),
       )
       .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.authorizationSuccessSub.unsubscribe();
-    this.authorizationFailureSub.unsubscribe();
   }
 
   @HostListener('contextmenu', ['$event'])
@@ -79,7 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
   onClick(): void {
     this.contextMenuService.close();
   }
-  
+
   @HostListener('wheel')
   onScroll(): void {
     this.contextMenuService.close();

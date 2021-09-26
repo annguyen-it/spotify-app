@@ -1,23 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Playlist } from '@models/playlist/playlist.model';
+import { BaseComponent } from '@modules/app/base/base.component';
 import { PlaylistService } from '@services/playlist.service';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'spotify-playlist',
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss']
 })
-export class PlaylistComponent implements OnInit, OnDestroy {
+export class PlaylistComponent extends BaseComponent implements OnInit {
   playlist!: Playlist;
   sub?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private playlistService: PlaylistService
-  ) { }
+  ) {
+    super();
+   }
 
   ngOnInit(): void {
     this.sub = this.route.params
@@ -28,14 +31,9 @@ export class PlaylistComponent implements OnInit, OnDestroy {
             .subscribe((playlist) => {
               this.playlist = playlist;
             });
-        })
+        }),
+        takeUntil(this.destroy$),
       )
       .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 }
