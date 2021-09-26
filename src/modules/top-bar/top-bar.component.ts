@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common'
 import { PublicUser } from '@models/user/public-user.model';
 import { Subscription } from 'rxjs';
 import { UserProfileService } from '@services/user-profile.service';
@@ -17,6 +18,7 @@ export class TopBarComponent extends BaseComponent implements OnInit {
   userProfileSub = new Subscription();
 
   constructor(
+    private location: Location,
     private accountService: AccountService,
     private userProfileService: UserProfileService,
     private authorizationService: AuthorizationService,
@@ -44,6 +46,14 @@ export class TopBarComponent extends BaseComponent implements OnInit {
           this.userProfile = undefined;
         }
       });
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  goForward(): void {
+    this.location.forward();
   }
 
   signUp(): void {
