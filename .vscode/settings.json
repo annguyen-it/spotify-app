@@ -1,13 +1,12 @@
 {
-  "prettier.htmlWhitespaceSensitivity": "ignore",
-  "prettier.jsxSingleQuote": true,
-  "prettier.printWidth": 1000,
-  "prettier.semi": true,
-  "prettier.singleQuote": true,
-  "prettier.tabWidth": 2,
-  "prettier.trailingComma": "none",
-  "prettier.proseWrap": "never",
+  "html.format.wrapAttributes": "preserve-aligned",
+  "html.format.wrapLineLength": 0,
+  "html.format.wrapAttributesIndentSize": 0,
+  "html.format.preserveNewLines": true,
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 1000,
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.rootFontSize": 14,
   "typescript.format.semicolons": "insert",
+  "typescript.preferences.quoteStyle": "single"
 }

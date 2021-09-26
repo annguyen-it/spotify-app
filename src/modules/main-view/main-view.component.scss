@@ -1,3 +1,4 @@
 :host {
-  overflow: auto;
+  background-color: #141414;
+  @apply relative overflow-auto;
 }

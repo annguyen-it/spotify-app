@@ -1,3 +1,14 @@
+@import '/src/styles/responsive.scss';
+
+.wrapper {
+  background-color: #141414;
+
+  @include responsive(sm) {
+    left: 230px;  // Sidebar's width
+    height: 60px;
+  }
+}
+
 div > button {
   @apply rounded-full font-bold;
 
@@ -6,17 +17,7 @@ div > button {
     @apply uppercase;
 
     &:hover {
-      transform: scale(1.06);
-    }
-  }
-}
-
-.dropdown {
-  button {
-    @apply flex justify-between items-center px-2.5 py-3.5 w-52 font-bold text-base-sm text-main-gray;
-
-    &:hover {
-      @apply bg-gray-700 text-white;
+      @apply transform scale-105;
     }
   }
 }

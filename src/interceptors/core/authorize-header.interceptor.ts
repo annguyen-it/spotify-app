@@ -1,31 +1,39 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 import { Observable, throwError } from "rxjs";
 
-import { SessionStorageKeyConstant } from "@constants/core/session-storage-key.constant";
 import { catchError } from "rxjs/operators";
-import { AUTHORIZATION_SERVICE_INJECTOR } from "@constants/core/injection-token.constant";
-import { IAuthorizationService } from "@services/interfaces/core/authorization-service.interface";
 import { Router } from "@angular/router";
+import { AuthorizationService } from "@services/authorization.service";
+import { SessionStorageKeyConstant } from "@constants/session-storage-key.constant";
 
 @Injectable()
 export class AuthorizeHeaderInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
-    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService
+    private authorizationService: AuthorizationService
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loginToken = sessionStorage.getItem(SessionStorageKeyConstant.accessToken);
-    if (!loginToken) {
+    const clientCredentials = sessionStorage.getItem(SessionStorageKeyConstant.clientCredentials);
+
+    let headers;
+
+    if (loginToken) {
+      headers = request.headers
+        .set('Authorization', `Bearer ${loginToken}`)
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json');
+    } else if (clientCredentials) {
+      headers = request.headers
+        .set('Authorization', `Bearer ${clientCredentials}`)
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json');
+    } else {
       return next.handle(request);
     }
-
-    let headers = request.headers
-      .set('Authorization', `Bearer ${loginToken}`)
-      .set('Accept', 'application/json')
-      .set('Content-Type', 'application/json');
 
     const clonedRequest = request.clone({
       headers,

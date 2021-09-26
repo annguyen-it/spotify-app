@@ -1,0 +1,9 @@
+<button (click)="follow()">Follow</button>
+<div class="sub">Share <i class="fas fa-caret-right"></i></div>
+<button (click)="openInDesktopApp()">Open in Desktop app</button>
+
+<div [ngStyle]="{'right': subRight ? 'calc(-100% + 3px)' : 'calc(100% - 3px)'}"
+     class="sub-menu">
+  <button (click)="copyShowLink()">Copy link to playlist</button>
+  <button (click)="embedShow()">Embed playlist</button>
+</div>

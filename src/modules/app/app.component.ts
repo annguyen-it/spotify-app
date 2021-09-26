@@ -1,24 +1,31 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { AUTHORIZATION_SERVICE_INJECTOR } from '@constants/core/injection-token.constant';
-import { IAuthorizationService } from '@services/interfaces/core/authorization-service.interface';
+import { filter, map, takeUntil } from 'rxjs/operators';
+import { AuthorizationService } from '@services/authorization.service';
+import { ClientCredentialsService } from '@services/client-credentials.service';
+import { ContextMenuService } from '@services/context-menu.service';
+import { BaseComponent } from './base/base.component';
 
 @Component({
   selector: 'spotify-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent extends BaseComponent implements OnInit {
   authorizationSuccessSub!: Subscription;
   authorizationFailureSub!: Subscription;
+  clientCredentialsSub!: Subscription;
 
   constructor(
-    @Inject(AUTHORIZATION_SERVICE_INJECTOR) private authorizationService: IAuthorizationService,
-    private route: ActivatedRoute,
     private router: Router,
-  ) { }
+    private route: ActivatedRoute,
+    private contextMenuService: ContextMenuService,
+    private authorizationService: AuthorizationService,
+    private clientCredentialsService: ClientCredentialsService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.authorizationSuccessSub = this.route.fragment
@@ -28,7 +35,8 @@ export class AppComponent implements OnInit, OnDestroy {
         map(params => ({
           accessToken: params.get('access_token'),
         })),
-        filter(params => !!params.accessToken)
+        filter(params => !!params.accessToken),
+        takeUntil(this.destroy$)
       )
       .subscribe(
         (loginInfo) => {
@@ -40,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authorizationFailureSub = this.route.queryParams
       .pipe(
         filter(params => params.error !== undefined),
+        takeUntil(this.destroy$),
       )
       .subscribe(
         () => {
@@ -47,10 +56,33 @@ export class AppComponent implements OnInit, OnDestroy {
           this.router.navigate([]);
         }
       );
+
+    this.clientCredentialsSub = this.clientCredentialsService
+      .gotCredentials()
+      .pipe(
+        map(async (gotCredentials) => {
+          if (!gotCredentials) {
+            await this.clientCredentialsService.requestCredentials().toPromise();
+          }
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
   }
 
-  ngOnDestroy(): void {
-    this.authorizationSuccessSub.unsubscribe();
-    this.authorizationFailureSub.unsubscribe();
+  @HostListener('contextmenu', ['$event'])
+  onRightClick(event: MouseEvent): void {
+    event.preventDefault();
+    this.contextMenuService.close();
+  }
+
+  @HostListener('click')
+  onClick(): void {
+    this.contextMenuService.close();
+  }
+
+  @HostListener('wheel')
+  onScroll(): void {
+    this.contextMenuService.close();
   }
 }

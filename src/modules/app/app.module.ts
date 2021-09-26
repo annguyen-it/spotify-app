@@ -4,15 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { loadAppSettingAsync } from '@factories/load-app-settings.factory';
 import { InterceptorsModule } from '@interceptors/interceptors.module';
-import { AppSettingsService } from '@services/implementations/core/app-settings.service';
 
-import { TopBarModule } from '../top-bar/top-bar.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { PlayBarModule } from '../play-bar/play-bar.module';
 import { MainViewModule } from '../main-view/main-view.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SettingsService } from '@services/settings.service';
+import { loadSpotifyAuthorizeAsync } from '@factories/load-spotify-authorize.factory';
+import { SearchModule } from '@modules/search/search.module';
+import { BaseComponent } from './base/base.component';
 
 @NgModule({
   imports: [
@@ -22,19 +24,25 @@ import { AppComponent } from './app.component';
     MainViewModule,
     PlayBarModule,
     SidebarModule,
-    TopBarModule,
+    SearchModule,
     AppRoutingModule,
   ],
   declarations: [
     AppComponent
   ],
   providers: [
-    AppSettingsService,
+    SettingsService,
     {
       provide: APP_INITIALIZER,
       useFactory: loadAppSettingAsync,
       multi: true,
-      deps: [AppSettingsService]
+      deps: [SettingsService]
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadSpotifyAuthorizeAsync,
+      multi: true,
+      deps: [SettingsService]
     },
   ],
   bootstrap: [AppComponent]

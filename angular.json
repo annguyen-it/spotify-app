@@ -34,7 +34,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/fonts.scss",
+              "src/styles/reset.scss",
+              "src/styles/responsive.scss"
             ],
             "scripts": []
           },
@@ -48,7 +51,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "3kb",
                   "maximumError": "4kb"
                 }
               ],
@@ -102,7 +105,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/fonts.scss",
+              "src/styles/reset.scss",
+              "src/styles/responsive.scss"
             ],
             "scripts": []
           }

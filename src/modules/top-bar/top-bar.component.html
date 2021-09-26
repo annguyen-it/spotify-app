@@ -1,71 +1,36 @@
-<div class="h-full flex justify-end items-center px-2 lg:px-9 bg-gray-900 text-sm">
-  <div *ngIf="!isAuthorized">
-    <button
-      (click)="signUp()"
-      class="px-10 py-3"
-    >
-      Sign up
-    </button>
-    <button
-      (click)="login()"
-      class="px-10 py-3 bg-white text-gray-700"
-    >
-      Log in
-    </button>
+<div class="wrapper static top-0 right-0 left-0 w-auto
+            flex justify-end items-center text-sm p-4 z-50
+            sm:fixed lg:px-9 lg:py-0">
+  <!-- Display if unauthorized -->
+  <div spotifyAuthCheck [displayIfAuth]="false">
+    <button (click)="signUp()" class="px-10 py-3"> Sign up </button>
+    <button (click)="login()" class="px-10 py-3 bg-white text-gray-700"> Log in </button>
   </div>
 
+  <!-- Display if authorized -->
+  <div spotifyAuthCheck [display]="'flex'"
+       *ngIf="userProfile?.displayName"
+       class="relative">
 
-  <div
-    *ngIf="isAuthorized && userProfile?.displayName"
-    class="relative flex"
-  >
-    <button
-      (click)="upgrade()"
-      class="hidden lg:block mr-5 px-10 py-2 border border-white"
-    >
+    <button (click)="upgrade()"
+            class="hidden lg:block mr-5 px-10 py-2
+                   border border-white">
       Upgrade
     </button>
-    <button
-      (click)="toggleDropDown()"
-      class="user h-9 flex justify-center items-center lg:pr-3 text-base lg:hover:bg-gray-800"
-      [class.bg-gray-800]="openDropDown"
-    >
-      <img
-        [src]="userProfile!.images[0].url"
-        class="rounded-full h-full object-cover"
-      >
+
+    <button contextMenu
+            [event]="['click']"
+            [popup]="popup"
+            [class.bg-gray-800]="popup.openMenu"
+            class="user h-9 flex justify-center items-center
+                   lg:pr-3 text-base lg:hover:bg-gray-800">
+
+      <img [src]="userProfile!.images[0].url" class="rounded-full h-full object-cover">
       <span class="hidden lg:block ml-3">{{ userProfile!.displayName }}</span>
-      <i
-        class="fas fa-caret-down ml-3 hidden lg:block"
-        *ngIf="!openDropDown"
-      ></i>
-      <i
-        class="fas fa-caret-up ml-3 hidden lg:block"
-        *ngIf="openDropDown"
-      ></i>
+      <i class="fas ml-3 hidden lg:block"
+         [ngClass]="popup.openMenu ? 'fa-caret-up' : 'fa-caret-down'">
+      </i>
     </button>
-    <ul
-      class="dropdown absolute top-full right-0 mt-2 p-1 bg-gray-800 text-base"
-      *ngIf="openDropDown"
-    >
-      <li>
-        <button>
-          Account
-          <i class="fal fa-external-link"></i>
-        </button>
-      </li>
-      <li>
-        <button>Profile</button>
-      </li>
-      <li>
-        <button (click)="upgrade()">
-          Upgrade to Premium
-          <i class="fal fa-external-link"></i>
-        </button>
-      </li>
-      <li>
-        <button (click)="logOut()">Logout</button>
-      </li>
-    </ul>
-  </div>
+
+    <spotify-top-bar-context-menu class="absolute top-full right-0 mt-2" #popup></spotify-top-bar-context-menu>
 </div>
