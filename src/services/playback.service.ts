@@ -59,7 +59,7 @@ export class PlaybackService {
       }
     });
 
-    // Ready
+    // ReadyVV
     player.addListener('ready', ({ device_id }: any) => {
       console.log('Ready with Device ID', device_id);
       this.playerService.transferUserPlayback(device_id).subscribe();

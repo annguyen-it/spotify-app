@@ -1,6 +1,6 @@
 <div class="relative" *ngIf="tracks">
   <!-- Header -->
-  <div class="header tile sticky h-10 border-b z-10 font-bold text-sm 
+  <div class="header tile sticky h-10 border-b z-10 font-bold text-sm
             text-main-gray uppercase ml-10 mr-10 bg-none mb-2">
     <div class="flex justify-end">#</div>
     <div class="pl-3 tracking-widest">Title</div>
@@ -11,7 +11,7 @@
   <!-- Body -->
   <div>
     <ng-container *ngFor="let track of tracks; index as i py-px">
-      <div class="tile h-16 hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md 
+      <div class="tile h-16 hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md
         mr-10 ml-10 transition-all"  *ngIf="track.track">
 
         <!-- Index -->
@@ -41,7 +41,7 @@
 
         <!-- Button group -->
         <div>
-          <button class="like-btn invisible mr-5"><i class="fas fa-heart text-main-gray" [class.text-green-400]="liked"></i></button>
+          <button class="like-btn invisible mr-5" (click)="likeSong(track.track.id)"><i class="fas fa-heart text-main-gray" [class.text-green-400]="liked"></i></button>
           <span class="mr-5">{{ track.track.durationMs | duration:'short' }}</span>
           <button class="more-btn invisible"><i class="far fa-ellipsis-h text-main-gray hover:text-white"></i></button>
         </div>

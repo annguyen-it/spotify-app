@@ -58,4 +58,17 @@ export class LikeService extends BaseDataService {
       )
   }
 
+  saveTrackCurrentUser(ids: string): Observable<any> {
+    console.log('like')
+    return this.http
+      .put<any>(
+        `${this.baseUrl}/v1/me/tracks`,
+        {
+          params: {
+            'ids': ids,
+          }
+        }
+      )
+  }
+
 }

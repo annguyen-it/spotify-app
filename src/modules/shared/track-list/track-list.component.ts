@@ -12,18 +12,18 @@ export class TrackListComponent implements OnInit {
   liked!: boolean[];
   track!: any[]
   songId!: any[];
-  
+
 
   constructor(private likeService: LikeService) { }
 
   ngOnInit(): void {
-    
-    this.track = this.tracks.map((x) => {
-      x.track
-    })
-    this.songId = this.track.map((y) => {
-      console.log(y)
-    })
+    // console.log(this.tracks)
+    // this.track = this.tracks.map((x) => {
+    //   console.log(x.track.id)
+    // })
+    // this.songId = this.track.map((y) => {
+    //   console.log(y)
+    // })
     this.initLikeSong()
   }
   initLikeSong():void {
@@ -31,6 +31,12 @@ export class TrackListComponent implements OnInit {
       .subscribe((liked) => {
         return this.liked = liked
       })
+  }
 
+  likeSong(trackId: string): void {
+    console.log(trackId)
+    this.likeService.saveTrackCurrentUser(trackId).subscribe((item) => {
+      return console.log(item)
+    });
   }
 }
