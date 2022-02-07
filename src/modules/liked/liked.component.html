@@ -1,0 +1,49 @@
+<main *ngIf="viewModel">
+  <!--  <spotify-banner [image]="pl.images[0]"-->
+  <!--                  [title]="pl.name"-->
+  <!--                  [uponText]="'playlist'"-->
+  <!--                  [description]="pl.description"-->
+  <!--                  [owner]="pl.owner"-->
+  <!--                  [tracks]="pl.tracks.items">-->
+  <!--  </spotify-banner>-->
+  <div class="contentSpacing">
+    <div style="background-color: rgb(80, 56, 160);"></div>
+    <div></div>
+    <div></div>
+    <div>
+      <div data-testid="playlist-image" draggable="false">
+        <div draggable="false">
+          <img aria-hidden="false" draggable="false" loading="eager"
+               src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
+               alt="Liked Songs"
+               class="ZKyw4m_g2d_2ig6XJbKp TIOO89K22hphZpBGu_rj XRD1P2qyA9MlnhSLnxwi"
+               srcset="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png 150w, https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png 300w"
+               sizes="(min-width: 1280px) 232px, 192px"/>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Playlist</h2>
+      <span dir="auto" draggable="false">
+        <h1 dir="auto" style="padding: 0.08em 0px; visibility: visible; width: 100%; font-size: 96px; line-height: 96px;">Liked Songs</h1>
+      </span>
+      <div>
+        <div>
+          <figure title="Đình Đạt" style="width: 24px; height: 24px;">
+            <div class="" style="width: 24px; height: 24px; inset-inline-start: 0px;">
+              <img aria-hidden="false"
+                   draggable="false"
+                   loading="eager"
+                   src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2487709997918847&amp;height=300&amp;width=300&amp;ext=1636851400&amp;hash=AeQj1otHjYqyP8RiToE"
+                   alt="Đình Đạt">
+            </div>
+          </figure>
+          <a draggable="false" href="/user/31kf3u7mpcynn7feb3l4sunzwxsa">Đình Đạt</a>
+        </div>
+        <span>33 songs<span></span></span>
+      </div>
+    </div>
+  </div>
+  <spotify-banner-button-group [playlist]="viewModel"></spotify-banner-button-group>
+  <spotify-track-list [tracks]="viewModel.items"></spotify-track-list>
+</main>

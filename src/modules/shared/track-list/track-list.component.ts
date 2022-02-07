@@ -8,7 +8,8 @@ import { LikeService } from '@services/like.service';
   styleUrls: ['./track-list.component.scss']
 })
 export class TrackListComponent implements OnInit {
-  @Input() tracks!: PlaylistTrack[];
+  // @Input() tracks!: PlaylistTrack[];
+  @Input() tracks!: any[];
   liked!: boolean[];
   track!: any[]
   songId!: any[];

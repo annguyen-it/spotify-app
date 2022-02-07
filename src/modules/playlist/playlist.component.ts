@@ -33,7 +33,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe()
-
+    console.log(this.playlist$)
   }
 
   ngOnDestroy(): void {

@@ -1,12 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SimplifiedPlaylist } from '@models/playlist/simplified-playlist.model';
 import { PlaybackService } from '@services/playback.service';
 import { PlayerService } from '@services/player.service';
 import {map, tap} from 'rxjs/operators';
 import {LikeService} from "@services/like.service";
 import {UserProfileService} from "@services/user-profile.service";
 import {Playlist} from "@models/playlist/playlist.model";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'spotify-banner-button-group',
@@ -64,7 +62,5 @@ export class BannerButtonGroupComponent implements OnInit {
         return this.initLike()
       })
     }
-
-
   }
 }

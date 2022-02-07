@@ -15,6 +15,10 @@ const routes: Routes = [
     path: '',
     loadChildren: async () => (await import('../home/home.module')).HomeModule
   },
+  {
+    path: 'liked',
+    loadChildren: async () => (await import('../liked/liked.module')).LikedModule
+  },
 ];
 
 @NgModule({

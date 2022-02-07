@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Playlist } from '@models/playlist/playlist.model';
 import { GetListOfCurrentUserPlaylistsResponse } from '@models/response/get-list-of-current-user-playlists.model';
+import { Paging } from '@models/track/paging.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseDataService } from './core/base-data.service';
@@ -35,6 +36,16 @@ export class PlaylistService extends BaseDataService {
       )
       .pipe(
         map<any, GetListOfCurrentUserPlaylistsResponse>(x => GetListOfCurrentUserPlaylistsResponse.parse(x)),
+      );
+  }
+
+  getUserSavedTracks(): Observable<Paging> {
+    return this.http
+      .get<any>(
+        `${this.baseUrl}/v1/me/tracks`,
+      )
+      .pipe(
+        map<any, Paging>(x => Paging.parse(x)),
       );
   }
 

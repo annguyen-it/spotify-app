@@ -19,12 +19,12 @@ export class LibraryComponent implements OnInit {
   }
 
   initViewModels(): void {
-    this.playlistService.getListOfCurrentUserPlaylists()
-      .subscribe((response) => {
-        this.viewModel = {
-          href: response.href,
-          items: response.items
-        };
-      });
+    // this.playlistService.getUserSavedTracks()
+    //   .subscribe((response) => {
+    //     console.log(response)
+    //     this.viewModel = {
+    //       ...response,
+    //     };
+    //   });
   }
 }
